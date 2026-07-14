@@ -46,7 +46,6 @@
         .form-row .input-field { margin-bottom: 0; }
         .hidden { display: none !important; }
 
-        /* Checklist */
         .check-item { display: flex; align-items: center; gap: 12px; padding: 14px; background: var(--bg); border-radius: 12px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; border: 1px solid transparent; }
         .check-item:active { transform: scale(0.98); }
         .check-item.done { opacity: 0.5; border-color: var(--success); }
@@ -57,7 +56,6 @@
         .check-item.done .check-box::after { opacity: 1; }
         .check-text { font-size: 0.95rem; }
 
-        /* Water */
         .water-tracker { display: flex; align-items: center; gap: 12px; padding: 16px; background: linear-gradient(135deg, #1e3a5f, #0f172a); border-radius: 16px; margin-bottom: 12px; }
         .water-btn { width: 60px; height: 60px; border-radius: 50%; border: 3px solid var(--info); background: transparent; color: var(--info); font-size: 1.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; }
         .water-info { flex: 1; }
@@ -65,14 +63,12 @@
         .water-bar { height: 6px; background: var(--card-hover); border-radius: 3px; margin-top: 8px; overflow: hidden; }
         .water-fill { height: 100%; background: linear-gradient(90deg, var(--info), #60a5fa); border-radius: 3px; transition: width 0.3s; }
 
-        /* Timer */
         .timer-display { text-align: center; padding: 20px; font-size: 3rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
         .timer-controls { display: flex; gap: 12px; justify-content: center; padding: 0 20px 20px; }
         .timer-btn { padding: 12px 24px; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; font-size: 1rem; }
         .timer-start { background: var(--success); color: white; }
         .timer-stop { background: var(--danger); color: white; }
 
-        /* Timeline */
         .timeline { position: relative; padding-left: 24px; }
         .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--accent), var(--info)); }
         .t-item { position: relative; padding: 12px 0; border-bottom: 1px solid var(--card-hover); }
@@ -82,7 +78,6 @@
         .t-act { font-size: 0.95rem; margin-top: 2px; }
         .t-note { font-size: 0.8rem; color: var(--text2); margin-top: 4px; }
 
-        /* Meals */
         .meal-card { background: var(--bg); border-radius: 12px; padding: 14px; margin-bottom: 10px; }
         .meal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
         .meal-name { font-weight: 600; color: var(--accent-light); font-size: 0.95rem; }
@@ -91,7 +86,6 @@
         .meal-macros { display: flex; gap: 12px; margin-top: 8px; font-size: 0.75rem; }
         .macro-p { color: var(--success); } .macro-c { color: var(--info); } .macro-f { color: var(--accent-light); }
 
-        /* Supps */
         .supp-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--card-hover); }
         .supp-row:last-child { border-bottom: none; }
         .supp-info { flex: 1; }
@@ -99,7 +93,6 @@
         .supp-timing { font-size: 0.8rem; color: var(--text2); }
         .supp-dose { background: var(--accent); color: #0f172a; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; white-space: nowrap; margin-left: 8px; }
 
-        /* Training */
         .day-selector { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px; scrollbar-width: none; }
         .day-selector::-webkit-scrollbar { display: none; }
         .day-chip { padding: 8px 14px; border-radius: 20px; background: var(--bg); color: var(--text2); font-size: 0.78rem; font-weight: 600; white-space: nowrap; cursor: pointer; border: 1px solid var(--card-hover); flex-shrink: 0; }
@@ -133,7 +126,6 @@
         .delta-down { color: var(--danger); font-size: 0.78rem; }
         .empty-hint { color: var(--text2); font-size: 0.85rem; padding: 10px 2px; }
 
-        /* Shopping */
         .shop-cat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
         .shop-cat-title { font-weight: 700; color: var(--accent-light); font-size: 1rem; }
         .freq-badge { background: var(--card-hover); color: var(--text2); padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; }
@@ -141,14 +133,12 @@
         .due-ok { color: var(--success); } .due-soon { color: var(--accent); } .due-late { color: var(--danger); }
         .shop-reset-btn { background: none; border: 1px solid var(--card-hover); color: var(--text2); padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer; margin-top: 8px; width: 100%; font-weight: 600; }
 
-        /* Weight */
         .weight-card { background: linear-gradient(135deg, #1e3a5f, #0f172a); border-radius: 16px; padding: 18px; margin-bottom: 12px; border: 1px solid var(--card-hover); }
         .weight-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0; }
         .weight-log-form { display: flex; gap: 8px; }
         .weight-log-form input { flex: 1; background: var(--bg); border: 1px solid var(--card-hover); border-radius: 10px; padding: 12px; color: var(--text); font-size: 0.95rem; }
         .weight-log-form button { background: var(--accent); border: none; border-radius: 10px; padding: 0 18px; color: #0f172a; font-weight: 700; cursor: pointer; }
 
-        /* Skincare */
         .skincare-step { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--card-hover); }
         .skincare-step:last-child { border-bottom: none; }
         .step-num { width: 28px; height: 28px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: #0f172a; flex-shrink: 0; }
@@ -158,26 +148,24 @@
         .hair-card h4 { color: #a5b4fc; margin-bottom: 8px; }
         .hair-card p { color: #c7d2fe; font-size: 0.9rem; margin-bottom: 6px; }
 
-        /* ===== FINANZAS ===== */
+        /* FINANZAS */
         .finance-summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 12px; }
         .finance-card { background: var(--bg); border-radius: 12px; padding: 14px; text-align: center; border: 1px solid var(--card-hover); }
         .finance-card.income { border-color: var(--success); }
         .finance-card.expense { border-color: var(--danger); }
         .finance-card.balance { border-color: var(--info); }
         .finance-card.savings { border-color: var(--accent); }
-        .finance-value { font-size: 1.4rem; font-weight: 700; }
+        .finance-value { font-size: 1.1rem; font-weight: 700; }
         .finance-value.pos { color: var(--success); }
         .finance-value.neg { color: var(--danger); }
         .finance-value.neu { color: var(--info); }
         .finance-value.warn { color: var(--accent); }
         .finance-label { font-size: 0.75rem; color: var(--text2); margin-top: 4px; }
 
-        .finance-section { margin-bottom: 16px; }
-        .finance-section-title { font-weight: 700; color: var(--accent-light); font-size: 1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
         .finance-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--card-hover); }
         .finance-item:last-child { border-bottom: none; }
         .finance-item-name { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
-        .finance-item-amount { font-weight: 700; font-size: 0.95rem; }
+        .finance-item-amount { font-weight: 700; font-size: 0.9rem; }
         .finance-item-amount.pos { color: var(--success); }
         .finance-item-amount.neg { color: var(--danger); }
         .finance-bar-bg { height: 8px; background: var(--bg); border-radius: 4px; overflow: hidden; margin-top: 6px; }
@@ -187,30 +175,30 @@
         .transaction-info { flex: 1; }
         .transaction-name { font-weight: 600; font-size: 0.9rem; }
         .transaction-date { font-size: 0.75rem; color: var(--text2); }
-        .transaction-amount { font-weight: 700; font-size: 1rem; }
+        .transaction-amount { font-weight: 700; font-size: 0.95rem; white-space: nowrap; }
         .transaction-amount.income { color: var(--success); }
         .transaction-amount.expense { color: var(--danger); }
         .transaction-delete { background: none; border: none; color: var(--danger); font-size: 1.2rem; cursor: pointer; padding: 0 8px; }
 
         .goal-card { background: var(--bg); border-radius: 12px; padding: 14px; margin-bottom: 10px; border: 1px solid var(--card-hover); }
         .goal-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
-        .goal-name { font-weight: 600; font-size: 0.95rem; }
-        .goal-amount { font-size: 0.85rem; color: var(--text2); }
+        .goal-name { font-weight: 600; font-size: 0.9rem; }
+        .goal-amount { font-size: 0.8rem; color: var(--text2); }
         .goal-bar-bg { height: 10px; background: var(--card-hover); border-radius: 5px; overflow: hidden; }
         .goal-bar-fill { height: 100%; border-radius: 5px; transition: width 0.5s; }
-        .goal-percent { text-align: right; font-size: 0.8rem; color: var(--text2); margin-top: 4px; }
+        .goal-percent { text-align: right; font-size: 0.78rem; color: var(--text2); margin-top: 4px; }
 
         .debt-card { background: var(--bg); border-radius: 12px; padding: 14px; margin-bottom: 10px; border: 1px solid var(--card-hover); }
         .debt-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
-        .debt-name { font-weight: 600; font-size: 0.95rem; }
-        .debt-amount { font-size: 0.85rem; color: var(--text2); }
+        .debt-name { font-weight: 600; font-size: 0.9rem; }
+        .debt-amount { font-size: 0.8rem; color: var(--text2); }
         .debt-bar-bg { height: 10px; background: var(--card-hover); border-radius: 5px; overflow: hidden; }
         .debt-bar-fill { height: 100%; border-radius: 5px; transition: width 0.5s; }
-        .debt-info { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.78rem; color: var(--text2); }
+        .debt-info { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.75rem; color: var(--text2); }
 
         .tabs { display: flex; gap: 4px; margin-bottom: 12px; overflow-x: auto; scrollbar-width: none; }
         .tabs::-webkit-scrollbar { display: none; }
-        .tab { padding: 8px 16px; border-radius: 10px; background: var(--bg); border: 1px solid var(--card-hover); color: var(--text2); font-size: 0.85rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+        .tab { padding: 8px 14px; border-radius: 10px; background: var(--bg); border: 1px solid var(--card-hover); color: var(--text2); font-size: 0.8rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
         .tab.active { background: var(--accent); color: #0f172a; border-color: var(--accent); }
 
         .month-selector { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
@@ -221,10 +209,11 @@
         .note-box p { color: #fed7aa; font-size: 0.9rem; }
     </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
     <div class="header">
-        <h1>💪 Fuerza Pura</h1>
+        <h1 id="app-title">Fuerza Pura</h1>
         <p id="header-info">Cargando...</p>
     </div>
 
@@ -334,7 +323,7 @@
                 <div class="stat"><div class="stat-value" id="bw-diff">--</div><div class="stat-label">Cambio (kg)</div></div>
             </div>
             <div class="weight-log-form">
-                <input type="number" step="0.1" id="bw-input" placeholder="Peso de hoy en kg">
+                <input type="number" step="0.1" inputmode="decimal" id="bw-input" placeholder="Peso de hoy en kg">
                 <button onclick="addBodyWeight()">💾 Guardar</button>
             </div>
         </div>
@@ -387,7 +376,7 @@
                 <div class="card-title">➕ Registrar Ingreso</div>
                 <input type="text" class="input-field" id="income-name" placeholder="Descripción (ej: Proyecto web)">
                 <div class="form-row">
-                    <input type="number" class="input-field" id="income-amount" placeholder="Monto" style="flex:1">
+                    <input type="number" class="input-field" id="income-amount" placeholder="Monto en COP" style="flex:1">
                     <select class="input-field" id="income-category" style="flex:1"></select>
                 </div>
                 <input type="date" class="input-field" id="income-date">
@@ -402,9 +391,9 @@
         <div id="finance-tab-expenses" class="finance-tab-content hidden">
             <div class="card">
                 <div class="card-title">➖ Registrar Gasto</div>
-                <input type="text" class="input-field" id="expense-name" placeholder="Descripción (ej: Supermercado)">
+                <input type="text" class="input-field" id="expense-name" placeholder="Descripción (ej: Supermercado Éxito)">
                 <div class="form-row">
-                    <input type="number" class="input-field" id="expense-amount" placeholder="Monto" style="flex:1">
+                    <input type="number" class="input-field" id="expense-amount" placeholder="Monto en COP" style="flex:1">
                     <select class="input-field" id="expense-category" style="flex:1"></select>
                 </div>
                 <input type="date" class="input-field" id="expense-date">
@@ -423,9 +412,9 @@
             </div>
             <div class="card">
                 <div class="card-title">➕ Agregar Gasto Fijo</div>
-                <input type="text" class="input-field" id="fixed-name" placeholder="Nombre (ej: Alquiler)">
+                <input type="text" class="input-field" id="fixed-name" placeholder="Nombre (ej: Arriendo apto)">
                 <div class="form-row">
-                    <input type="number" class="input-field" id="fixed-amount" placeholder="Monto mensual" style="flex:1">
+                    <input type="number" class="input-field" id="fixed-amount" placeholder="Monto mensual COP" style="flex:1">
                     <input type="number" class="input-field" id="fixed-day" placeholder="Día del mes" style="flex:1;max-width:100px">
                 </div>
                 <select class="input-field" id="fixed-category"></select>
@@ -442,10 +431,10 @@
                 <div class="card-title">➕ Nueva Meta</div>
                 <input type="text" class="input-field" id="goal-name" placeholder="Nombre de la meta">
                 <div class="form-row">
-                    <input type="number" class="input-field" id="goal-target" placeholder="Meta ($)" style="flex:1">
-                    <input type="number" class="input-field" id="goal-current" placeholder="Actual ($)" style="flex:1">
+                    <input type="number" class="input-field" id="goal-target" placeholder="Meta en COP" style="flex:1">
+                    <input type="number" class="input-field" id="goal-current" placeholder="Actual COP" style="flex:1">
                 </div>
-                <input type="number" class="input-field" id="goal-monthly" placeholder="Ahorro mensual automático ($)">
+                <input type="number" class="input-field" id="goal-monthly" placeholder="Ahorro mensual automático COP">
                 <button class="btn-primary" onclick="addSavingsGoal()">💾 Crear Meta</button>
             </div>
         </div>
@@ -457,10 +446,10 @@
             </div>
             <div class="card">
                 <div class="card-title">➕ Registrar Deuda</div>
-                <input type="text" class="input-field" id="debt-name" placeholder="Nombre (ej: Tarjeta de crédito)">
+                <input type="text" class="input-field" id="debt-name" placeholder="Nombre (ej: Tarjeta de crédito Bancolombia)">
                 <div class="form-row">
-                    <input type="number" class="input-field" id="debt-total" placeholder="Total ($)" style="flex:1">
-                    <input type="number" class="input-field" id="debt-paid" placeholder="Pagado ($)" style="flex:1">
+                    <input type="number" class="input-field" id="debt-total" placeholder="Total en COP" style="flex:1">
+                    <input type="number" class="input-field" id="debt-paid" placeholder="Pagado COP" style="flex:1">
                 </div>
                 <div class="form-row">
                     <input type="number" class="input-field" id="debt-min" placeholder="Pago mínimo mensual" style="flex:1">
@@ -518,31 +507,1162 @@ let timerInterval = null;
 let timerSeconds = 150;
 let financeTab = 'overview';
 
-// ==================== LOCAL STORAGE KEYS ====================
 const LS = {
-    water: 'fp_water',
-    checked: 'fp_checked',
-    exerciseChecked: 'fp_exerciseChecked',
-    exerciseLogs: 'fp_exerciseLogs',
-    bodyWeight: 'fp_bodyWeight',
-    shoppingChecked: 'fp_shoppingChecked',
-    shoppingLastBought: 'fp_shoppingLastBought',
-    lastOpenDate: 'fp_lastOpenDate',
-    transactions: 'fp_transactions',
-    savingsGoals: 'fp_savingsGoals',
-    debts: 'fp_debts',
-    fixedExpenses: 'fp_fixedExpenses'
+    water: 'fp_water', checked: 'fp_checked', exerciseChecked: 'fp_exerciseChecked',
+    exerciseLogs: 'fp_exerciseLogs', bodyWeight: 'fp_bodyWeight',
+    shoppingChecked: 'fp_shoppingChecked', shoppingLastBought: 'fp_shoppingLastBought',
+    lastOpenDate: 'fp_lastOpenDate', transactions: 'fp_transactions',
+    savingsGoals: 'fp_savingsGoals', debts: 'fp_debts', fixedExpenses: 'fp_fixedExpenses'
 };
 
-// ==================== CARGAR DATA.JSON ====================
-async function loadData() {
-    try {
-        const res = await fetch('data.json');
-        DATA = await res.json();
-        initApp();
-    } catch (e) {
-        document.body.innerHTML = '<div style="padding:40px;text-align:center;color:#f59e0b"><h2>❌ Error cargando data.json</h2><p>Asegúrate de que el archivo data.json esté en la misma carpeta que index.html</p></div>';
+// ==================== FORMATO COP ====================
+function formatCOP(amount) {
+    if (amount === undefined || amount === null) return '$ 0';
+    const num = Math.round(amount);
+    return '$ ' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+function formatCurrency(amount) {
+    return formatCOP(amount);
+}
+
+// ==================== DATA EMBEBIDA ====================
+const EMBEDDED_DATA = {
+  "profile": {
+    "name": "Fuerza Pura",
+    "name_clean": "Fuerza Pura",
+    "icon": "💪",
+    "height_m": 1.75,
+    "weight_kg": 75,
+    "goal": "Definición + Fuerza",
+    "water_goal_ml": 3500
+  },
+  "checklist": [
+    {
+      "id": 1,
+      "text": "Tomar vaso de agua al despertar",
+      "time": "06:00",
+      "done": false
+    },
+    {
+      "id": 2,
+      "text": "Lavarse los dientes + skincare AM",
+      "time": "06:15",
+      "done": false
+    },
+    {
+      "id": 3,
+      "text": "Preparar desayuno",
+      "time": "06:30",
+      "done": false
+    },
+    {
+      "id": 4,
+      "text": "Tomar suplementos matutinos",
+      "time": "07:00",
+      "done": false
+    },
+    {
+      "id": 5,
+      "text": "Desayuno (comida 1)",
+      "time": "07:30",
+      "done": false
+    },
+    {
+      "id": 6,
+      "text": "Trabajo / Productividad",
+      "time": "08:00 - 12:00",
+      "done": false
+    },
+    {
+      "id": 7,
+      "text": "Almuerzo (comida 2)",
+      "time": "12:30",
+      "done": false
+    },
+    {
+      "id": 8,
+      "text": "Descanso digestivo",
+      "time": "13:00",
+      "done": false
+    },
+    {
+      "id": 9,
+      "text": "Entrenamiento de fuerza",
+      "time": "15:00",
+      "done": false
+    },
+    {
+      "id": 10,
+      "text": "Post-workout + proteína",
+      "time": "16:30",
+      "done": false
+    },
+    {
+      "id": 11,
+      "text": "Cena (comida 3)",
+      "time": "19:00",
+      "done": false
+    },
+    {
+      "id": 12,
+      "text": "Skincare PM",
+      "time": "21:00",
+      "done": false
+    },
+    {
+      "id": 13,
+      "text": "Relajación / Lectura",
+      "time": "21:30",
+      "done": false
+    },
+    {
+      "id": 14,
+      "text": "Dormir 7-8 horas",
+      "time": "22:30",
+      "done": false
     }
+  ],
+  "timeline": [
+    {
+      "time": "06:00",
+      "activity": "Despertar + Agua",
+      "note": "500ml agua tibia con limón",
+      "icon": "💧"
+    },
+    {
+      "time": "06:15",
+      "activity": "Higiene + Skincare AM",
+      "note": "Limpieza, vitamina C, protector solar",
+      "icon": "✨"
+    },
+    {
+      "time": "07:00",
+      "activity": "Suplementos",
+      "note": "Multivitamínico, omega-3, creatina",
+      "icon": "💊"
+    },
+    {
+      "time": "07:30",
+      "activity": "Desayuno",
+      "note": "Avena + huevos + fruta",
+      "icon": "🍳"
+    },
+    {
+      "time": "08:00",
+      "activity": "Trabajo",
+      "note": "Bloque de productividad profunda",
+      "icon": "💻"
+    },
+    {
+      "time": "10:30",
+      "activity": "Snack",
+      "note": "Frutos secos o yogur griego",
+      "icon": "🥜"
+    },
+    {
+      "time": "12:30",
+      "activity": "Almuerzo",
+      "note": "Proteína + carbohidratos + vegetales",
+      "icon": "🍽️"
+    },
+    {
+      "time": "15:00",
+      "activity": "Entrenamiento",
+      "note": "Rutina de fuerza del día",
+      "icon": "🏋️"
+    },
+    {
+      "time": "16:30",
+      "activity": "Post-workout",
+      "note": "Batido de proteína + carbs",
+      "icon": "🥤"
+    },
+    {
+      "time": "19:00",
+      "activity": "Cena",
+      "note": "Proteína magra + vegetales",
+      "icon": "🥗"
+    },
+    {
+      "time": "21:00",
+      "activity": "Skincare PM",
+      "note": "Doble limpieza, retinol, hidratante",
+      "icon": "🌙"
+    },
+    {
+      "time": "22:30",
+      "activity": "Dormir",
+      "note": "7-8 horas de sueño reparador",
+      "icon": "😴"
+    }
+  ],
+  "training": {
+    "exercise_library": {
+      "Sentadilla": "Pies a la anchura de los hombros, barra sobre trapecios, descender controladamente hasta que los muslos estén paralelos al suelo.",
+      "Peso Muerto": "Barra cerca de las espinillas, espalda recta, empujar con los talones al levantar.",
+      "Press Banca": "Barra sobre el pecho, codos a 45°, bajar controladamente hasta tocar el pecho.",
+      "Press Militar": "Barra desde el pecho hasta extensión completa de brazos, core activado.",
+      "Dominadas": "Agarre prono, subir hasta que la barbilla supere la barra, controlar el descenso.",
+      "Fondos": "En paralelas, bajar hasta 90° de flexión de codo, empujar hasta extensión.",
+      "Curl de Bíceps": "Codos fijos al costado, subir el peso sin balancear el cuerpo.",
+      "Extensión de Tríceps": "Codo fijo, extender el antebrazo hasta la extensión completa.",
+      "Prensa de Piernas": "Pies en la plataforma a la anchura de los hombros, no bloquear rodillas.",
+      "Hip Thrust": "Espalda sobre banco, barra sobre caderas, empujar hacia arriba apretando glúteos.",
+      "Peso Muerto Rumano": "Piernas semi-rígidas, barra cerca del cuerpo, sentir el estiramiento en isquiotibiales.",
+      "Zancadas": "Paso largo hacia adelante, rodilla trasera casi toca el suelo, empujar con el talón delantero.",
+      "Elevación de Gemelos": "En máquina o con mancuernas, subir sobre las puntas de los pies.",
+      "Plancha": "Antebrazos en el suelo, cuerpo en línea recta, core activado 30-60 seg.",
+      "Face Pull": "Cuerda a la altura de la cara, tirar hacia la frente, codos altos.",
+      "Remo con Barra": "Espalda recta, tirar la barra hacia el abdomen inferior, apretar omóplatos.",
+      "Remo Unilateral": "Mancuerna, apoyar mano y rodilla en banco, tirar hacia la cadera.",
+      "Pull-over": "Mancuerna con ambas manos, brazos extendidos sobre el pecho, descender detrás de la cabeza.",
+      "Curl Martillo": "Mancuernas en agarre neutro, alternar brazos.",
+      "Patada de Tríceps": "Mancuerna, codo fijo a 90°, extender hacia atrás.",
+      "Crunch": "Manos detrás de la cabeza, elevar hombros del suelo sin tirar del cuello.",
+      "Elevación de Piernas": "Acostado boca arriba, elevar piernas rectas hasta 90°.",
+      "Press de Piernas": "Máquina, pies en la plataforma, empujar sin bloquear rodillas.",
+      "Abducción de Cadera": "Máquina, abrir piernas contra resistencia apretando glúteos.",
+      "Adducción de Cadera": "Máquina, juntar piernas contra resistencia.",
+      "Press de Hombros con Mancuernas": "Sentado, mancuernas a la altura de los hombros, empujar hacia arriba.",
+      "Elevación Lateral": "Mancuernas, elevar brazos hasta la altura de los hombros, codos ligeramente flexionados.",
+      "Elevación Frontal": "Mancuernas, elevar brazos al frente hasta la altura de los hombros.",
+      "Encogimiento de Hombros": "Barra o mancuernas, elevar hombros hacia las orejas.",
+      "Pulldown": "Agarre ancho, tirar la barra hacia la parte superior del pecho.",
+      "Remo en Máquina": "Sentado, agarre neutro, tirar hacia el abdomen apretando omóplatos.",
+      "Curl en Máquina": "Bíceps en la almohadilla, subir el brazo sin mover el codo."
+    },
+    "week": [
+      {
+        "day": "Lunes",
+        "type": "Pecho + Tríceps",
+        "rest": false,
+        "exercises": [
+          {
+            "name": "Press Banca",
+            "sets": 4,
+            "reps": "8-10",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Fondos",
+            "sets": 3,
+            "reps": "10-12",
+            "trackable": false,
+            "desc": ""
+          },
+          {
+            "name": "Pull-over",
+            "sets": 3,
+            "reps": "12-15",
+            "trackable": false,
+            "desc": ""
+          },
+          {
+            "name": "Curl de Bíceps",
+            "sets": 3,
+            "reps": "10-12",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Extensión de Tríceps",
+            "sets": 3,
+            "reps": "12-15",
+            "trackable": true,
+            "desc": ""
+          }
+        ]
+      },
+      {
+        "day": "Martes",
+        "type": "Espalda + Bíceps",
+        "rest": false,
+        "exercises": [
+          {
+            "name": "Dominadas",
+            "sets": 4,
+            "reps": "6-10",
+            "trackable": false,
+            "desc": ""
+          },
+          {
+            "name": "Remo con Barra",
+            "sets": 4,
+            "reps": "8-10",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Remo Unilateral",
+            "sets": 3,
+            "reps": "10-12",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Pulldown",
+            "sets": 3,
+            "reps": "10-12",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Curl Martillo",
+            "sets": 3,
+            "reps": "12-15",
+            "trackable": true,
+            "desc": ""
+          }
+        ]
+      },
+      {
+        "day": "Miércoles",
+        "type": "Piernas + Glúteos",
+        "rest": false,
+        "exercises": [
+          {
+            "name": "Sentadilla",
+            "sets": 4,
+            "reps": "6-8",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Prensa de Piernas",
+            "sets": 4,
+            "reps": "10-12",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Hip Thrust",
+            "sets": 4,
+            "reps": "10-12",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Peso Muerto Rumano",
+            "sets": 3,
+            "reps": "10-12",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Zancadas",
+            "sets": 3,
+            "reps": "12-15",
+            "trackable": false,
+            "desc": ""
+          },
+          {
+            "name": "Elevación de Gemelos",
+            "sets": 4,
+            "reps": "15-20",
+            "trackable": false,
+            "desc": ""
+          }
+        ]
+      },
+      {
+        "day": "Jueves",
+        "type": "Descanso Activo",
+        "rest": true,
+        "exercises": [
+          {
+            "name": "Caminata ligera",
+            "sets": 1,
+            "reps": "30-45 min",
+            "trackable": false,
+            "desc": "Ritmo moderado, zona de quema de grasa"
+          },
+          {
+            "name": "Estiramientos",
+            "sets": 1,
+            "reps": "15-20 min",
+            "trackable": false,
+            "desc": "Enfoque en piernas y espalda"
+          },
+          {
+            "name": "Plancha",
+            "sets": 3,
+            "reps": "45-60 seg",
+            "trackable": false,
+            "desc": "Core activado, respiración controlada"
+          }
+        ]
+      },
+      {
+        "day": "Viernes",
+        "type": "Hombros + Core",
+        "rest": false,
+        "exercises": [
+          {
+            "name": "Press Militar",
+            "sets": 4,
+            "reps": "8-10",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Press de Hombros con Mancuernas",
+            "sets": 3,
+            "reps": "10-12",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Elevación Lateral",
+            "sets": 4,
+            "reps": "12-15",
+            "trackable": false,
+            "desc": ""
+          },
+          {
+            "name": "Elevación Frontal",
+            "sets": 3,
+            "reps": "12-15",
+            "trackable": false,
+            "desc": ""
+          },
+          {
+            "name": "Encogimiento de Hombros",
+            "sets": 3,
+            "reps": "12-15",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Face Pull",
+            "sets": 3,
+            "reps": "15-20",
+            "trackable": false,
+            "desc": ""
+          },
+          {
+            "name": "Crunch",
+            "sets": 4,
+            "reps": "15-20",
+            "trackable": false,
+            "desc": ""
+          },
+          {
+            "name": "Elevación de Piernas",
+            "sets": 3,
+            "reps": "12-15",
+            "trackable": false,
+            "desc": ""
+          }
+        ]
+      },
+      {
+        "day": "Sábado",
+        "type": "Full Body Intenso",
+        "rest": false,
+        "exercises": [
+          {
+            "name": "Peso Muerto",
+            "sets": 4,
+            "reps": "5-6",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Sentadilla",
+            "sets": 4,
+            "reps": "6-8",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Press Banca",
+            "sets": 4,
+            "reps": "8-10",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Dominadas",
+            "sets": 3,
+            "reps": "6-10",
+            "trackable": false,
+            "desc": ""
+          },
+          {
+            "name": "Remo con Barra",
+            "sets": 3,
+            "reps": "8-10",
+            "trackable": true,
+            "desc": ""
+          },
+          {
+            "name": "Press Militar",
+            "sets": 3,
+            "reps": "8-10",
+            "trackable": true,
+            "desc": ""
+          }
+        ]
+      },
+      {
+        "day": "Domingo",
+        "type": "Descanso Completo",
+        "rest": true,
+        "exercises": [
+          {
+            "name": "Descanso total",
+            "sets": 1,
+            "reps": "Todo el día",
+            "trackable": false,
+            "desc": "Recuperación muscular, hidratación, sueño"
+          },
+          {
+            "name": "Foam rolling",
+            "sets": 1,
+            "reps": "10-15 min",
+            "trackable": false,
+            "desc": "Liberación miofascial en grupos musculares trabajados"
+          },
+          {
+            "name": "Meditación",
+            "sets": 1,
+            "reps": "10-20 min",
+            "trackable": false,
+            "desc": "Reducción de cortisol, recuperación mental"
+          }
+        ]
+      }
+    ]
+  },
+  "nutrition": {
+    "fasting_window": "(16:8)",
+    "target_calories": 2500,
+    "target_protein_g": 180,
+    "target_carbs_g": 250,
+    "target_fat_g": 80,
+    "meals": [
+      {
+        "name": "Desayuno (07:30)",
+        "calories": 650,
+        "items": "Avena (80g) con leche descremada, 3 huevos enteros, 1 plátano, café negro",
+        "protein_g": 35,
+        "carbs_g": 70,
+        "fat_g": 22
+      },
+      {
+        "name": "Almuerzo (12:30)",
+        "calories": 750,
+        "items": "200g pechuga de pollo a la plancha, 150g arroz integral, 200g brócoli al vapor, 1 cda aceite de oliva",
+        "protein_g": 50,
+        "carbs_g": 75,
+        "fat_g": 18
+      },
+      {
+        "name": "Pre-entreno (14:30)",
+        "calories": 200,
+        "items": "1 plátano, 30g de avena, café con creatina",
+        "protein_g": 3,
+        "carbs_g": 40,
+        "fat_g": 2
+      },
+      {
+        "name": "Post-entreno (16:30)",
+        "calories": 400,
+        "items": "Batido de proteína whey (40g) con 250ml leche descremada, 1 cda miel",
+        "protein_g": 45,
+        "carbs_g": 30,
+        "fat_g": 5
+      },
+      {
+        "name": "Cena (19:00)",
+        "calories": 500,
+        "items": "200g salmón a la plancha, 150g ensalada mixta (aguacate, espinaca, tomate), 1 cda aceite de oliva",
+        "protein_g": 42,
+        "carbs_g": 10,
+        "fat_g": 30
+      },
+      {
+        "name": "Snack nocturno (opcional)",
+        "calories": 150,
+        "items": "200g yogur griego natural, 10g almendras",
+        "protein_g": 15,
+        "carbs_g": 8,
+        "fat_g": 8
+      }
+    ],
+    "teas": [
+      {
+        "name": "Té Verde",
+        "benefit": "Antioxidante, acelera metabolismo, mejora concentración",
+        "best_time": "Mañana, antes del entrenamiento"
+      },
+      {
+        "name": "Té de Jengibre",
+        "benefit": "Antiinflamatorio, mejora digestión, reduce náuseas",
+        "best_time": "Después de las comidas"
+      },
+      {
+        "name": "Té de Manzanilla",
+        "benefit": "Relajante, mejora calidad del sueño, reduce ansiedad",
+        "best_time": "Antes de dormir"
+      },
+      {
+        "name": "Té de Hibisco",
+        "benefit": "Reduce presión arterial, antioxidante, diurético natural",
+        "best_time": "Tarde, entre comidas"
+      }
+    ]
+  },
+  "shopping": [
+    {
+      "category": "🥩 Proteínas",
+      "frequency": "Semanal",
+      "days": 7,
+      "items": [
+        {
+          "name": "Pechuga de pollo",
+          "qty": "1.5 kg"
+        },
+        {
+          "name": "Salmón fresco",
+          "qty": "800g"
+        },
+        {
+          "name": "Huevos (docena)",
+          "qty": "3 docenas"
+        },
+        {
+          "name": "Proteína whey",
+          "qty": "1 kg"
+        }
+      ]
+    },
+    {
+      "category": "🍚 Carbohidratos",
+      "frequency": "Semanal",
+      "days": 7,
+      "items": [
+        {
+          "name": "Avena en hojuelas",
+          "qty": "1 kg"
+        },
+        {
+          "name": "Arroz integral",
+          "qty": "1 kg"
+        },
+        {
+          "name": "Plátanos",
+          "qty": "1.5 kg"
+        },
+        {
+          "name": "Patatas",
+          "qty": "1 kg"
+        }
+      ]
+    },
+    {
+      "category": "🥑 Grasas Saludables",
+      "frequency": "Semanal",
+      "days": 7,
+      "items": [
+        {
+          "name": "Aguacates",
+          "qty": "4-5 unidades"
+        },
+        {
+          "name": "Aceite de oliva extra virgen",
+          "qty": "500 ml"
+        },
+        {
+          "name": "Almendras",
+          "qty": "500g"
+        },
+        {
+          "name": "Mantequilla de maní natural",
+          "qty": "400g"
+        }
+      ]
+    },
+    {
+      "category": "🥬 Vegetales",
+      "frequency": "Semanal",
+      "days": 7,
+      "items": [
+        {
+          "name": "Brócoli",
+          "qty": "1 kg"
+        },
+        {
+          "name": "Espinaca fresca",
+          "qty": "500g"
+        },
+        {
+          "name": "Tomates",
+          "qty": "1 kg"
+        },
+        {
+          "name": "Zanahorias",
+          "qty": "500g"
+        }
+      ]
+    },
+    {
+      "category": "💊 Suplementos",
+      "frequency": "Mensual",
+      "days": 30,
+      "items": [
+        {
+          "name": "Multivitamínico",
+          "qty": "30 tabletas"
+        },
+        {
+          "name": "Omega-3 (EPA/DHA)",
+          "qty": "60 cápsulas"
+        },
+        {
+          "name": "Creatina monohidratada",
+          "qty": "300g"
+        },
+        {
+          "name": "Vitamina D3",
+          "qty": "30 tabletas"
+        },
+        {
+          "name": "Magnesio",
+          "qty": "60 tabletas"
+        }
+      ]
+    },
+    {
+      "category": "✨ Skincare",
+      "frequency": "Trimestral",
+      "days": 90,
+      "items": [
+        {
+          "name": "Limpiador facial suave",
+          "qty": "150 ml"
+        },
+        {
+          "name": "Vitamina C sérum",
+          "qty": "30 ml"
+        },
+        {
+          "name": "Protector solar SPF 50",
+          "qty": "50 ml"
+        },
+        {
+          "name": "Retinol 0.5%",
+          "qty": "30 ml"
+        },
+        {
+          "name": "Hidratante facial",
+          "qty": "50 ml"
+        },
+        {
+          "name": "Desmaquillante bifásico",
+          "qty": "100 ml"
+        }
+      ]
+    },
+    {
+      "category": "💇 Cuidado Capilar",
+      "frequency": "Mensual",
+      "days": 30,
+      "items": [
+        {
+          "name": "Shampoo sin sulfatos",
+          "qty": "400 ml"
+        },
+        {
+          "name": "Acondicionador hidratante",
+          "qty": "400 ml"
+        },
+        {
+          "name": "Mascarilla capilar",
+          "qty": "200 ml"
+        },
+        {
+          "name": "Serum anti-caída",
+          "qty": "60 ml"
+        }
+      ]
+    },
+    {
+      "category": "🍵 Tés y Bebidas",
+      "frequency": "Mensual",
+      "days": 30,
+      "items": [
+        {
+          "name": "Té verde orgánico",
+          "qty": "50 bolsitas"
+        },
+        {
+          "name": "Té de jengibre",
+          "qty": "25 bolsitas"
+        },
+        {
+          "name": "Té de manzanilla",
+          "qty": "25 bolsitas"
+        },
+        {
+          "name": "Café en grano",
+          "qty": "500g"
+        }
+      ]
+    },
+    {
+      "category": "🧹 Limpieza",
+      "frequency": "Quincenal",
+      "days": 14,
+      "items": [
+        {
+          "name": "Detergente líquido",
+          "qty": "2 L"
+        },
+        {
+          "name": "Suavizante",
+          "qty": "1 L"
+        },
+        {
+          "name": "Limpiador multiusos",
+          "qty": "1 L"
+        },
+        {
+          "name": "Papel higiénico",
+          "qty": "12 rollos"
+        }
+      ]
+    },
+    {
+      "category": "🐕 Mascotas",
+      "frequency": "Quincenal",
+      "days": 14,
+      "items": [
+        {
+          "name": "Alimento para perro",
+          "qty": "5 kg"
+        },
+        {
+          "name": "Snacks para perro",
+          "qty": "500g"
+        },
+        {
+          "name": "Arena para gato",
+          "qty": "5 kg"
+        }
+      ]
+    }
+  ],
+  "supplements": [
+    {
+      "name": "Multivitamínico",
+      "timing": "Con el desayuno",
+      "dose": "1 tableta"
+    },
+    {
+      "name": "Omega-3 (EPA/DHA)",
+      "timing": "Con el desayuno",
+      "dose": "2 cápsulas (1000mg)"
+    },
+    {
+      "name": "Creatina Monohidratada",
+      "timing": "Pre o post entreno",
+      "dose": "5g (1 cucharada)"
+    },
+    {
+      "name": "Vitamina D3",
+      "timing": "Con el desayuno",
+      "dose": "2000 UI"
+    },
+    {
+      "name": "Magnesio",
+      "timing": "Antes de dormir",
+      "dose": "400mg"
+    },
+    {
+      "name": "Proteína Whey",
+      "timing": "Post-entreno o entre comidas",
+      "dose": "30-40g"
+    },
+    {
+      "name": "Cafeína",
+      "timing": "Pre-entreno (30 min antes)",
+      "dose": "200mg"
+    },
+    {
+      "name": "Zinc",
+      "timing": "Con el desayuno",
+      "dose": "15mg"
+    }
+  ],
+  "skincare": {
+    "am": [
+      {
+        "step": 1,
+        "title": "Limpieza suave",
+        "desc": "Gel limpiador con pH equilibrado, masaje circular 60 segundos"
+      },
+      {
+        "step": 2,
+        "title": "Tónico hidratante",
+        "desc": "Aplicar con algodón o palmas de las manos, dejar absorber"
+      },
+      {
+        "step": 3,
+        "title": "Vitamina C sérum",
+        "desc": "3-5 gotas, aplicar en rostro y cuello, esperar 2-3 min"
+      },
+      {
+        "step": 4,
+        "title": "Contorno de ojos",
+        "desc": "Toquecitos con anular, sin estirar la piel"
+      },
+      {
+        "step": 5,
+        "title": "Hidratante ligero",
+        "desc": "Aplicar cantidad generosa, masaje ascendente"
+      },
+      {
+        "step": 6,
+        "title": "Protector solar SPF 50",
+        "desc": "2 dedos de producto para todo el rostro, reaplicar cada 2-3h"
+      }
+    ],
+    "pm": [
+      {
+        "step": 1,
+        "title": "Desmaquillante / Aceite limpiador",
+        "desc": "Doble limpieza: primero aceite, luego gel limpiador"
+      },
+      {
+        "step": 2,
+        "title": "Exfoliante químico (2-3x semana)",
+        "desc": "Ácido glicólico o salicílico, dejar actuar 5-10 min"
+      },
+      {
+        "step": 3,
+        "title": "Tónico hidratante",
+        "desc": "Preparar la piel para los activos"
+      },
+      {
+        "step": 4,
+        "title": "Retinol 0.5% (3x semana)",
+        "desc": "Aplicar en piel seca, evitar contorno de ojos, empezar 2x semana"
+      },
+      {
+        "step": 5,
+        "title": "Niacinamida 5%",
+        "desc": "Control de poros y sebo, aplicar después del retinol"
+      },
+      {
+        "step": 6,
+        "title": "Contorno de ojos",
+        "desc": "Crema específica para ojos, masaje suave"
+      },
+      {
+        "step": 7,
+        "title": "Hidratante reparador",
+        "desc": "Crema más nutritiva que la de día, masaje facial"
+      },
+      {
+        "step": 8,
+        "title": "Bálsamo labial",
+        "desc": "Aplicar generosamente antes de dormir"
+      }
+    ],
+    "hair": {
+      "shampoo_freq": "cada 2-3 días",
+      "conditioner": "en medios y puntas, cada lavado",
+      "water_temp": "tibia, evitar agua muy caliente",
+      "dryer": "temperatura media, a 15cm del cabello",
+      "weekly_treatment": "Mascarilla capilar 1x por semana (sábado)",
+      "avoid": [
+        "sulfatos",
+        "siliconas",
+        "alcohol en exceso",
+        "lavado diario",
+        "agua caliente"
+      ]
+    }
+  },
+  "finance": {
+    "income_categories": [
+      {
+        "id": "salary",
+        "name": "Salario",
+        "icon": "💼"
+      },
+      {
+        "id": "freelance",
+        "name": "Freelance",
+        "icon": "💻"
+      },
+      {
+        "id": "investments",
+        "name": "Inversiones",
+        "icon": "📈"
+      },
+      {
+        "id": "gifts",
+        "name": "Regalos",
+        "icon": "🎁"
+      },
+      {
+        "id": "other_income",
+        "name": "Otros",
+        "icon": "💵"
+      }
+    ],
+    "expense_categories": [
+      {
+        "id": "food",
+        "name": "Alimentación",
+        "icon": "🍽️",
+        "color": "#22c55e"
+      },
+      {
+        "id": "transport",
+        "name": "Transporte",
+        "icon": "🚗",
+        "color": "#3b82f6"
+      },
+      {
+        "id": "housing",
+        "name": "Vivienda",
+        "icon": "🏠",
+        "color": "#f59e0b"
+      },
+      {
+        "id": "health",
+        "name": "Salud",
+        "icon": "🏥",
+        "color": "#ef4444"
+      },
+      {
+        "id": "gym",
+        "name": "Gimnasio",
+        "icon": "🏋️",
+        "color": "#a855f7"
+      },
+      {
+        "id": "supplements",
+        "name": "Suplementos",
+        "icon": "💊",
+        "color": "#06b6d4"
+      },
+      {
+        "id": "skincare",
+        "name": "Skincare",
+        "icon": "✨",
+        "color": "#ec4899"
+      },
+      {
+        "id": "entertainment",
+        "name": "Entretenimiento",
+        "icon": "🎬",
+        "color": "#f97316"
+      },
+      {
+        "id": "shopping",
+        "name": "Compras",
+        "icon": "🛍️",
+        "color": "#8b5cf6"
+      },
+      {
+        "id": "education",
+        "name": "Educación",
+        "icon": "📚",
+        "color": "#14b8a6"
+      },
+      {
+        "id": "other_expense",
+        "name": "Otros",
+        "icon": "📦",
+        "color": "#78716c"
+      }
+    ],
+    "fixed_expenses": [
+      {
+        "name": "Arriendo apartamento",
+        "amount": 1200000,
+        "day_of_month": 1,
+        "category": "housing"
+      },
+      {
+        "name": "Servicios públicos",
+        "amount": 250000,
+        "day_of_month": 5,
+        "category": "housing"
+      },
+      {
+        "name": "Internet",
+        "amount": 120000,
+        "day_of_month": 10,
+        "category": "housing"
+      },
+      {
+        "name": "Gimnasio",
+        "amount": 180000,
+        "day_of_month": 15,
+        "category": "gym"
+      },
+      {
+        "name": "Seguro médico",
+        "amount": 200000,
+        "day_of_month": 20,
+        "category": "health"
+      },
+      {
+        "name": "Spotify + Netflix",
+        "amount": 50000,
+        "day_of_month": 25,
+        "category": "entertainment"
+      }
+    ],
+    "savings_goals": [
+      {
+        "name": "Fondo de emergencia",
+        "target": 10000000,
+        "current": 3500000,
+        "monthly_auto": 500000
+      },
+      {
+        "name": "Viaje a Europa",
+        "target": 15000000,
+        "current": 2000000,
+        "monthly_auto": 300000
+      },
+      {
+        "name": "Nueva laptop",
+        "target": 5000000,
+        "current": 1500000,
+        "monthly_auto": 200000
+      }
+    ],
+    "debts": [
+      {
+        "name": "Tarjeta de crédito Bancolombia",
+        "total": 3500000,
+        "paid": 1200000,
+        "monthly_min": 350000,
+        "interest_rate": 25.5
+      },
+      {
+        "name": "Crédito de vehículo",
+        "total": 25000000,
+        "paid": 8000000,
+        "monthly_min": 850000,
+        "interest_rate": 12.8
+      }
+    ]
+  }
+};
+
+function loadData() {
+    DATA = EMBEDDED_DATA;
+    initApp();
 }
 
 function getTodayStr() {
@@ -554,34 +1674,48 @@ function getMonthKey() {
     return currentYear + '-' + String(currentMonth + 1).padStart(2, '0');
 }
 
-function formatCurrency(amount) {
-    const sym = DATA?.finance?.currency_symbol || '$';
-    return sym + amount.toFixed(2);
-}
+function getLS(key, def) { try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(def)); } catch(e) { return def; } }
+function setLS(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
 
 // ==================== INICIALIZACIÓN ====================
 function initApp() {
-    // Header
     const p = DATA.profile;
-    document.getElementById('header-info').textContent = `${p.height_m}m | ${p.weight_kg}kg | ${p.goal}`;
+    document.getElementById('app-title').textContent = (p.icon || '') + ' ' + (p.name_clean || p.name || 'Fuerza Pura');
+    document.getElementById('header-info').textContent = p.height_m + 'm | ' + p.weight_kg + 'kg | ' + p.goal;
     document.getElementById('water-goal').textContent = p.water_goal_ml;
 
-    // Daily reset
     checkDailyReset();
-
-    // Set selected day to today
     const dayMap = [6, 0, 1, 2, 3, 4, 5];
     selectedDayIdx = dayMap[new Date().getDay()];
 
-    // Init finance defaults
     initFinanceDefaults();
-
-    // Set default dates
+    populateCategorySelects();
     const today = getTodayStr();
     document.getElementById('income-date').value = today;
     document.getElementById('expense-date').value = today;
 
-    // Render all
+    renderAll();
+}
+
+function checkDailyReset() {
+    const today = getTodayStr();
+    const last = localStorage.getItem(LS.lastOpenDate);
+    if (last !== today) {
+        setLS(LS.checked, []);
+        setLS(LS.exerciseChecked, {});
+        localStorage.setItem(LS.water, '0');
+        localStorage.setItem(LS.lastOpenDate, today);
+    }
+}
+
+function initFinanceDefaults() {
+    if (!localStorage.getItem(LS.transactions)) setLS(LS.transactions, {});
+    if (!localStorage.getItem(LS.savingsGoals)) setLS(LS.savingsGoals, DATA.finance.savings_goals);
+    if (!localStorage.getItem(LS.debts)) setLS(LS.debts, DATA.finance.debts);
+    if (!localStorage.getItem(LS.fixedExpenses)) setLS(LS.fixedExpenses, DATA.finance.fixed_expenses);
+}
+
+function renderAll() {
     renderChecklist();
     renderTimeline();
     renderDaySelector();
@@ -602,45 +1736,10 @@ function initApp() {
     updateStats();
 }
 
-function checkDailyReset() {
-    const today = getTodayStr();
-    const last = localStorage.getItem(LS.lastOpenDate);
-    if (last !== today) {
-        localStorage.setItem(LS.checked, '[]');
-        localStorage.setItem(LS.exerciseChecked, '{}');
-        localStorage.setItem(LS.water, '0');
-        localStorage.setItem(LS.lastOpenDate, today);
-    }
-}
-
-function initFinanceDefaults() {
-    // Initialize transactions if empty
-    if (!localStorage.getItem(LS.transactions)) {
-        localStorage.setItem(LS.transactions, JSON.stringify({}));
-    }
-    // Initialize savings goals from data.json if empty
-    if (!localStorage.getItem(LS.savingsGoals)) {
-        localStorage.setItem(LS.savingsGoals, JSON.stringify(DATA.finance.savings_goals));
-    }
-    // Initialize debts from data.json if empty
-    if (!localStorage.getItem(LS.debts)) {
-        localStorage.setItem(LS.debts, JSON.stringify(DATA.finance.debts));
-    }
-    // Initialize fixed expenses from data.json if empty
-    if (!localStorage.getItem(LS.fixedExpenses)) {
-        localStorage.setItem(LS.fixedExpenses, JSON.stringify(DATA.finance.fixed_expenses));
-    }
-}
-
-// ==================== GETTERS LOCAL STORAGE ====================
-function getLS(key, def) { try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(def)); } catch(e) { return def; } }
-function setLS(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
-
-// ==================== RENDER: CHECKLIST ====================
+// ==================== CHECKLIST ====================
 function renderChecklist() {
     const checked = getLS(LS.checked, []);
-    const container = document.getElementById('checklist-container');
-    container.innerHTML = DATA.checklist.map(item => `
+    document.getElementById('checklist-container').innerHTML = DATA.checklist.map(item => `
         <div class="check-item ${checked.includes(item.id) ? 'done' : ''}" onclick="toggleCheck(${item.id})">
             <div class="check-box"></div>
             <div>
@@ -662,24 +1761,24 @@ function toggleCheck(id) {
 
 function resetChecks() {
     setLS(LS.checked, []);
-    setLS(LS.water, 0);
+    localStorage.setItem(LS.water, '0');
     renderChecklist();
     updateWater();
     updateStats();
 }
 
-// ==================== RENDER: TIMELINE ====================
+// ==================== TIMELINE ====================
 function renderTimeline() {
     document.getElementById('daily-timeline').innerHTML = DATA.timeline.map(t => `
         <div class="t-item">
             <div class="t-time">${t.time}</div>
-            <div class="t-act">${t.icon} ${t.activity}</div>
+            <div class="t-act">${t.icon || ''} ${t.activity}</div>
             <div class="t-note">${t.note}</div>
         </div>
     `).join('');
 }
 
-// ==================== RENDER: TRAINING ====================
+// ==================== TRAINING ====================
 function renderDaySelector() {
     document.getElementById('day-selector').innerHTML = DATA.training.week.map((d, i) => `
         <div class="day-chip ${i === selectedDayIdx ? 'active' : ''} ${i === selectedDayIdx ? 'today' : ''}" onclick="selectDay(${i})">${d.day.slice(0, 3)}</div>
@@ -694,7 +1793,7 @@ function selectDay(i) {
 
 function renderExercises() {
     const d = DATA.training.week[selectedDayIdx];
-    document.getElementById('today-training-title').textContent = `${d.day}${selectedDayIdx === selectedDayIdx ? '' : ''} — ${d.type}`;
+    document.getElementById('today-training-title').textContent = d.day + ' — ' + d.type;
     const exerciseChecked = getLS(LS.exerciseChecked, {});
     const exerciseLogs = getLS(LS.exerciseLogs, {});
 
@@ -708,10 +1807,10 @@ function renderExercises() {
         if (ex.trackable) {
             logRow = `
                 <div class="exercise-log">
-                    <input type="number" step="2.5" id="w-${key}" placeholder="${last ? last.weight + 'kg (último)' : 'peso en kg'}">
+                    <input type="number" step="2.5" id="w-${key}" placeholder="${last ? last.weight + 'kg (ultimo)' : 'peso en kg'}">
                     <button onclick="logWeight('${ex.name.replace(/'/g, "\'")}','${key}')">💾</button>
                 </div>
-                ${last ? `<div class="exercise-last">Último registro: ${last.weight}kg — ${last.date}</div>` : ''}
+                ${last ? `<div class="exercise-last">Ultimo registro: ${last.weight}kg — ${last.date}</div>` : ''}
             `;
         }
         return `
@@ -740,7 +1839,7 @@ function toggleExercise(key) {
 function logWeight(name, key) {
     const input = document.getElementById('w-' + key);
     const val = parseFloat(input.value);
-    if (!val || val <= 0) { alert('Ingresa un peso válido'); return; }
+    if (!val || val <= 0) { alert('Ingresa un peso valido'); return; }
     let exerciseLogs = getLS(LS.exerciseLogs, {});
     if (!exerciseLogs[name]) exerciseLogs[name] = [];
     exerciseLogs[name].push({ date: getTodayStr(), weight: val });
@@ -791,13 +1890,13 @@ function buildLineChart(logs) {
 
 function renderProgressChart() {
     const container = document.getElementById('progress-tracker');
-    if (!selectedExercise) { container.innerHTML = '<p class="empty-hint">Aún no hay ejercicios registrables.</p>'; return; }
+    if (!selectedExercise) { container.innerHTML = '<p class="empty-hint">Aun no hay ejercicios registrables.</p>'; return; }
     const logs = getLS(LS.exerciseLogs, {})[selectedExercise] || [];
     if (logs.length === 0) {
-        container.innerHTML = `<p class="empty-hint">Aún no hay registros de <b>${selectedExercise}</b>.</p>`;
+        container.innerHTML = `<p class="empty-hint">Aun no hay registros de <b>${selectedExercise}</b>.</p>`;
         return;
     }
-    const chart = logs.length >= 2 ? buildLineChart(logs) : '<p class="empty-hint">Registra al menos 2 sesiones para ver la gráfica.</p>';
+    const chart = logs.length >= 2 ? buildLineChart(logs) : '<p class="empty-hint">Registra al menos 2 sesiones para ver la grafica.</p>';
     const rows = logs.slice(-8).reverse().map((l, idx, arr) => {
         const prev = arr[idx + 1];
         let delta = '';
@@ -817,17 +1916,16 @@ function renderWeek() {
         <div class="day-card ${d.rest ? 'rest' : ''}">
             <div class="day-name">${d.day}</div>
             <div class="day-type">${d.type}</div>
-            <div class="day-exercises">${d.exercises.map(e => `${e.name} ${e.sets}x${e.reps}`).join('<br>')}</div>
+            <div class="day-exercises">${d.exercises.map(e => e.name + ' ' + e.sets + 'x' + e.reps).join('<br>')}</div>
         </div>
     `).join('');
 }
 
-// ==================== RENDER: MEALS ====================
+// ==================== MEALS ====================
 function renderMeals() {
     const n = DATA.nutrition;
     document.getElementById('fasting-label').textContent = n.fasting_window;
 
-    // Macro summary
     const totalP = n.meals.reduce((s, m) => s + m.protein_g, 0);
     const totalC = n.meals.reduce((s, m) => s + m.carbs_g, 0);
     const totalF = n.meals.reduce((s, m) => s + m.fat_g, 0);
@@ -836,7 +1934,7 @@ function renderMeals() {
     document.getElementById('macro-summary').innerHTML = `
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;font-size:0.8rem">
             <div style="background:var(--bg);padding:8px;border-radius:8px"><div style="font-weight:700;color:var(--accent)">${totalCal}</div><div style="color:var(--text2)">kcal</div></div>
-            <div style="background:var(--bg);padding:8px;border-radius:8px"><div style="font-weight:700;color:var(--success)">${totalP}g</div><div style="color:var(--text2)">Proteína</div></div>
+            <div style="background:var(--bg);padding:8px;border-radius:8px"><div style="font-weight:700;color:var(--success)">${totalP}g</div><div style="color:var(--text2)">Proteina</div></div>
             <div style="background:var(--bg);padding:8px;border-radius:8px"><div style="font-weight:700;color:var(--info)">${totalC}g</div><div style="color:var(--text2)">Carbs</div></div>
             <div style="background:var(--bg);padding:8px;border-radius:8px"><div style="font-weight:700;color:var(--accent-light)">${totalF}g</div><div style="color:var(--text2)">Grasas</div></div>
         </div>
@@ -871,7 +1969,7 @@ function renderTeas() {
     `).join('');
 }
 
-// ==================== RENDER: SHOPPING ====================
+// ==================== SHOPPING ====================
 function daysBetween(d1, d2) { return Math.floor((d2 - d1) / (1000 * 60 * 60 * 24)); }
 
 function renderShopping() {
@@ -888,8 +1986,8 @@ function renderShopping() {
             const daysSince = daysBetween(new Date(lastBought), new Date());
             const daysLeft = cat.days - daysSince;
             if (daysLeft <= 0) { dueLabel = '🔴 ¡Toca comprar ya!'; dueClass = 'due-late'; }
-            else if (daysLeft <= 3) { dueLabel = `🟡 Próxima compra en ${daysLeft} día(s)`; dueClass = 'due-soon'; }
-            else { dueLabel = `🟢 Próxima compra en ${daysLeft} días`; dueClass = 'due-ok'; }
+            else if (daysLeft <= 3) { dueLabel = `🟡 Proxima compra en ${daysLeft} dia(s)`; dueClass = 'due-soon'; }
+            else { dueLabel = `🟢 Proxima compra en ${daysLeft} dias`; dueClass = 'due-ok'; }
         }
         const items = cat.items.map((it, ii) => {
             const key = ci + '-' + ii;
@@ -908,7 +2006,7 @@ function renderShopping() {
                 </div>
                 <div class="due-badge ${dueClass}">${dueLabel}</div>
                 <div>${items}</div>
-                <button class="shop-reset-btn" onclick="resetShoppingCategory(${ci})">✅ Ya compré esto (reiniciar categoría)</button>
+                <button class="shop-reset-btn" onclick="resetShoppingCategory(${ci})">✅ Ya compre esto (reiniciar categoria)</button>
             </div>
         `;
     }).join('');
@@ -933,13 +2031,13 @@ function resetShoppingCategory(ci) {
 
 function renderShoppingEstimates() {
     document.getElementById('shopping-estimates').innerHTML = `
-        <div class="supp-row"><div class="supp-info"><div class="supp-name">Alimentos frescos</div><div class="supp-timing">Semanal</div></div><div class="supp-dose">$75-105</div></div>
-        <div class="supp-row"><div class="supp-info"><div class="supp-name">Suplementos</div><div class="supp-timing">Mensual</div></div><div class="supp-dose">$80-120</div></div>
-        <div class="supp-row"><div class="supp-info"><div class="supp-name">Skincare</div><div class="supp-timing">Trimestral</div></div><div class="supp-dose">$60-100</div></div>
+        <div class="supp-row"><div class="supp-info"><div class="supp-name">Alimentos frescos</div><div class="supp-timing">Semanal</div></div><div class="supp-dose">${formatCOP(300000)}</div></div>
+        <div class="supp-row"><div class="supp-info"><div class="supp-name">Suplementos</div><div class="supp-timing">Mensual</div></div><div class="supp-dose">${formatCOP(400000)}</div></div>
+        <div class="supp-row"><div class="supp-info"><div class="supp-name">Skincare</div><div class="supp-timing">Trimestral</div></div><div class="supp-dose">${formatCOP(600000)}</div></div>
     `;
 }
 
-// ==================== RENDER: BODY WEIGHT ====================
+// ==================== BODY WEIGHT ====================
 function renderBodyWeight() {
     const logs = getLS(LS.bodyWeight, []);
     const current = logs.length ? logs[logs.length - 1].weight : DATA.profile.weight_kg;
@@ -952,30 +2050,38 @@ function renderBodyWeight() {
 
     document.getElementById('bw-chart').innerHTML = logs.length >= 2
         ? buildLineChart(logs)
-        : '<p class="empty-hint">Registra al menos 2 pesajes para ver tu gráfica.</p>';
+        : '<p class="empty-hint">Registra al menos 2 pesajes para ver tu grafica.</p>';
 
     document.getElementById('bw-history').innerHTML = logs.length
         ? logs.slice(-15).reverse().map(l => `<div class="history-row"><span>${l.date}</span><span>${l.weight}kg</span></div>`).join('')
-        : '<p class="empty-hint">Aún no hay pesajes registrados.</p>';
+        : '<p class="empty-hint">Aun no hay pesajes registrados.</p>';
 
-    document.getElementById('header-info').textContent = `${DATA.profile.height_m}m | ${current}kg | ${DATA.profile.goal}`;
+    document.getElementById('header-info').textContent = DATA.profile.height_m + 'm | ' + current + 'kg | ' + DATA.profile.goal;
 }
 
 function addBodyWeight() {
     const input = document.getElementById('bw-input');
-    const val = parseFloat(input.value);
-    if (!val || val <= 0) { alert('Ingresa un peso válido'); return; }
+    let raw = input.value.replace(',', '.').trim();
+    const val = parseFloat(raw);
+    if (isNaN(val) || val <= 0 || val > 300) { 
+        alert('Ingresa un peso válido entre 0.1 y 300 kg'); 
+        return; 
+    }
     let logs = getLS(LS.bodyWeight, []);
     const today = getTodayStr();
     const existingIdx = logs.findIndex(l => l.date === today);
-    if (existingIdx >= 0) logs[existingIdx].weight = val;
-    else logs.push({ date: today, weight: val });
+    if (existingIdx >= 0) {
+        if (!confirm('Ya registraste peso hoy (' + logs[existingIdx].weight + 'kg). ¿Sobrescribir?')) return;
+        logs[existingIdx].weight = val;
+    } else {
+        logs.push({ date: today, weight: val });
+    }
     setLS(LS.bodyWeight, logs);
     input.value = '';
     renderBodyWeight();
 }
 
-// ==================== RENDER: SUPPS & SKIN ====================
+// ==================== SUPPS & SKIN ====================
 function renderSupps() {
     document.getElementById('supps-container').innerHTML = DATA.supplements.map(s => `
         <div class="supp-row">
@@ -1015,332 +2121,253 @@ function renderHair() {
     `;
 }
 
-// ==================== FINANZAS COMPLETAS ====================
+// ==================== NAVEGACIÓN ====================
+function showPanel(id) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.bottom-nav .bottom-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+}
+
+// ==================== AGUA Y STATS ====================
+function addWater(amount) {
+    let water = parseInt(localStorage.getItem(LS.water) || '0') + amount;
+    if (water > 4000) water = 4000;
+    localStorage.setItem(LS.water, water);
+    updateWater();
+}
+
+function updateWater() {
+    const water = parseInt(localStorage.getItem(LS.water) || '0');
+    document.getElementById('water-current').textContent = water;
+    document.getElementById('stat-water').textContent = water;
+    const goal = DATA.profile.water_goal_ml;
+    document.getElementById('water-bar').style.width = Math.min((water / goal) * 100, 100) + '%';
+}
+
+function updateStats() {
+    const checked = getLS(LS.checked, []);
+    document.getElementById('stat-check').textContent = checked.length + '/' + DATA.checklist.length;
+    const m = DATA.nutrition.meals;
+    const cals = (checked.includes(5) ? m[0].calories : 0) + (checked.includes(8) ? m[1].calories : 0) +
+                 (checked.includes(12) ? m[3].calories : 0) + (checked.includes(13) ? m[4].calories : 0);
+    document.getElementById('stat-cals').textContent = cals;
+}
+
+// ==================== TEMPORIZADOR ====================
+function startTimer() {
+    if (timerInterval) return;
+    timerInterval = setInterval(() => {
+        timerSeconds--;
+        if (timerSeconds <= 0) { stopTimer(); navigator.vibrate?.([200, 100, 200]); alert('⏱️ ¡Descanso completado!'); }
+        updateTimerDisplay();
+    }, 1000);
+}
+function stopTimer() { clearInterval(timerInterval); timerInterval = null; }
+function setTimer(seconds) { stopTimer(); timerSeconds = seconds; updateTimerDisplay(); }
+function updateTimerDisplay() {
+    const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+    const s = (timerSeconds % 60).toString().padStart(2, '0');
+    document.getElementById('timer').textContent = m + ':' + s;
+}
+
+// ==================== FINANZAS ====================
+const MONTH_NAMES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+function populateCategorySelects() {
+    document.getElementById('income-category').innerHTML = DATA.finance.income_categories.map(c => `<option value="${c.id}">${c.icon} ${c.name}</option>`).join('');
+    document.getElementById('expense-category').innerHTML = DATA.finance.expense_categories.map(c => `<option value="${c.id}">${c.icon} ${c.name}</option>`).join('');
+    document.getElementById('fixed-category').innerHTML = DATA.finance.expense_categories.map(c => `<option value="${c.id}">${c.icon} ${c.name}</option>`).join('');
+}
+
+function getCategory(type, id) {
+    const list = type === 'income' ? DATA.finance.income_categories : DATA.finance.expense_categories;
+    return list.find(c => c.id === id) || { name: id, icon: '📦', color: '#78716c' };
+}
+
+function getMonthTransactions() { return getLS(LS.transactions, {})[getMonthKey()] || []; }
+
 function changeMonth(delta) {
     currentMonth += delta;
-    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
     if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
     renderFinance();
 }
 
 function showFinanceTab(tab) {
     financeTab = tab;
-    document.querySelectorAll('.finance-tab-content').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+    document.querySelectorAll('.finance-tab-content').forEach(c => c.classList.add('hidden'));
     document.getElementById('finance-tab-' + tab).classList.remove('hidden');
-    document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
-    event.target.classList.add('active');
     renderFinanceTabContent();
 }
 
-function getTransactions() {
-    return getLS(LS.transactions, {});
-}
-
-function getMonthTransactions() {
-    const all = getTransactions();
-    const key = getMonthKey();
-    return all[key] || { income: [], expenses: [] };
-}
-
-function saveMonthTransactions(data) {
-    const all = getTransactions();
-    all[getMonthKey()] = data;
-    setLS(LS.transactions, all);
-}
-
 function renderFinance() {
-    const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-    document.getElementById('current-month-label').textContent = `${monthNames[currentMonth]} ${currentYear}`;
-
-    const data = getMonthTransactions();
-    const totalIncome = data.income.reduce((s, t) => s + t.amount, 0);
-    const totalExpenses = data.expenses.reduce((s, t) => s + t.amount, 0);
-    const fixedExpenses = getLS(LS.fixedExpenses, []);
-    const totalFixed = fixedExpenses.reduce((s, f) => s + (f.amount || 0), 0);
-    const savingsGoals = getLS(LS.savingsGoals, []);
-    const totalSaved = savingsGoals.reduce((s, g) => s + (g.current || 0), 0);
-    const debts = getLS(LS.debts, []);
-    const totalDebt = debts.reduce((s, d) => s + ((d.total || 0) - (d.paid || 0)), 0);
-
-    const balance = totalIncome - totalExpenses - totalFixed;
+    document.getElementById('current-month-label').textContent = MONTH_NAMES[currentMonth] + ' ' + currentYear;
+    const txs = getMonthTransactions();
+    const fixed = getLS(LS.fixedExpenses, DATA.finance.fixed_expenses);
+    const income = txs.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
+    const expense = txs.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0) + fixed.reduce((s, f) => s + f.amount, 0);
+    const balance = income - expense;
+    const savings = getLS(LS.savingsGoals, DATA.finance.savings_goals).reduce((s, g) => s + g.current, 0);
 
     document.getElementById('finance-summary').innerHTML = `
-        <div class="finance-card income">
-            <div class="finance-value pos">${formatCurrency(totalIncome)}</div>
-            <div class="finance-label">Ingresos</div>
-        </div>
-        <div class="finance-card expense">
-            <div class="finance-value neg">${formatCurrency(totalExpenses + totalFixed)}</div>
-            <div class="finance-label">Gastos</div>
-        </div>
-        <div class="finance-card balance">
-            <div class="finance-value ${balance >= 0 ? 'pos' : 'neg'}">${formatCurrency(balance)}</div>
-            <div class="finance-label">Balance</div>
-        </div>
-        <div class="finance-card savings">
-            <div class="finance-value warn">${formatCurrency(totalSaved)}</div>
-            <div class="finance-label">Ahorrado</div>
-        </div>
+        <div class="finance-card income"><div class="finance-value pos">${formatCOP(income)}</div><div class="finance-label">Ingresos</div></div>
+        <div class="finance-card expense"><div class="finance-value neg">${formatCOP(expense)}</div><div class="finance-label">Gastos</div></div>
+        <div class="finance-card balance"><div class="finance-value ${balance >= 0 ? 'neu' : 'neg'}">${formatCOP(balance)}</div><div class="finance-label">Balance</div></div>
+        <div class="finance-card savings"><div class="finance-value warn">${formatCOP(savings)}</div><div class="finance-label">Ahorros</div></div>
     `;
-
     renderFinanceTabContent();
 }
 
 function renderFinanceTabContent() {
-    if (financeTab === 'overview') renderFinanceOverview();
-    else if (financeTab === 'income') renderIncomeTab();
-    else if (financeTab === 'expenses') renderExpensesTab();
-    else if (financeTab === 'fixed') renderFixedTab();
-    else if (financeTab === 'goals') renderGoalsTab();
-    else if (financeTab === 'debts') renderDebtsTab();
+    if (financeTab === 'overview') renderOverview();
+    else if (financeTab === 'income') renderTransactionList('income');
+    else if (financeTab === 'expenses') renderTransactionList('expense');
+    else if (financeTab === 'fixed') renderFixedList();
+    else if (financeTab === 'goals') renderGoalsList();
+    else if (financeTab === 'debts') renderDebtsList();
 }
 
-function renderFinanceOverview() {
-    const data = getMonthTransactions();
-    const expenses = data.expenses;
-    const cats = DATA.finance.expense_categories;
+function renderOverview() {
+    const txs = getMonthTransactions().filter(t => t.type === 'expense');
+    const fixed = getLS(LS.fixedExpenses, DATA.finance.fixed_expenses);
+    const byCat = {};
+    txs.forEach(t => { byCat[t.category] = (byCat[t.category] || 0) + t.amount; });
+    fixed.forEach(f => { byCat[f.category] = (byCat[f.category] || 0) + f.amount; });
+    const total = Object.values(byCat).reduce((s, v) => s + v, 0);
+    const cats = DATA.finance.expense_categories.filter(c => byCat[c.id]).sort((a, b) => byCat[b.id] - byCat[a.id]);
 
-    // Distribution
-    let distHTML = '';
-    const catTotals = {};
-    expenses.forEach(e => { catTotals[e.category] = (catTotals[e.category] || 0) + e.amount; });
-    const totalExp = expenses.reduce((s, e) => s + e.amount, 0);
-
-    cats.forEach(cat => {
-        const amount = catTotals[cat.id] || 0;
-        const pct = totalExp > 0 ? (amount / totalExp * 100).toFixed(1) : 0;
-        const budget = cat.budget_monthly || 0;
-        const budgetPct = budget > 0 ? Math.min((amount / budget * 100), 100) : 0;
-        distHTML += `
+    document.getElementById('expense-distribution').innerHTML = total ? cats.map(c => {
+        const amt = byCat[c.id], pct = ((amt / total) * 100).toFixed(0);
+        return `
             <div class="finance-item">
-                <div class="finance-item-name"><span style="font-size:1.2rem">${cat.icon}</span> ${cat.name}</div>
-                <div>
-                    <div class="finance-item-amount neg">${formatCurrency(amount)} / ${formatCurrency(budget)}</div>
-                    <div class="finance-bar-bg"><div class="finance-bar-fill" style="width:${budgetPct}%;background:${cat.color}"></div></div>
-                </div>
+                <div class="finance-item-name">${c.icon} ${c.name}</div>
+                <div class="finance-item-amount neg">${formatCOP(amt)}</div>
             </div>
+            <div class="finance-bar-bg"><div class="finance-bar-fill" style="width:${pct}%;background:${c.color}"></div></div>
         `;
-    });
-    document.getElementById('expense-distribution').innerHTML = distHTML || '<p class="empty-hint">Aún no hay gastos registrados este mes.</p>';
+    }).join('') : '<p class="empty-hint">Sin gastos registrados este mes.</p>';
 
-    // Monthly evolution (last 6 months)
-    const allTrans = getTransactions();
-    const months = [];
+    const allTx = getLS(LS.transactions, {});
+    let evo = '';
     for (let i = 5; i >= 0; i--) {
-        const d = new Date(currentYear, currentMonth - i, 1);
-        const key = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
-        const mData = allTrans[key] || { income: [], expenses: [] };
-        const inc = mData.income.reduce((s, t) => s + t.amount, 0);
-        const exp = mData.expenses.reduce((s, t) => s + t.amount, 0);
-        months.push({ key, inc, exp, label: d.toLocaleDateString('es', { month: 'short' }) });
+        let m = currentMonth - i, y = currentYear;
+        if (m < 0) { m += 12; y--; }
+        const mk = y + '-' + String(m + 1).padStart(2, '0');
+        const list = allTx[mk] || [];
+        const inc = list.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
+        const exp = list.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0) + fixed.reduce((s, f) => s + f.amount, 0);
+        const bal = inc - exp;
+        evo += `<div class="history-row"><span>${MONTH_NAMES[m].slice(0, 3)} ${y}</span><span class="${bal >= 0 ? 'delta-up' : 'delta-down'}">${formatCOP(bal)}</span></div>`;
     }
+    document.getElementById('monthly-evolution').innerHTML = evo;
 
-    const maxVal = Math.max(...months.map(m => Math.max(m.inc, m.exp)), 1);
-    const w = 300, h = 100, pad = 20;
-    const barW = (w - 2 * pad) / months.length * 0.35;
-    const spacing = (w - 2 * pad) / months.length;
-
-    let bars = '';
-    months.forEach((m, i) => {
-        const x = pad + i * spacing;
-        const hInc = (m.inc / maxVal) * (h - pad);
-        const hExp = (m.exp / maxVal) * (h - pad);
-        bars += `<rect x="${x}" y="${h - hInc}" width="${barW}" height="${hInc}" fill="var(--success)" rx="3"/>`;
-        bars += `<rect x="${x + barW + 2}" y="${h - hExp}" width="${barW}" height="${hExp}" fill="var(--danger)" rx="3"/>`;
-        bars += `<text x="${x + barW}" y="${h + 12}" text-anchor="middle" fill="var(--text2)" font-size="8">${m.label}</text>`;
-    });
-
-    document.getElementById('monthly-evolution').innerHTML = `<svg viewBox="0 0 ${w} ${h + 20}" style="width:100%;height:120px">${bars}</svg>
-        <div style="display:flex;gap:16px;justify-content:center;margin-top:8px;font-size:0.8rem">
-            <span style="color:var(--success)">■ Ingresos</span>
-            <span style="color:var(--danger)">■ Gastos</span>
-        </div>`;
-
-    // Tip
-    const balance = months[months.length - 1].inc - months[months.length - 1].exp;
-    const tip = balance < 0 
-        ? "⚠️ Este mes gastas más de lo que ingresas. Revisa gastos variables y considera reducir entretenimiento u otros no esenciales."
-        : balance < 100
-        ? "💡 Estás al límite. Intenta aumentar ingresos freelance o reducir gastos variables para crear margen de ahorro."
-        : "✅ ¡Buen balance! Considera destinar el excedente a tu fondo de emergencia o metas de ahorro.";
+    const income = getMonthTransactions().filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
+    let tip = 'Registra tus ingresos y gastos del mes para ver un consejo personalizado.';
+    if (income > 0) {
+        const rate = (((income - total) / income) * 100).toFixed(0);
+        if (total > income) tip = `⚠️ Este mes tus gastos (${formatCOP(total)}) superan tus ingresos (${formatCOP(income)}). Revisa la categoria con mayor gasto.`;
+        else if (rate >= 20) tip = `✅ Vas ahorrando ~${rate}% de tus ingresos este mes. ¡Buen ritmo!`;
+        else tip = `🟡 Estas ahorrando ~${rate}% de tus ingresos. Intenta llegar al 20% recortando gastos variables.`;
+    }
     document.getElementById('finance-tip').textContent = tip;
 }
 
-function renderIncomeTab() {
-    // Populate category select
-    const select = document.getElementById('income-category');
-    select.innerHTML = DATA.finance.income_categories.map(c => `<option value="${c.id}">${c.icon} ${c.name}</option>`).join('');
-
-    const data = getMonthTransactions();
-    document.getElementById('income-list').innerHTML = data.income.length
-        ? data.income.slice().reverse().map((t, i) => `
+function renderTransactionList(type) {
+    const txs = getMonthTransactions().filter(t => t.type === type).sort((a, b) => b.date.localeCompare(a.date));
+    const listId = type === 'income' ? 'income-list' : 'expense-list';
+    document.getElementById(listId).innerHTML = txs.length ? txs.map(t => {
+        const cat = getCategory(type, t.category);
+        return `
             <div class="transaction-row">
                 <div class="transaction-info">
-                    <div class="transaction-name">${t.name}</div>
-                    <div class="transaction-date">${t.date} · ${getCatName('income', t.category)}</div>
+                    <div class="transaction-name">${cat.icon} ${t.name}</div>
+                    <div class="transaction-date">${t.date} · ${cat.name}</div>
                 </div>
-                <div class="transaction-amount income">+${formatCurrency(t.amount)}</div>
-                <button class="transaction-delete" onclick="deleteTransaction('income',${data.income.length - 1 - i})">🗑</button>
-            </div>
-        `).join('')
-        : '<p class="empty-hint">Aún no hay ingresos registrados este mes.</p>';
+                <div class="transaction-amount ${type}">${type === 'income' ? '+' : '-'}${formatCOP(t.amount)}</div>
+                <button class="transaction-delete" onclick="deleteTransaction('${t.id}')">🗑️</button>
+            </div>`;
+    }).join('') : '<p class="empty-hint">Sin movimientos este mes.</p>';
 }
 
-function renderExpensesTab() {
-    const select = document.getElementById('expense-category');
-    select.innerHTML = DATA.finance.expense_categories.map(c => `<option value="${c.id}">${c.icon} ${c.name}</option>`).join('');
-
-    const data = getMonthTransactions();
-    document.getElementById('expense-list').innerHTML = data.expenses.length
-        ? data.expenses.slice().reverse().map((t, i) => `
-            <div class="transaction-row">
-                <div class="transaction-info">
-                    <div class="transaction-name">${t.name}</div>
-                    <div class="transaction-date">${t.date} · ${getCatName('expense', t.category)}</div>
-                </div>
-                <div class="transaction-amount expense">-${formatCurrency(t.amount)}</div>
-                <button class="transaction-delete" onclick="deleteTransaction('expense',${data.expenses.length - 1 - i})">🗑</button>
-            </div>
-        `).join('')
-        : '<p class="empty-hint">Aún no hay gastos registrados este mes.</p>';
-}
-
-function renderFixedTab() {
-    const fixed = getLS(LS.fixedExpenses, []);
-    const catSelect = document.getElementById('fixed-category');
-    catSelect.innerHTML = DATA.finance.expense_categories.map(c => `<option value="${c.id}">${c.icon} ${c.name}</option>`).join('');
-
-    document.getElementById('fixed-expenses-list').innerHTML = fixed.length
-        ? fixed.map((f, i) => `
-            <div class="finance-item">
-                <div class="finance-item-name">
-                    <span>${f.name}</span>
-                    <span style="font-size:0.75rem;color:var(--text2)">Día ${f.day_of_month}</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:8px">
-                    <span class="finance-item-amount neg">${formatCurrency(f.amount || 0)}</span>
-                    <button class="transaction-delete" onclick="deleteFixedExpense(${i})">🗑</button>
-                </div>
-            </div>
-        `).join('')
-        : '<p class="empty-hint">No hay gastos fijos configurados. Agrégalos desde data.json o con el formulario de abajo.</p>';
-}
-
-function renderGoalsTab() {
-    const goals = getLS(LS.savingsGoals, []);
-    document.getElementById('savings-goals-list').innerHTML = goals.map((g, i) => {
-        const pct = g.target > 0 ? Math.min((g.current / g.target) * 100, 100) : 0;
-        return `
-            <div class="goal-card">
-                <div class="goal-header">
-                    <span class="goal-name">${g.name}</span>
-                    <span class="goal-amount">${formatCurrency(g.current)} / ${formatCurrency(g.target)}</span>
-                </div>
-                <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:${pct}%;background:linear-gradient(90deg,var(--accent),var(--accent-light))"></div></div>
-                <div class="goal-percent">${pct.toFixed(1)}% · Ahorro mensual: ${formatCurrency(g.monthly_auto || 0)}</div>
-                <div style="display:flex;gap:8px;margin-top:8px">
-                    <input type="number" class="input-field" id="goal-add-${i}" placeholder="Agregar $" style="flex:1;margin-bottom:0">
-                    <button class="btn-secondary" onclick="addToGoal(${i})">➕</button>
-                    <button class="btn-danger" onclick="deleteGoal(${i})">🗑</button>
-                </div>
-            </div>
-        `;
-    }).join('') || '<p class="empty-hint">No hay metas de ahorro. Crea una desde el formulario de abajo.</p>';
-}
-
-function renderDebtsTab() {
-    const debts = getLS(LS.debts, []);
-    document.getElementById('debts-list').innerHTML = debts.map((d, i) => {
-        const remaining = (d.total || 0) - (d.paid || 0);
-        const pct = d.total > 0 ? ((d.paid / d.total) * 100) : 0;
-        return `
-            <div class="debt-card">
-                <div class="debt-header">
-                    <span class="debt-name">${d.name}</span>
-                    <span class="debt-amount">${formatCurrency(remaining)} restante</span>
-                </div>
-                <div class="debt-bar-bg"><div class="debt-bar-fill" style="width:${pct}%;background:linear-gradient(90deg,var(--danger),var(--accent))"></div></div>
-                <div class="debt-info">
-                    <span>Total: ${formatCurrency(d.total || 0)}</span>
-                    <span>Pagado: ${formatCurrency(d.paid || 0)}</span>
-                    <span>Mín: ${formatCurrency(d.monthly_min || 0)}/mes</span>
-                </div>
-                <div style="display:flex;gap:8px;margin-top:8px">
-                    <input type="number" class="input-field" id="debt-pay-${i}" placeholder="Pago $" style="flex:1;margin-bottom:0">
-                    <button class="btn-secondary" onclick="payDebt(${i})">💰 Pagar</button>
-                    <button class="btn-danger" onclick="deleteDebt(${i})">🗑</button>
-                </div>
-            </div>
-        `;
-    }).join('') || '<p class="empty-hint">No hay deudas registradas.</p>';
-}
-
-function getCatName(type, id) {
-    const cats = type === 'income' ? DATA.finance.income_categories : DATA.finance.expense_categories;
-    const cat = cats.find(c => c.id === id);
-    return cat ? cat.name : id;
-}
-
-// ==================== FINANCE ACTIONS ====================
 function addTransaction(type) {
     const nameEl = document.getElementById(type + '-name');
     const amountEl = document.getElementById(type + '-amount');
     const catEl = document.getElementById(type + '-category');
     const dateEl = document.getElementById(type + '-date');
-
     const name = nameEl.value.trim();
     const amount = parseFloat(amountEl.value);
-    const category = catEl.value;
-    const date = dateEl.value;
-
-    if (!name || !amount || amount <= 0 || !date) {
-        alert('Completa todos los campos');
-        return;
-    }
-
-    const data = getMonthTransactions();
-    data[type === 'income' ? 'income' : 'expenses'].push({ name, amount, category, date });
-    saveMonthTransactions(data);
-
-    nameEl.value = '';
-    amountEl.value = '';
+    if (!name || !amount || amount <= 0) { alert('Completa descripcion y monto validos'); return; }
+    const date = dateEl.value || getTodayStr();
+    const mk = date.slice(0, 7);
+    let all = getLS(LS.transactions, {});
+    if (!all[mk]) all[mk] = [];
+    all[mk].push({ id: Date.now().toString(36), type, name, amount, category: catEl.value, date });
+    setLS(LS.transactions, all);
+    nameEl.value = ''; amountEl.value = '';
     renderFinance();
 }
 
-function deleteTransaction(type, index) {
-    const data = getMonthTransactions();
-    const arr = data[type === 'income' ? 'income' : 'expenses'];
-    arr.splice(index, 1);
-    saveMonthTransactions(data);
+function deleteTransaction(id) {
+    let all = getLS(LS.transactions, {});
+    const mk = getMonthKey();
+    if (all[mk]) all[mk] = all[mk].filter(t => t.id !== id);
+    setLS(LS.transactions, all);
     renderFinance();
+}
+
+function renderFixedList() {
+    const fixed = getLS(LS.fixedExpenses, DATA.finance.fixed_expenses);
+    document.getElementById('fixed-expenses-list').innerHTML = fixed.length ? fixed.map((f, i) => {
+        const cat = getCategory('expense', f.category);
+        return `
+            <div class="transaction-row">
+                <div class="transaction-info">
+                    <div class="transaction-name">${cat.icon} ${f.name}</div>
+                    <div class="transaction-date">Dia ${f.day_of_month} de cada mes · ${cat.name}</div>
+                </div>
+                <div class="transaction-amount expense">${formatCOP(f.amount)}</div>
+                <button class="transaction-delete" onclick="deleteFixedExpense(${i})">🗑️</button>
+            </div>`;
+    }).join('') : '<p class="empty-hint">Sin gastos fijos configurados.</p>';
 }
 
 function addFixedExpense() {
     const name = document.getElementById('fixed-name').value.trim();
     const amount = parseFloat(document.getElementById('fixed-amount').value);
-    const day = parseInt(document.getElementById('fixed-day').value);
+    const day = parseInt(document.getElementById('fixed-day').value) || 1;
     const category = document.getElementById('fixed-category').value;
-
-    if (!name || !amount || amount <= 0 || !day || day < 1 || day > 31) {
-        alert('Completa todos los campos correctamente');
-        return;
-    }
-
-    let fixed = getLS(LS.fixedExpenses, []);
+    if (!name || !amount || amount <= 0) { alert('Completa nombre y monto validos'); return; }
+    let fixed = getLS(LS.fixedExpenses, DATA.finance.fixed_expenses);
     fixed.push({ name, amount, day_of_month: day, category });
     setLS(LS.fixedExpenses, fixed);
-
     document.getElementById('fixed-name').value = '';
     document.getElementById('fixed-amount').value = '';
     document.getElementById('fixed-day').value = '';
     renderFinance();
 }
 
-function deleteFixedExpense(index) {
-    let fixed = getLS(LS.fixedExpenses, []);
-    fixed.splice(index, 1);
+function deleteFixedExpense(i) {
+    let fixed = getLS(LS.fixedExpenses, DATA.finance.fixed_expenses);
+    fixed.splice(i, 1);
     setLS(LS.fixedExpenses, fixed);
     renderFinance();
+}
+
+function renderGoalsList() {
+    const goals = getLS(LS.savingsGoals, DATA.finance.savings_goals);
+    document.getElementById('savings-goals-list').innerHTML = goals.length ? goals.map((g, i) => {
+        const pct = Math.min(100, (g.current / g.target) * 100).toFixed(0);
+        return `
+            <div class="goal-card">
+                <div class="goal-header"><span class="goal-name">🎯 ${g.name}</span><button class="transaction-delete" onclick="deleteGoal(${i})">🗑️</button></div>
+                <div class="goal-amount">${formatCOP(g.current)} / ${formatCOP(g.target)}</div>
+                <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:${pct}%;background:var(--accent)"></div></div>
+                <div class="goal-percent">${pct}% · +${formatCOP(g.monthly_auto)}/mes</div>
+            </div>`;
+    }).join('') : '<p class="empty-hint">Sin metas de ahorro.</p>';
 }
 
 function addSavingsGoal() {
@@ -1348,16 +2375,10 @@ function addSavingsGoal() {
     const target = parseFloat(document.getElementById('goal-target').value);
     const current = parseFloat(document.getElementById('goal-current').value) || 0;
     const monthly = parseFloat(document.getElementById('goal-monthly').value) || 0;
-
-    if (!name || !target || target <= 0) {
-        alert('Nombre y meta objetivo son obligatorios');
-        return;
-    }
-
-    let goals = getLS(LS.savingsGoals, []);
+    if (!name || !target || target <= 0) { alert('Completa nombre y meta validos'); return; }
+    let goals = getLS(LS.savingsGoals, DATA.finance.savings_goals);
     goals.push({ name, target, current, monthly_auto: monthly });
     setLS(LS.savingsGoals, goals);
-
     document.getElementById('goal-name').value = '';
     document.getElementById('goal-target').value = '';
     document.getElementById('goal-current').value = '';
@@ -1365,20 +2386,26 @@ function addSavingsGoal() {
     renderFinance();
 }
 
-function addToGoal(index) {
-    const amount = parseFloat(document.getElementById('goal-add-' + index).value);
-    if (!amount || amount <= 0) { alert('Monto inválido'); return; }
-    let goals = getLS(LS.savingsGoals, []);
-    goals[index].current = (goals[index].current || 0) + amount;
+function deleteGoal(i) {
+    let goals = getLS(LS.savingsGoals, DATA.finance.savings_goals);
+    goals.splice(i, 1);
     setLS(LS.savingsGoals, goals);
     renderFinance();
 }
 
-function deleteGoal(index) {
-    let goals = getLS(LS.savingsGoals, []);
-    goals.splice(index, 1);
-    setLS(LS.savingsGoals, goals);
-    renderFinance();
+function renderDebtsList() {
+    const debts = getLS(LS.debts, DATA.finance.debts);
+    document.getElementById('debts-list').innerHTML = debts.length ? debts.map((d, i) => {
+        const pct = d.total > 0 ? Math.min(100, (d.paid / d.total) * 100).toFixed(0) : 0;
+        const remaining = d.total - d.paid;
+        return `
+            <div class="debt-card">
+                <div class="debt-header"><span class="debt-name">📉 ${d.name}</span><button class="transaction-delete" onclick="deleteDebt(${i})">🗑️</button></div>
+                <div class="debt-amount">${formatCOP(d.paid)} pagado / ${formatCOP(d.total)}</div>
+                <div class="debt-bar-bg"><div class="debt-bar-fill" style="width:${pct}%;background:var(--danger)"></div></div>
+                <div class="debt-info"><span>Restante: ${formatCOP(remaining)}</span><span>Min: ${formatCOP(d.monthly_min)}/mes · ${d.interest_rate}% anual</span></div>
+            </div>`;
+    }).join('') : '<p class="empty-hint">Sin deudas registradas.</p>';
 }
 
 function addDebt() {
@@ -1387,118 +2414,44 @@ function addDebt() {
     const paid = parseFloat(document.getElementById('debt-paid').value) || 0;
     const min = parseFloat(document.getElementById('debt-min').value) || 0;
     const rate = parseFloat(document.getElementById('debt-rate').value) || 0;
-
-    if (!name || !total || total <= 0) {
-        alert('Nombre y total son obligatorios');
-        return;
-    }
-
-    let debts = getLS(LS.debts, []);
+    if (!name || !total || total <= 0) { alert('Completa nombre y total validos'); return; }
+    let debts = getLS(LS.debts, DATA.finance.debts);
     debts.push({ name, total, paid, monthly_min: min, interest_rate: rate });
     setLS(LS.debts, debts);
-
-    document.getElementById('debt-name').value = '';
-    document.getElementById('debt-total').value = '';
-    document.getElementById('debt-paid').value = '';
-    document.getElementById('debt-min').value = '';
-    document.getElementById('debt-rate').value = '';
+    ['debt-name', 'debt-total', 'debt-paid', 'debt-min', 'debt-rate'].forEach(id => document.getElementById(id).value = '');
     renderFinance();
 }
 
-function payDebt(index) {
-    const amount = parseFloat(document.getElementById('debt-pay-' + index).value);
-    if (!amount || amount <= 0) { alert('Monto inválido'); return; }
-    let debts = getLS(LS.debts, []);
-    debts[index].paid = (debts[index].paid || 0) + amount;
-    if (debts[index].paid > debts[index].total) debts[index].paid = debts[index].total;
+function deleteDebt(i) {
+    let debts = getLS(LS.debts, DATA.finance.debts);
+    debts.splice(i, 1);
     setLS(LS.debts, debts);
     renderFinance();
 }
 
-function deleteDebt(index) {
-    let debts = getLS(LS.debts, []);
-    debts.splice(index, 1);
-    setLS(LS.debts, debts);
-    renderFinance();
-}
-
-// ==================== WATER & TIMER ====================
-function addWater(amount) {
-    let water = parseInt(localStorage.getItem(LS.water) || '0');
-    water += amount;
-    if (water > 5000) water = 5000;
-    localStorage.setItem(LS.water, water);
-    updateWater();
-}
-
-function updateWater() {
-    const water = parseInt(localStorage.getItem(LS.water) || '0');
-    const goal = DATA ? DATA.profile.water_goal_ml : 3500;
-    document.getElementById('water-current').textContent = water;
-    document.getElementById('stat-water').textContent = water;
-    const pct = Math.min((water / goal) * 100, 100);
-    document.getElementById('water-bar').style.width = pct + '%';
-}
-
-function updateStats() {
-    const checked = getLS(LS.checked, []);
-    document.getElementById('stat-check').textContent = checked.length + '/' + (DATA ? DATA.checklist.length : 16);
-    const cals = checked.includes(5) ? 550 : 0;
-    const cals2 = checked.includes(8) ? 600 : 0;
-    const cals3 = checked.includes(12) ? 550 : 0;
-    const cals4 = checked.includes(13) ? 320 : 0;
-    document.getElementById('stat-cals').textContent = cals + cals2 + cals3 + cals4;
-}
-
-function startTimer() {
-    if (timerInterval) return;
-    timerInterval = setInterval(() => {
-        timerSeconds--;
-        if (timerSeconds <= 0) {
-            stopTimer();
-            navigator.vibrate?.([200, 100, 200]);
-            alert('⏱️ ¡Descanso completado!');
-        }
-        updateTimerDisplay();
-    }, 1000);
-}
-
-function stopTimer() {
-    clearInterval(timerInterval);
-    timerInterval = null;
-}
-
-function setTimer(seconds) {
-    stopTimer();
-    timerSeconds = seconds;
-    updateTimerDisplay();
-}
-
-function updateTimerDisplay() {
-    const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
-    const s = (timerSeconds % 60).toString().padStart(2, '0');
-    document.getElementById('timer').textContent = m + ':' + s;
-}
-
-// ==================== NAVIGATION ====================
-function showPanel(id) {
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.bottom-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('panel-' + id).classList.add('active');
-    event.currentTarget.classList.add('active');
+// ==================== SERVICE WORKER (offline: cachea index.html y manifest) ====================
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('data:text/javascript;base64,' + btoa(`
+        const CACHE = 'fp-v1';
+        self.addEventListener('install', e => {
+            e.waitUntil(caches.open(CACHE).then(c => c.addAll(['./', './index.html', './manifest.json'])).catch(()=>{}));
+            self.skipWaiting();
+        });
+        self.addEventListener('activate', e => e.waitUntil(clients.claim()));
+        self.addEventListener('fetch', e => {
+            e.respondWith(
+                fetch(e.request).then(res => {
+                    const copy = res.clone();
+                    caches.open(CACHE).then(c => c.put(e.request, copy)).catch(()=>{});
+                    return res;
+                }).catch(() => caches.match(e.request))
+            );
+        });
+    `)).catch(() => {});
 }
 
 // ==================== INIT ====================
 loadData();
-
-// Service Worker para offline
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('data:text/javascript;base64,' + btoa(`
-        self.addEventListener('install', e => self.skipWaiting());
-        self.addEventListener('activate', e => e.waitUntil(clients.claim()));
-        self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
-    `)).catch(() => {});
-}
 </script>
 </body>
 </html>
