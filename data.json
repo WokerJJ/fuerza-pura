@@ -1,0 +1,1267 @@
+{
+  "profile": {
+    "name": "Fuerza Pura",
+    "height_m": 1.71,
+    "weight_kg": 96,
+    "goal": "Fuerza + Recomposición",
+    "water_goal_ml": 3500,
+    "sleep_hours": 7.5,
+    "wake_time": "07:00",
+    "bed_time": "22:30"
+  },
+  "checklist": [
+    {
+      "id": 1,
+      "text": "💧 500ml agua al despertar",
+      "time": "07:00",
+      "category": "hidratacion"
+    },
+    {
+      "id": 2,
+      "text": "🧴 Skincare mañana completo",
+      "time": "07:15",
+      "category": "skincare"
+    },
+    {
+      "id": 3,
+      "text": "🐕 Paseo perros (30-40 min)",
+      "time": "07:30",
+      "category": "perros"
+    },
+    {
+      "id": 4,
+      "text": "💊 D3 + Omega-3 + Zinc + Creatina",
+      "time": "08:00",
+      "category": "suplementos"
+    },
+    {
+      "id": 5,
+      "text": "🍳 Comida 1: 4 huevos + pechuga",
+      "time": "11:30",
+      "category": "comida"
+    },
+    {
+      "id": 6,
+      "text": "🏋️ Micro-activación cada 90min",
+      "time": "Todo el día",
+      "category": "activacion"
+    },
+    {
+      "id": 7,
+      "text": "🧹 Limpieza casa (30-45 min)",
+      "time": "15:30",
+      "category": "limpieza"
+    },
+    {
+      "id": 8,
+      "text": "🍚 Comida 2: Arroz + carne pre-entreno",
+      "time": "15:30",
+      "category": "comida"
+    },
+    {
+      "id": 9,
+      "text": "⚡ Pre-entreno: Creatina + Cafeína",
+      "time": "16:00",
+      "category": "suplementos"
+    },
+    {
+      "id": 10,
+      "text": "💪 Entrenamiento fuerza (60-75 min)",
+      "time": "16:30",
+      "category": "entreno"
+    },
+    {
+      "id": 11,
+      "text": "🥤 Post-entreno: Whey + plátano",
+      "time": "18:00",
+      "category": "comida"
+    },
+    {
+      "id": 12,
+      "text": "🐟 Comida 3: Pescado + patata",
+      "time": "18:30",
+      "category": "comida"
+    },
+    {
+      "id": 13,
+      "text": "🥣 Comida 4: Yogur + nueces",
+      "time": "21:00",
+      "category": "comida"
+    },
+    {
+      "id": 14,
+      "text": "🍵 Té relajante + Magnesio 400mg",
+      "time": "21:30",
+      "category": "suplementos"
+    },
+    {
+      "id": 15,
+      "text": "✨ Skincare noche completo",
+      "time": "22:00",
+      "category": "skincare"
+    },
+    {
+      "id": 16,
+      "text": "😴 Dormir 22:30 (7.5-8 horas)",
+      "time": "22:30",
+      "category": "sueño"
+    }
+  ],
+  "timeline": [
+    {
+      "time": "07:00",
+      "activity": "Despertar + Hidratación",
+      "note": "500ml agua + limón. NO celular 15 min.",
+      "icon": "🌅"
+    },
+    {
+      "time": "07:15",
+      "activity": "Skincare Mañana",
+      "note": "Gel + Vit C + Hidratante gel + SPF 50",
+      "icon": "✨"
+    },
+    {
+      "time": "07:30",
+      "activity": "Paseo Perros",
+      "note": "30-45 min caminata activa. ~3000-4000 pasos.",
+      "icon": "🐕"
+    },
+    {
+      "time": "08:00",
+      "activity": "Suplementos Mañana",
+      "note": "D3 4000UI + Omega-3 2g + Zinc 25mg + Creatina 5g",
+      "icon": "💊"
+    },
+    {
+      "time": "08:30",
+      "activity": "Trabajo Freelance Bloque 1",
+      "note": "Deep work 90 min. Té verde o manzanilla.",
+      "icon": "💻"
+    },
+    {
+      "time": "10:00",
+      "activity": "Micro-Activación #1",
+      "note": "10 sentadillas + 10 flexiones + 30s plancha + 10 puentes",
+      "icon": "🏋️"
+    },
+    {
+      "time": "10:05",
+      "activity": "Trabajo Freelance Bloque 2",
+      "note": "Otro bloque 90 min productivo.",
+      "icon": "💻"
+    },
+    {
+      "time": "11:30",
+      "activity": "Comida 1",
+      "note": "4 huevos + 150g pechuga + vegetales + 30g aceite oliva",
+      "icon": "🍳"
+    },
+    {
+      "time": "12:00",
+      "activity": "Trabajo Freelance Bloque 3",
+      "note": "Último bloque de la mañana.",
+      "icon": "💻"
+    },
+    {
+      "time": "13:30",
+      "activity": "Micro-Activación #2",
+      "note": "15 sentadillas + 12 flexiones + 40s plancha + psoas",
+      "icon": "🏋️"
+    },
+    {
+      "time": "15:30",
+      "activity": "Comida 2 Pre-Entreno",
+      "note": "200g arroz + 150g carne magra + vegetales",
+      "icon": "🍚"
+    },
+    {
+      "time": "16:00",
+      "activity": "Pre-Entreno",
+      "note": "Cafeína 200mg + Citrulina 8g (opcional). Espera 30 min.",
+      "icon": "⚡"
+    },
+    {
+      "time": "16:30",
+      "activity": "Entrenamiento Fuerza",
+      "note": "Programa del día. 500ml agua durante entreno.",
+      "icon": "💪"
+    },
+    {
+      "time": "18:00",
+      "activity": "Post-Entreno Inmediato",
+      "note": "Whey 30-40g + plátano o 50g avena",
+      "icon": "🥤"
+    },
+    {
+      "time": "18:30",
+      "activity": "Comida 3",
+      "note": "200g pescado + 150g patata + ensalada grande",
+      "icon": "🐟"
+    },
+    {
+      "time": "19:30",
+      "activity": "Limpieza Casa Tipo 16",
+      "note": "~150-200 kcal quemadas. Barrer, trapear, ordenar.",
+      "icon": "🧹"
+    },
+    {
+      "time": "20:30",
+      "activity": "Ducha + Skincare Noche",
+      "note": "Doble limpieza + Retinol/ácido + Hidratante ligero",
+      "icon": "🚿"
+    },
+    {
+      "time": "21:00",
+      "activity": "Comida 4",
+      "note": "250g yogur griego + 30g nueces + canela",
+      "icon": "🥣"
+    },
+    {
+      "time": "21:30",
+      "activity": "Té Relajante + Magnesio",
+      "note": "Manzanilla/tilo/pasiflora + Magnesio glicinato 400mg",
+      "icon": "🍵"
+    },
+    {
+      "time": "22:00",
+      "activity": "Lectura / Relajación",
+      "note": "Libro físico. Respiración 4-7-8. Sin pantallas.",
+      "icon": "📖"
+    },
+    {
+      "time": "22:30",
+      "activity": "Dormir",
+      "note": "18-19°C. Oscuridad total. Sin teléfono en cama.",
+      "icon": "😴"
+    }
+  ],
+  "training": {
+    "exercise_library": {
+      "Press banca": "Acuéstate en el banco con los pies firmes en el piso. Agarra la barra un poco más ancho que los hombros. Baja controlado hasta rozar el pecho manteniendo los codos a ~45°, y empuja explosivo sin rebotar la barra en el pecho.",
+      "Press militar": "De pie, barra a la altura de la clavícula con agarre a la anchura de hombros. Empuja hacia arriba en línea recta sin arquear la espalda, apretando glúteos y abdomen. Baja controlado.",
+      "Fondos": "En paralelas, baja el cuerpo flexionando los codos hasta 90°, inclinando el torso ligeramente adelante para enfatizar pecho. Empuja hasta extender los codos sin bloquear bruscamente.",
+      "Push-ups lastradas": "Flexiones normales con un disco o mochila con peso sobre la espalda. Cuerpo recto de cabeza a talones; baja hasta que el pecho casi toque el piso y empuja completo.",
+      "Plancha con peso": "Posición de plancha apoyado en antebrazos, con un disco sobre la zona lumbar/glúteos. Mantén el cuerpo en línea recta apretando abdomen y glúteos, sin dejar caer la cadera.",
+      "Ab wheel": "De rodillas, sujeta la rueda y avanza hacia adelante extendiendo el cuerpo controlando con el core, sin arquear la zona lumbar. Regresa usando el abdomen, no los brazos.",
+      "Peso muerto": "Barra sobre la mitad del pie, agarre justo fuera de las piernas. Espalda recta y pecho arriba; empuja el piso con las piernas y extiende cadera y rodillas al mismo tiempo.",
+      "Dominadas lastradas": "Agarre prono en la barra, con un peso extra colgado del cinturón. Sube hasta que la barbilla pase la barra, controla la bajada completa y evita el balanceo.",
+      "Remo T": "Inclinado sobre la barra en T con espalda recta, tira el peso hacia el abdomen apretando los omóplatos. Baja controlado sin redondear la espalda.",
+      "Face pulls": "En polea a la altura de la cara, tira la cuerda hacia el rostro separando las manos y elevando los codos. Aprieta los omóplatos al final del movimiento.",
+      "Curl bíceps": "De pie, codos pegados al torso. Sube la barra o mancuernas flexionando el codo sin balancear el cuerpo, y baja controlado.",
+      "Hip thrust": "Espalda apoyada en un banco, barra sobre la cadera. Empuja la cadera hacia arriba apretando los glúteos hasta formar una línea recta hombro-cadera-rodilla, y baja controlado.",
+      "Sentadilla trasera": "Barra sobre los trapecios, pies al ancho de hombros. Baja empujando la cadera hacia atrás y las rodillas hacia afuera hasta paralelo o más profundo, y sube empujando con los talones.",
+      "Prensa piernas": "Sentado en la máquina con los pies al ancho de hombros sobre la plataforma. Baja controlado hasta 90° de rodilla y empuja sin bloquear las rodillas al extender.",
+      "Bulgarian split": "Pie trasero elevado sobre un banco, pie delantero adelante. Baja la rodilla trasera hacia el piso manteniendo el torso erguido y empuja con el talón delantero.",
+      "Psoas march": "De pie o suspendido, eleva la rodilla hacia el pecho de forma controlada activando el psoas, alternando piernas sin balancear el torso.",
+      "Calf raises": "De pie sobre un step o plataforma, sube en punta de pies lo más alto posible y baja controlado hasta sentir estiramiento en la pantorrilla.",
+      "Sentadilla frontal": "Barra apoyada sobre los deltoides frontales con codos altos. Baja manteniendo el torso lo más vertical posible y sube empujando con los talones.",
+      "Press banca cerrado": "Igual que el press banca pero con agarre a la anchura de hombros. Baja hasta el pecho manteniendo los codos cerca del torso, enfatizando el trabajo de tríceps al empujar.",
+      "Peso muerto rumano": "Barra frente a los muslos con rodillas semi-flexionadas y fijas. Baja la barra pegada a las piernas empujando la cadera hacia atrás hasta sentir estiramiento en isquiotibiales, y sube extendiendo la cadera.",
+      "Remo unilateral": "Apoya rodilla y mano en un banco, tira la mancuerna hacia la cadera apretando el omóplato. Baja controlado sin rotar el torso.",
+      "Farmer's walk": "Sujeta un peso considerable en cada mano y camina con pasos cortos y controlados, manteniendo el torso erguido y el core apretado.",
+      "Sled push / Burpees": "Trineo: empuja con los brazos extendidos y pasos cortos y potentes, torso inclinado adelante. Burpees (alternativa sin trineo): baja a sentadilla, lleva los pies atrás a plancha, haz una flexión, regresa los pies y salta explosivo hacia arriba."
+    },
+    "week": [
+      {
+        "day": "LUNES",
+        "type": "🏋️ EMPUJE + CORE",
+        "rest": false,
+        "exercises": [
+          {
+            "name": "Press banca",
+            "sets": 5,
+            "reps": "5",
+            "trackable": true
+          },
+          {
+            "name": "Press militar",
+            "sets": 4,
+            "reps": "6",
+            "trackable": true
+          },
+          {
+            "name": "Fondos",
+            "sets": 3,
+            "reps": "8",
+            "trackable": true
+          },
+          {
+            "name": "Push-ups lastradas",
+            "sets": 3,
+            "reps": "12",
+            "trackable": true
+          },
+          {
+            "name": "Plancha con peso",
+            "sets": 4,
+            "reps": "45s",
+            "trackable": false
+          },
+          {
+            "name": "Ab wheel",
+            "sets": 3,
+            "reps": "10",
+            "trackable": false
+          }
+        ]
+      },
+      {
+        "day": "MARTES",
+        "type": "🏋️ TRACCIÓN + POSTERIOR",
+        "rest": false,
+        "exercises": [
+          {
+            "name": "Peso muerto",
+            "sets": 5,
+            "reps": "5",
+            "trackable": true
+          },
+          {
+            "name": "Dominadas lastradas",
+            "sets": 4,
+            "reps": "6",
+            "trackable": true
+          },
+          {
+            "name": "Remo T",
+            "sets": 4,
+            "reps": "8",
+            "trackable": true
+          },
+          {
+            "name": "Face pulls",
+            "sets": 3,
+            "reps": "15",
+            "trackable": false
+          },
+          {
+            "name": "Curl bíceps",
+            "sets": 3,
+            "reps": "10",
+            "trackable": true
+          },
+          {
+            "name": "Hip thrust",
+            "sets": 4,
+            "reps": "8",
+            "trackable": true
+          }
+        ]
+      },
+      {
+        "day": "MIÉRCOLES",
+        "type": "🧘 RECUPERACIÓN ACTIVA",
+        "rest": true,
+        "exercises": [
+          {
+            "name": "Paseo perros",
+            "sets": 1,
+            "reps": "45-60 min",
+            "trackable": false,
+            "desc": "Camina a ritmo activo con los perros; ideal si incluye terreno irregular para trabajar estabilidad."
+          },
+          {
+            "name": "Yoga / Movilidad",
+            "sets": 1,
+            "reps": "20 min",
+            "trackable": false,
+            "desc": "Rutina suave de estiramientos y movilidad articular, enfocada en cadera, hombros y columna."
+          },
+          {
+            "name": "Foam rolling",
+            "sets": 1,
+            "reps": "15 min",
+            "trackable": false,
+            "desc": "Rueda lentamente sobre cada grupo muscular grande (piernas, espalda, glúteos) buscando puntos de tensión."
+          },
+          {
+            "name": "Respiración",
+            "sets": 1,
+            "reps": "10 min",
+            "trackable": false,
+            "desc": "Respiración diafragmática lenta 4-7-8 para bajar el cortisol y mejorar la recuperación del sistema nervioso."
+          }
+        ]
+      },
+      {
+        "day": "JUEVES",
+        "type": "🏋️ PIERNAS + MOVILIDAD",
+        "rest": false,
+        "exercises": [
+          {
+            "name": "Sentadilla trasera",
+            "sets": 5,
+            "reps": "5",
+            "trackable": true
+          },
+          {
+            "name": "Prensa piernas",
+            "sets": 4,
+            "reps": "8",
+            "trackable": true
+          },
+          {
+            "name": "Bulgarian split",
+            "sets": 3,
+            "reps": "8/pierna",
+            "trackable": true
+          },
+          {
+            "name": "Hip thrust",
+            "sets": 3,
+            "reps": "10",
+            "trackable": true
+          },
+          {
+            "name": "Psoas march",
+            "sets": 3,
+            "reps": "10/pierna",
+            "trackable": false
+          },
+          {
+            "name": "Calf raises",
+            "sets": 4,
+            "reps": "12",
+            "trackable": true
+          }
+        ]
+      },
+      {
+        "day": "VIERNES",
+        "type": "🏋️ FULL BODY + CONDICIONAMIENTO",
+        "rest": false,
+        "exercises": [
+          {
+            "name": "Sentadilla frontal",
+            "sets": 4,
+            "reps": "5",
+            "trackable": true
+          },
+          {
+            "name": "Press banca cerrado",
+            "sets": 4,
+            "reps": "6",
+            "trackable": true
+          },
+          {
+            "name": "Peso muerto rumano",
+            "sets": 4,
+            "reps": "8",
+            "trackable": true
+          },
+          {
+            "name": "Remo unilateral",
+            "sets": 3,
+            "reps": "10/brazo",
+            "trackable": true
+          },
+          {
+            "name": "Farmer's walk",
+            "sets": 3,
+            "reps": "40m",
+            "trackable": true
+          },
+          {
+            "name": "Sled push / Burpees",
+            "sets": 1,
+            "reps": "AMRAP",
+            "trackable": false
+          }
+        ]
+      },
+      {
+        "day": "SÁBADO",
+        "type": "🐕 ACTIVO - PERROS",
+        "rest": true,
+        "exercises": [
+          {
+            "name": "Paseo largo",
+            "sets": 1,
+            "reps": "60-90 min",
+            "trackable": false,
+            "desc": "Camina en naturaleza o parque a ritmo cómodo, aprovechando para desconectar mentalmente."
+          },
+          {
+            "name": "Movilidad suave",
+            "sets": 1,
+            "reps": "15 min",
+            "trackable": false,
+            "desc": "Estiramientos suaves de cadera, isquiotibiales y hombros."
+          },
+          {
+            "name": "Limpieza profunda casa",
+            "sets": 1,
+            "reps": "según necesidad",
+            "trackable": false,
+            "desc": "Aprovecha el movimiento constante como actividad física ligera adicional."
+          }
+        ]
+      },
+      {
+        "day": "DOMINGO",
+        "type": "😴 DESCANSO TOTAL",
+        "rest": true,
+        "exercises": [
+          {
+            "name": "Paseo relajado",
+            "sets": 1,
+            "reps": "30 min",
+            "trackable": false,
+            "desc": "Caminata tranquila con los perros, sin exigencia física."
+          },
+          {
+            "name": "Planificación semanal",
+            "sets": 1,
+            "reps": "-",
+            "trackable": false,
+            "desc": "Revisa la semana que viene: comidas, compras y entrenos."
+          },
+          {
+            "name": "Meal prep / Compras",
+            "sets": 1,
+            "reps": "-",
+            "trackable": false,
+            "desc": "Prepara comidas y revisa la lista de compras pendiente."
+          }
+        ]
+      }
+    ]
+  },
+  "nutrition": {
+    "target_calories": 2200,
+    "target_protein_g": 160,
+    "target_carbs_g": 200,
+    "target_fat_g": 80,
+    "fasting_window": "16:8",
+    "eating_window_start": "11:30",
+    "eating_window_end": "21:30",
+    "meals": [
+      {
+        "name": "🍳 Comida 1 — 11:30",
+        "calories": 550,
+        "protein_g": 45,
+        "carbs_g": 15,
+        "fat_g": 35,
+        "items": "4 huevos enteros + 150g pechuga de pollo + vegetales salteados + 30g aceite de oliva + café o té verde"
+      },
+      {
+        "name": "🍚 Comida 2 — 15:30",
+        "calories": 600,
+        "protein_g": 40,
+        "carbs_g": 70,
+        "fat_g": 15,
+        "items": "200g arroz blanco + 150g carne magra (res/pavo) + vegetales salteados + 1 cda aceite de oliva"
+      },
+      {
+        "name": "🥤 Post-Entreno — 18:00",
+        "calories": 180,
+        "protein_g": 30,
+        "carbs_g": 15,
+        "fat_g": 2,
+        "items": "1 scoop whey protein (30-40g) + plátano mediano o 50g avena + 300ml agua"
+      },
+      {
+        "name": "🐟 Comida 3 — 18:30",
+        "calories": 550,
+        "protein_g": 40,
+        "carbs_g": 50,
+        "fat_g": 20,
+        "items": "200g pescado (salmón/merluza/atún) + 150g patata/boniato + ensalada grande + aceite de oliva"
+      },
+      {
+        "name": "🥣 Comida 4 — 21:00",
+        "calories": 320,
+        "protein_g": 20,
+        "carbs_g": 15,
+        "fat_g": 18,
+        "items": "250g yogur griego natural + 30g nueces/almendras + canela + opcional miel"
+      }
+    ],
+    "teas": [
+      {
+        "name": "🍃 Té Verde",
+        "benefit": "Cafeína suave + L-teanina = enfoque calmado",
+        "best_time": "Mañana, antes de trabajar"
+      },
+      {
+        "name": "🫚 Jengibre",
+        "benefit": "Digestión, antiinflamatorio, energía",
+        "best_time": "Pre-entreno o tarde temprano"
+      },
+      {
+        "name": "🌼 Manzanilla",
+        "benefit": "Relajante, digestivo, antiinflamatorio",
+        "best_time": "Después del almuerzo"
+      },
+      {
+        "name": "🌿 Tilo",
+        "benefit": "Relajación suave, transición al sueño",
+        "best_time": "Tarde-noche"
+      },
+      {
+        "name": "🌸 Pasiflora",
+        "benefit": "Ansiedad, insomnio, relajación muscular",
+        "best_time": "Noche, con magnesio"
+      },
+      {
+        "name": "🌙 Valeriana",
+        "benefit": "Sedante natural, mejora calidad del sueño",
+        "best_time": "30 min antes de dormir"
+      }
+    ]
+  },
+  "supplements": [
+    {
+      "name": "🥇 Creatina Monohidratada",
+      "dose": "5g/día",
+      "timing": "Cualquier hora",
+      "priority": "OBLIGATORIO",
+      "priority_level": 1
+    },
+    {
+      "name": "🥇 Whey Protein",
+      "dose": "30-40g",
+      "timing": "Post-entreno",
+      "priority": "OBLIGATORIO",
+      "priority_level": 1
+    },
+    {
+      "name": "🥇 Vitamina D3",
+      "dose": "4,000 UI",
+      "timing": "Mañana con grasa",
+      "priority": "OBLIGATORIO",
+      "priority_level": 1
+    },
+    {
+      "name": "🥇 Omega-3 EPA/DHA",
+      "dose": "2-3g",
+      "timing": "Con comidas",
+      "priority": "OBLIGATORIO",
+      "priority_level": 1
+    },
+    {
+      "name": "🥇 Magnesio Glicinato",
+      "dose": "400-600mg",
+      "timing": "30 min antes dormir",
+      "priority": "OBLIGATORIO",
+      "priority_level": 1
+    },
+    {
+      "name": "🥈 Zinc",
+      "dose": "25-30mg",
+      "timing": "Con comida",
+      "priority": "ALTA",
+      "priority_level": 2
+    },
+    {
+      "name": "🥈 Colágeno",
+      "dose": "10-15g",
+      "timing": "Mañana/post-entreno",
+      "priority": "ALTA",
+      "priority_level": 2
+    },
+    {
+      "name": "🥉 Cafeína",
+      "dose": "200-300mg",
+      "timing": "Pre-entreno (antes 17:00)",
+      "priority": "OPCIONAL",
+      "priority_level": 3
+    },
+    {
+      "name": "🥉 Citrulina Malato",
+      "dose": "8g",
+      "timing": "30 min pre-entreno",
+      "priority": "OPCIONAL",
+      "priority_level": 3
+    }
+  ],
+  "skincare": {
+    "am": [
+      {
+        "step": 1,
+        "title": "Gel limpiador facial",
+        "desc": "Sin sulfatos. Ácido salicílico 0.5-2% o tea tree. Agua tibia."
+      },
+      {
+        "step": 2,
+        "title": "Tónico astringente suave",
+        "desc": "Sin alcohol. Niacinamida 5% o agua de rosas."
+      },
+      {
+        "step": 3,
+        "title": "Sérum Vitamina C 10-15%",
+        "desc": "Antioxidante, unifica tono. Espera 2-3 min."
+      },
+      {
+        "step": 4,
+        "title": "Hidratante gel oil-free",
+        "desc": "Non-comedogénico. Hyaluronic acid. Sin aceites."
+      },
+      {
+        "step": 5,
+        "title": "Protector solar SPF 50+ MATTE",
+        "desc": "Obligatorio. Reaplica cada 2-3h si sudas."
+      }
+    ],
+    "pm": [
+      {
+        "step": 1,
+        "title": "Doble limpieza",
+        "desc": "Aceite/bálsamo primero → Gel limpiador segundo."
+      },
+      {
+        "step": 2,
+        "title": "Exfoliación química (2-3x/semana)",
+        "desc": "Ácido salicílico 2% (BHA) o glicólico 5-10% (AHA)."
+      },
+      {
+        "step": 3,
+        "title": "Niacinamida 5-10%",
+        "desc": "Controla sebo, reduce poros, antiinflamatorio."
+      },
+      {
+        "step": 4,
+        "title": "Activo nocturno (alterna)",
+        "desc": "Noche A: Retinol 0.25-0.5% | Noche B: Ácido salicílico | Noche C: Descanso"
+      },
+      {
+        "step": 5,
+        "title": "Hidratante ligero noche",
+        "desc": "Gel o emulsión. Ceramidas sin ser pesado."
+      },
+      {
+        "step": 6,
+        "title": "Contorno de ojos (opcional)",
+        "desc": "Gel con cafeína o péptidos. Aplica con anular."
+      }
+    ],
+    "hair": {
+      "shampoo_freq": "cada 1-2 días (NO diario)",
+      "conditioner": "SOLO en puntas, nunca en raíces",
+      "water_temp": "tibia, NO caliente",
+      "dryer": "frío/tibio, no calor",
+      "weekly_treatment": "Arcilla bentonita 1x semana en cuero cabelludo",
+      "avoid": [
+        "siliconas pesadas",
+        "aceites capilares",
+        "lavado diario"
+      ]
+    }
+  },
+  "shopping": [
+    {
+      "category": "🥩 Proteínas",
+      "frequency": "Semanal",
+      "days": 7,
+      "items": [
+        {
+          "name": "Pechuga de pollo",
+          "qty": "1.5 kg"
+        },
+        {
+          "name": "Carne magra (res o pavo)",
+          "qty": "1 kg"
+        },
+        {
+          "name": "Pescado (salmón/merluza/atún)",
+          "qty": "1.5 kg"
+        },
+        {
+          "name": "Huevos",
+          "qty": "3 docenas"
+        },
+        {
+          "name": "Atún en lata (en agua)",
+          "qty": "4 latas"
+        },
+        {
+          "name": "Yogur griego natural sin azúcar",
+          "qty": "1.5 kg"
+        }
+      ]
+    },
+    {
+      "category": "🍚 Carbohidratos",
+      "frequency": "Semanal",
+      "days": 7,
+      "items": [
+        {
+          "name": "Arroz blanco",
+          "qty": "2 kg"
+        },
+        {
+          "name": "Avena en hojuelas",
+          "qty": "1 kg"
+        },
+        {
+          "name": "Patatas",
+          "qty": "2 kg"
+        },
+        {
+          "name": "Boniato",
+          "qty": "1 kg"
+        },
+        {
+          "name": "Pan integral",
+          "qty": "1 barra"
+        },
+        {
+          "name": "Pasta integral",
+          "qty": "500 g"
+        }
+      ]
+    },
+    {
+      "category": "🥑 Grasas Saludables",
+      "frequency": "Semanal",
+      "days": 7,
+      "items": [
+        {
+          "name": "Aceite de oliva extra virgen",
+          "qty": "750 ml"
+        },
+        {
+          "name": "Nueces",
+          "qty": "400 g"
+        },
+        {
+          "name": "Almendras",
+          "qty": "300 g"
+        },
+        {
+          "name": "Aguacates",
+          "qty": "5 unid"
+        },
+        {
+          "name": "Semillas de chía",
+          "qty": "200 g"
+        }
+      ]
+    },
+    {
+      "category": "🥬 Vegetales",
+      "frequency": "Semanal",
+      "days": 7,
+      "items": [
+        {
+          "name": "Espinaca fresca",
+          "qty": "500 g"
+        },
+        {
+          "name": "Brócoli",
+          "qty": "1 kg"
+        },
+        {
+          "name": "Tomates",
+          "qty": "1 kg"
+        },
+        {
+          "name": "Pimientos (varios colores)",
+          "qty": "6 unid"
+        },
+        {
+          "name": "Lechuga / mix hojas verdes",
+          "qty": "2 bolsas"
+        },
+        {
+          "name": "Cebolla",
+          "qty": "1 kg"
+        },
+        {
+          "name": "Zanahoria",
+          "qty": "500 g"
+        },
+        {
+          "name": "Pepino",
+          "qty": "4 unid"
+        },
+        {
+          "name": "Ajo",
+          "qty": "1 cabeza"
+        },
+        {
+          "name": "Limones",
+          "qty": "6 unid"
+        }
+      ]
+    },
+    {
+      "category": "💊 Suplementos",
+      "frequency": "Mensual",
+      "days": 30,
+      "items": [
+        {
+          "name": "Creatina monohidratada",
+          "qty": "500 g"
+        },
+        {
+          "name": "Proteína whey",
+          "qty": "2 kg"
+        },
+        {
+          "name": "Colágeno hidrolizado",
+          "qty": "300 g"
+        },
+        {
+          "name": "Vitamina D3 4000 UI",
+          "qty": "1 frasco"
+        },
+        {
+          "name": "Omega-3 EPA/DHA",
+          "qty": "1 frasco"
+        },
+        {
+          "name": "Magnesio glicinato 400mg",
+          "qty": "1 frasco"
+        },
+        {
+          "name": "Zinc 25 mg",
+          "qty": "1 frasco"
+        },
+        {
+          "name": "Cafeína 200mg (opcional)",
+          "qty": "1 frasco"
+        },
+        {
+          "name": "Citrulina malato (opcional)",
+          "qty": "250 g"
+        }
+      ]
+    },
+    {
+      "category": "✨ Skincare",
+      "frequency": "Trimestral",
+      "days": 90,
+      "items": [
+        {
+          "name": "Gel limpiador facial",
+          "qty": "1"
+        },
+        {
+          "name": "Tónico sin alcohol / niacinamida",
+          "qty": "1"
+        },
+        {
+          "name": "Sérum vitamina C 10-15%",
+          "qty": "1"
+        },
+        {
+          "name": "Hidratante gel oil-free",
+          "qty": "1"
+        },
+        {
+          "name": "Protector solar SPF 50 matte",
+          "qty": "1"
+        },
+        {
+          "name": "Ácido salicílico 2%",
+          "qty": "1"
+        },
+        {
+          "name": "Retinol 0.25-0.5%",
+          "qty": "1"
+        },
+        {
+          "name": "Niacinamida 5-10%",
+          "qty": "1"
+        },
+        {
+          "name": "Aceite limpiador o bálsamo",
+          "qty": "1"
+        },
+        {
+          "name": "Papel secante facial",
+          "qty": "1 paquete"
+        },
+        {
+          "name": "Máscara de arcilla blanca",
+          "qty": "1"
+        }
+      ]
+    },
+    {
+      "category": "💇 Cabello",
+      "frequency": "Mensual",
+      "days": 30,
+      "items": [
+        {
+          "name": "Champú sin sulfatos",
+          "qty": "1"
+        },
+        {
+          "name": "Acondicionador ligero",
+          "qty": "1"
+        },
+        {
+          "name": "Arcilla bentonita / caolín",
+          "qty": "1"
+        }
+      ]
+    },
+    {
+      "category": "🍵 Tés",
+      "frequency": "Mensual",
+      "days": 30,
+      "items": [
+        {
+          "name": "Té verde",
+          "qty": "1 caja"
+        },
+        {
+          "name": "Manzanilla",
+          "qty": "1 caja"
+        },
+        {
+          "name": "Valeriana",
+          "qty": "1 caja"
+        },
+        {
+          "name": "Pasiflora",
+          "qty": "1 caja"
+        },
+        {
+          "name": "Tilo",
+          "qty": "1 caja"
+        },
+        {
+          "name": "Jengibre",
+          "qty": "1 caja"
+        }
+      ]
+    },
+    {
+      "category": "🧹 Limpieza Casa",
+      "frequency": "Quincenal",
+      "days": 14,
+      "items": [
+        {
+          "name": "Detergente multiuso",
+          "qty": "1"
+        },
+        {
+          "name": "Desinfectante",
+          "qty": "1"
+        },
+        {
+          "name": "Jabón para trapear",
+          "qty": "1"
+        },
+        {
+          "name": "Esponjas / trapos de microfibra",
+          "qty": "1 paquete"
+        },
+        {
+          "name": "Bolsas de basura",
+          "qty": "1 rollo"
+        }
+      ]
+    },
+    {
+      "category": "🐕 Perros",
+      "frequency": "Quincenal",
+      "days": 14,
+      "items": [
+        {
+          "name": "Croquetas / alimento",
+          "qty": "2 semanas"
+        },
+        {
+          "name": "Premios / snacks",
+          "qty": "1 bolsa"
+        },
+        {
+          "name": "Bolsas para heces",
+          "qty": "1 rollo"
+        }
+      ]
+    }
+  ],
+  "finance": {
+    "currency": "USD",
+    "currency_symbol": "$",
+    "income_categories": [
+      {
+        "id": "freelance",
+        "name": "💻 Freelance",
+        "color": "#3b82f6",
+        "icon": "💻"
+      },
+      {
+        "id": "other",
+        "name": "📦 Otros",
+        "color": "#22c55e",
+        "icon": "📦"
+      },
+      {
+        "id": "investment",
+        "name": "📈 Inversiones",
+        "color": "#f59e0b",
+        "icon": "📈"
+      },
+      {
+        "id": "gift",
+        "name": "🎁 Regalos",
+        "color": "#ec4899",
+        "icon": "🎁"
+      }
+    ],
+    "expense_categories": [
+      {
+        "id": "food",
+        "name": "🍽️ Alimentación",
+        "color": "#ef4444",
+        "icon": "🍽️",
+        "budget_monthly": 400
+      },
+      {
+        "id": "supplements",
+        "name": "💊 Suplementos",
+        "color": "#8b5cf6",
+        "icon": "💊",
+        "budget_monthly": 100
+      },
+      {
+        "id": "skincare",
+        "name": "✨ Skincare",
+        "color": "#ec4899",
+        "icon": "✨",
+        "budget_monthly": 40
+      },
+      {
+        "id": "gym",
+        "name": "🏋️ Gimnasio",
+        "color": "#f59e0b",
+        "icon": "🏋️",
+        "budget_monthly": 50
+      },
+      {
+        "id": "transport",
+        "name": "🚗 Transporte",
+        "color": "#06b6d4",
+        "icon": "🚗",
+        "budget_monthly": 80
+      },
+      {
+        "id": "bills",
+        "name": "📡 Servicios",
+        "color": "#64748b",
+        "icon": "📡",
+        "budget_monthly": 150
+      },
+      {
+        "id": "entertainment",
+        "name": "🎮 Entretenimiento",
+        "color": "#a855f7",
+        "icon": "🎮",
+        "budget_monthly": 60
+      },
+      {
+        "id": "dogs",
+        "name": "🐕 Perros",
+        "color": "#84cc16",
+        "icon": "🐕",
+        "budget_monthly": 50
+      },
+      {
+        "id": "cleaning",
+        "name": "🧹 Limpieza",
+        "color": "#14b8a6",
+        "icon": "🧹",
+        "budget_monthly": 30
+      },
+      {
+        "id": "other_exp",
+        "name": "📦 Otros",
+        "color": "#78716c",
+        "icon": "📦",
+        "budget_monthly": 100
+      }
+    ],
+    "fixed_expenses": [
+      {
+        "name": "🏠 Alquiler / Hipoteca",
+        "amount": 0,
+        "day_of_month": 1,
+        "category": "bills"
+      },
+      {
+        "name": "📡 Internet",
+        "amount": 0,
+        "day_of_month": 5,
+        "category": "bills"
+      },
+      {
+        "name": "📱 Teléfono móvil",
+        "amount": 0,
+        "day_of_month": 10,
+        "category": "bills"
+      },
+      {
+        "name": "⚡ Electricidad",
+        "amount": 0,
+        "day_of_month": 15,
+        "category": "bills"
+      },
+      {
+        "name": "💧 Agua",
+        "amount": 0,
+        "day_of_month": 15,
+        "category": "bills"
+      },
+      {
+        "name": "🏋️ Gimnasio",
+        "amount": 0,
+        "day_of_month": 1,
+        "category": "gym"
+      },
+      {
+        "name": "📺 Streaming (Netflix/Spotify/etc)",
+        "amount": 0,
+        "day_of_month": 1,
+        "category": "entertainment"
+      },
+      {
+        "name": "💊 Seguro médico",
+        "amount": 0,
+        "day_of_month": 1,
+        "category": "bills"
+      }
+    ],
+    "savings_goals": [
+      {
+        "name": "🚨 Fondo de emergencia",
+        "target": 3000,
+        "current": 0,
+        "monthly_auto": 200
+      },
+      {
+        "name": "💪 Equipo de gym",
+        "target": 500,
+        "current": 0,
+        "monthly_auto": 50
+      },
+      {
+        "name": "✈️ Vacaciones",
+        "target": 1500,
+        "current": 0,
+        "monthly_auto": 100
+      }
+    ],
+    "debts": [
+      {
+        "name": "💳 Tarjeta de crédito",
+        "total": 0,
+        "paid": 0,
+        "monthly_min": 0,
+        "interest_rate": 0
+      },
+      {
+        "name": "📚 Préstamo estudios",
+        "total": 0,
+        "paid": 0,
+        "monthly_min": 0,
+        "interest_rate": 0
+      }
+    ]
+  }
+}

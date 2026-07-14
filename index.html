@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Fuerza Pura - Tracker</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23f59e0b' width='100' height='100' rx='20'/%3E%3Ctext x='50' y='65' font-size='50' text-anchor='middle' fill='%230f172a'%3E💪%3C/text%3E%3C/svg%3E">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        :root {
+            --bg: #0f172a; --card: #1e293b; --card-hover: #334155;
+            --accent: #f59e0b; --accent-light: #fbbf24;
+            --text: #f1f5f9; --text2: #94a3b8;
+            --success: #22c55e; --danger: #ef4444; --info: #3b82f6; --warning: #f97316;
+        }
+        body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.5; min-height: 100vh; padding-bottom: 80px; }
+        .header { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 20px; text-align: center; border-bottom: 1px solid var(--card-hover); position: sticky; top: 0; z-index: 100; }
+        .header h1 { font-size: 1.4rem; background: linear-gradient(90deg, var(--accent), var(--accent-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header p { color: var(--text2); font-size: 0.85rem; margin-top: 4px; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 16px; background: var(--card); margin: 12px; border-radius: 16px; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 0.75rem; color: var(--text2); }
+        .panel { display: none; padding: 0 12px 20px; animation: fadeIn 0.3s; }
+        .panel.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .card { background: var(--card); border-radius: 16px; padding: 16px; margin-bottom: 12px; border: 1px solid var(--card-hover); }
+        .card-title { color: var(--accent); font-weight: 700; font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card); border-top: 1px solid var(--card-hover); display: flex; justify-content: flex-start; padding: 8px 4px; z-index: 1000; overflow-x: auto; scrollbar-width: none; }
+        .bottom-nav::-webkit-scrollbar { display: none; }
+        .bottom-btn { background: none; border: none; color: var(--text2); font-size: 0.72rem; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; padding: 4px 10px; flex-shrink: 0; }
+        .bottom-btn.active { color: var(--accent); }
+        .bottom-btn span { font-size: 1.25rem; }
+        .btn-primary { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); border: none; border-radius: 12px; color: #0f172a; font-weight: 700; font-size: 1rem; cursor: pointer; }
+        .btn-primary:active { transform: scale(0.98); }
+        .btn-secondary { padding: 10px 16px; background: var(--card-hover); border: none; border-radius: 10px; color: var(--text); font-weight: 600; cursor: pointer; font-size: 0.9rem; }
+        .btn-danger { padding: 10px 16px; background: var(--danger); border: none; border-radius: 10px; color: white; font-weight: 600; cursor: pointer; font-size: 0.9rem; }
+        .input-field { width: 100%; padding: 12px; background: var(--bg); border: 1px solid var(--card-hover); border-radius: 10px; color: var(--text); font-size: 0.95rem; margin-bottom: 10px; }
+        .input-field:focus { outline: none; border-color: var(--accent); }
+        select.input-field { cursor: pointer; }
+        .form-row { display: flex; gap: 8px; margin-bottom: 10px; }
+        .form-row .input-field { margin-bottom: 0; }
+        .hidden { display: none !important; }
+
+        /* Checklist */
+        .check-item { display: flex; align-items: center; gap: 12px; padding: 14px; background: var(--bg); border-radius: 12px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; border: 1px solid transparent; }
+        .check-item:active { transform: scale(0.98); }
+        .check-item.done { opacity: 0.5; border-color: var(--success); }
+        .check-item.done .check-text { text-decoration: line-through; color: var(--text2); }
+        .check-box { width: 24px; height: 24px; border: 2px solid var(--text2); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: 0.2s; }
+        .check-item.done .check-box { background: var(--success); border-color: var(--success); }
+        .check-box::after { content: '✓'; color: white; font-weight: 700; opacity: 0; }
+        .check-item.done .check-box::after { opacity: 1; }
+        .check-text { font-size: 0.95rem; }
+
+        /* Water */
+        .water-tracker { display: flex; align-items: center; gap: 12px; padding: 16px; background: linear-gradient(135deg, #1e3a5f, #0f172a); border-radius: 16px; margin-bottom: 12px; }
+        .water-btn { width: 60px; height: 60px; border-radius: 50%; border: 3px solid var(--info); background: transparent; color: var(--info); font-size: 1.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .water-info { flex: 1; }
+        .water-amount { font-size: 1.3rem; font-weight: 700; color: var(--info); }
+        .water-bar { height: 6px; background: var(--card-hover); border-radius: 3px; margin-top: 8px; overflow: hidden; }
+        .water-fill { height: 100%; background: linear-gradient(90deg, var(--info), #60a5fa); border-radius: 3px; transition: width 0.3s; }
+
+        /* Timer */
+        .timer-display { text-align: center; padding: 20px; font-size: 3rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+        .timer-controls { display: flex; gap: 12px; justify-content: center; padding: 0 20px 20px; }
+        .timer-btn { padding: 12px 24px; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; font-size: 1rem; }
+        .timer-start { background: var(--success); color: white; }
+        .timer-stop { background: var(--danger); color: white; }
+
+        /* Timeline */
+        .timeline { position: relative; padding-left: 24px; }
+        .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--accent), var(--info)); }
+        .t-item { position: relative; padding: 12px 0; border-bottom: 1px solid var(--card-hover); }
+        .t-item:last-child { border-bottom: none; }
+        .t-item::before { content: ''; position: absolute; left: -22px; top: 16px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid var(--card); }
+        .t-time { font-size: 0.8rem; font-weight: 700; color: var(--accent); }
+        .t-act { font-size: 0.95rem; margin-top: 2px; }
+        .t-note { font-size: 0.8rem; color: var(--text2); margin-top: 4px; }
+
+        /* Meals */
+        .meal-card { background: var(--bg); border-radius: 12px; padding: 14px; margin-bottom: 10px; }
+        .meal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .meal-name { font-weight: 600; color: var(--accent-light); font-size: 0.95rem; }
+        .meal-cal { color: var(--text2); font-size: 0.8rem; }
+        .meal-items { color: var(--text2); font-size: 0.9rem; line-height: 1.6; }
+        .meal-macros { display: flex; gap: 12px; margin-top: 8px; font-size: 0.75rem; }
+        .macro-p { color: var(--success); } .macro-c { color: var(--info); } .macro-f { color: var(--accent-light); }
+
+        /* Supps */
+        .supp-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--card-hover); }
+        .supp-row:last-child { border-bottom: none; }
+        .supp-info { flex: 1; }
+        .supp-name { font-weight: 600; font-size: 0.95rem; }
+        .supp-timing { font-size: 0.8rem; color: var(--text2); }
+        .supp-dose { background: var(--accent); color: #0f172a; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; white-space: nowrap; margin-left: 8px; }
+
+        /* Training */
+        .day-selector { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px; scrollbar-width: none; }
+        .day-selector::-webkit-scrollbar { display: none; }
+        .day-chip { padding: 8px 14px; border-radius: 20px; background: var(--bg); color: var(--text2); font-size: 0.78rem; font-weight: 600; white-space: nowrap; cursor: pointer; border: 1px solid var(--card-hover); flex-shrink: 0; }
+        .day-chip.active { background: var(--accent); color: #0f172a; border-color: var(--accent); }
+        .day-chip.today { box-shadow: 0 0 0 2px var(--info) inset; }
+        .exercise-card { background: var(--bg); border-radius: 12px; padding: 14px; margin-bottom: 10px; border: 1px solid var(--card-hover); }
+        .exercise-card.done { border-color: var(--success); }
+        .exercise-top { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .exercise-check { width: 24px; height: 24px; border: 2px solid var(--text2); border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .exercise-card.done .exercise-check { background: var(--success); border-color: var(--success); }
+        .exercise-check::after { content: '✓'; color: #fff; font-weight: 700; opacity: 0; }
+        .exercise-card.done .exercise-check::after { opacity: 1; }
+        .exercise-name { font-weight: 600; font-size: 0.95rem; }
+        .exercise-card.done .exercise-name { color: var(--text2); text-decoration: line-through; }
+        .exercise-sets { font-size: 0.78rem; color: var(--accent-light); }
+        .exercise-desc { font-size: 0.83rem; color: var(--text2); margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--card-hover); line-height: 1.55; }
+        .exercise-log { display: flex; gap: 8px; margin-top: 10px; }
+        .exercise-log input { flex: 1; background: var(--card); border: 1px solid var(--card-hover); border-radius: 8px; padding: 10px; color: var(--text); font-size: 0.9rem; }
+        .exercise-log button { background: var(--accent); border: none; border-radius: 8px; padding: 0 16px; color: #0f172a; font-weight: 700; cursor: pointer; }
+        .exercise-last { font-size: 0.76rem; color: var(--text2); margin-top: 6px; }
+        .week-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        .day-card { background: var(--bg); border-radius: 12px; padding: 14px; border-left: 4px solid var(--accent); }
+        .day-card.rest { border-left-color: var(--success); }
+        .day-name { font-weight: 700; color: var(--accent); font-size: 1rem; }
+        .day-type { font-size: 0.85rem; color: var(--text2); margin: 4px 0; }
+        .day-exercises { font-size: 0.9rem; color: var(--text); line-height: 1.7; }
+        .chart-wrap { background: var(--bg); border-radius: 12px; padding: 10px; }
+        .history-row { display: flex; justify-content: space-between; padding: 8px 4px; border-bottom: 1px solid var(--card-hover); font-size: 0.85rem; }
+        .history-row:last-child { border-bottom: none; }
+        .delta-up { color: var(--success); font-size: 0.78rem; }
+        .delta-down { color: var(--danger); font-size: 0.78rem; }
+        .empty-hint { color: var(--text2); font-size: 0.85rem; padding: 10px 2px; }
+
+        /* Shopping */
+        .shop-cat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .shop-cat-title { font-weight: 700; color: var(--accent-light); font-size: 1rem; }
+        .freq-badge { background: var(--card-hover); color: var(--text2); padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; }
+        .due-badge { font-size: 0.78rem; margin-bottom: 10px; font-weight: 600; }
+        .due-ok { color: var(--success); } .due-soon { color: var(--accent); } .due-late { color: var(--danger); }
+        .shop-reset-btn { background: none; border: 1px solid var(--card-hover); color: var(--text2); padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer; margin-top: 8px; width: 100%; font-weight: 600; }
+
+        /* Weight */
+        .weight-card { background: linear-gradient(135deg, #1e3a5f, #0f172a); border-radius: 16px; padding: 18px; margin-bottom: 12px; border: 1px solid var(--card-hover); }
+        .weight-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0; }
+        .weight-log-form { display: flex; gap: 8px; }
+        .weight-log-form input { flex: 1; background: var(--bg); border: 1px solid var(--card-hover); border-radius: 10px; padding: 12px; color: var(--text); font-size: 0.95rem; }
+        .weight-log-form button { background: var(--accent); border: none; border-radius: 10px; padding: 0 18px; color: #0f172a; font-weight: 700; cursor: pointer; }
+
+        /* Skincare */
+        .skincare-step { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--card-hover); }
+        .skincare-step:last-child { border-bottom: none; }
+        .step-num { width: 28px; height: 28px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: #0f172a; flex-shrink: 0; }
+        .step-title { font-weight: 600; font-size: 0.95rem; }
+        .step-desc { font-size: 0.85rem; color: var(--text2); margin-top: 2px; }
+        .hair-card { background: linear-gradient(135deg, #1e1b4b, #312e81); border-radius: 12px; padding: 16px; margin-top: 12px; }
+        .hair-card h4 { color: #a5b4fc; margin-bottom: 8px; }
+        .hair-card p { color: #c7d2fe; font-size: 0.9rem; margin-bottom: 6px; }
+
+        /* ===== FINANZAS ===== */
+        .finance-summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 12px; }
+        .finance-card { background: var(--bg); border-radius: 12px; padding: 14px; text-align: center; border: 1px solid var(--card-hover); }
+        .finance-card.income { border-color: var(--success); }
+        .finance-card.expense { border-color: var(--danger); }
+        .finance-card.balance { border-color: var(--info); }
+        .finance-card.savings { border-color: var(--accent); }
+        .finance-value { font-size: 1.4rem; font-weight: 700; }
+        .finance-value.pos { color: var(--success); }
+        .finance-value.neg { color: var(--danger); }
+        .finance-value.neu { color: var(--info); }
+        .finance-value.warn { color: var(--accent); }
+        .finance-label { font-size: 0.75rem; color: var(--text2); margin-top: 4px; }
+
+        .finance-section { margin-bottom: 16px; }
+        .finance-section-title { font-weight: 700; color: var(--accent-light); font-size: 1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .finance-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--card-hover); }
+        .finance-item:last-child { border-bottom: none; }
+        .finance-item-name { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+        .finance-item-amount { font-weight: 700; font-size: 0.95rem; }
+        .finance-item-amount.pos { color: var(--success); }
+        .finance-item-amount.neg { color: var(--danger); }
+        .finance-bar-bg { height: 8px; background: var(--bg); border-radius: 4px; overflow: hidden; margin-top: 6px; }
+        .finance-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+
+        .transaction-row { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--bg); border-radius: 10px; margin-bottom: 8px; border: 1px solid var(--card-hover); }
+        .transaction-info { flex: 1; }
+        .transaction-name { font-weight: 600; font-size: 0.9rem; }
+        .transaction-date { font-size: 0.75rem; color: var(--text2); }
+        .transaction-amount { font-weight: 700; font-size: 1rem; }
+        .transaction-amount.income { color: var(--success); }
+        .transaction-amount.expense { color: var(--danger); }
+        .transaction-delete { background: none; border: none; color: var(--danger); font-size: 1.2rem; cursor: pointer; padding: 0 8px; }
+
+        .goal-card { background: var(--bg); border-radius: 12px; padding: 14px; margin-bottom: 10px; border: 1px solid var(--card-hover); }
+        .goal-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .goal-name { font-weight: 600; font-size: 0.95rem; }
+        .goal-amount { font-size: 0.85rem; color: var(--text2); }
+        .goal-bar-bg { height: 10px; background: var(--card-hover); border-radius: 5px; overflow: hidden; }
+        .goal-bar-fill { height: 100%; border-radius: 5px; transition: width 0.5s; }
+        .goal-percent { text-align: right; font-size: 0.8rem; color: var(--text2); margin-top: 4px; }
+
+        .debt-card { background: var(--bg); border-radius: 12px; padding: 14px; margin-bottom: 10px; border: 1px solid var(--card-hover); }
+        .debt-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .debt-name { font-weight: 600; font-size: 0.95rem; }
+        .debt-amount { font-size: 0.85rem; color: var(--text2); }
+        .debt-bar-bg { height: 10px; background: var(--card-hover); border-radius: 5px; overflow: hidden; }
+        .debt-bar-fill { height: 100%; border-radius: 5px; transition: width 0.5s; }
+        .debt-info { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.78rem; color: var(--text2); }
+
+        .tabs { display: flex; gap: 4px; margin-bottom: 12px; overflow-x: auto; scrollbar-width: none; }
+        .tabs::-webkit-scrollbar { display: none; }
+        .tab { padding: 8px 16px; border-radius: 10px; background: var(--bg); border: 1px solid var(--card-hover); color: var(--text2); font-size: 0.85rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+        .tab.active { background: var(--accent); color: #0f172a; border-color: var(--accent); }
+
+        .month-selector { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+        .month-selector button { background: var(--bg); border: 1px solid var(--card-hover); color: var(--text); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .month-selector span { font-weight: 700; color: var(--accent); }
+
+        .note-box { background: linear-gradient(135deg, #451a03, #7c2d12); border: 1px solid var(--accent); border-radius: 12px; padding: 14px; margin: 12px 0; }
+        .note-box p { color: #fed7aa; font-size: 0.9rem; }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="header">
+        <h1>💪 Fuerza Pura</h1>
+        <p id="header-info">Cargando...</p>
+    </div>
+
+    <div class="stats" id="top-stats">
+        <div class="stat"><div class="stat-value" id="stat-water">0</div><div class="stat-label">ml agua</div></div>
+        <div class="stat"><div class="stat-value" id="stat-check">0/0</div><div class="stat-label">checks</div></div>
+        <div class="stat"><div class="stat-value" id="stat-cals">0</div><div class="stat-label">kcal</div></div>
+    </div>
+
+    <!-- PANEL: HOY -->
+    <div id="panel-hoy" class="panel active">
+        <div class="water-tracker">
+            <button class="water-btn" onclick="addWater(250)">💧</button>
+            <div class="water-info">
+                <div class="water-amount"><span id="water-current">0</span> / <span id="water-goal">3500</span> ml</div>
+                <div class="water-goal">Meta diaria de hidratación</div>
+                <div class="water-bar"><div class="water-fill" id="water-bar" style="width:0%"></div></div>
+            </div>
+            <button class="water-btn" onclick="addWater(500)" style="border-color:var(--success);color:var(--success)">💧+</button>
+        </div>
+        <div class="card">
+            <div class="card-title">📋 Checklist del Día</div>
+            <div id="checklist-container"></div>
+            <button class="btn-primary" onclick="resetChecks()">🔄 Reiniciar Día</button>
+        </div>
+        <div class="card">
+            <div class="card-title">⏱️ Temporizador Descanso</div>
+            <div class="timer-display" id="timer">02:30</div>
+            <div class="timer-controls">
+                <button class="timer-btn timer-start" onclick="startTimer()">▶ Iniciar</button>
+                <button class="timer-btn timer-stop" onclick="stopTimer()">⏹ Detener</button>
+            </div>
+            <div style="text-align:center;padding:0 20px 10px;">
+                <button class="timer-btn" style="background:var(--card-hover);color:var(--text)" onclick="setTimer(90)">1:30</button>
+                <button class="timer-btn" style="background:var(--card-hover);color:var(--text)" onclick="setTimer(150)">2:30</button>
+                <button class="timer-btn" style="background:var(--card-hover);color:var(--text)" onclick="setTimer(180)">3:00</button>
+                <button class="timer-btn" style="background:var(--card-hover);color:var(--text)" onclick="setTimer(210)">3:30</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL: RUTINA -->
+    <div id="panel-rutina" class="panel">
+        <div class="card">
+            <div class="card-title">🌅 Rutina Diaria</div>
+            <div class="timeline" id="daily-timeline"></div>
+        </div>
+    </div>
+
+    <!-- PANEL: ENTRENO -->
+    <div id="panel-entreno" class="panel">
+        <div class="card">
+            <div class="card-title">🏋️ Entrenamiento de Hoy</div>
+            <div class="day-selector" id="day-selector"></div>
+            <div id="today-training-title" style="font-weight:700;color:var(--accent-light);margin-bottom:10px;font-size:0.95rem;"></div>
+            <div id="exercise-list"></div>
+        </div>
+        <div class="card">
+            <div class="card-title">📈 Progresión de Pesos</div>
+            <select class="input-field" id="exercise-select" onchange="onExerciseSelectChange()"></select>
+            <div id="progress-tracker"></div>
+        </div>
+        <div class="card">
+            <div class="card-title">📅 Vista Semanal</div>
+            <div class="week-grid" id="week-grid"></div>
+        </div>
+    </div>
+
+    <!-- PANEL: COMIDAS -->
+    <div id="panel-comidas" class="panel">
+        <div class="card">
+            <div class="card-title">🍽️ Alimentación <span id="fasting-label"></span></div>
+            <div id="macro-summary" style="margin-bottom:12px;"></div>
+            <div id="meals-container"></div>
+        </div>
+        <div class="card">
+            <div class="card-title">🍵 Tés Recomendados</div>
+            <div id="teas-container"></div>
+        </div>
+    </div>
+
+    <!-- PANEL: COMPRAS -->
+    <div id="panel-compras" class="panel">
+        <div class="card">
+            <div class="card-title">🛒 Guía de Frecuencia</div>
+            <p style="color:var(--text2);font-size:0.85rem;line-height:1.7">
+                🥩🍚🥑🥬 Alimentos frescos → cada <b style="color:var(--text)">semana</b><br>
+                🧹🐕 Limpieza y perros → cada <b style="color:var(--text)">2 semanas</b><br>
+                💊💇🍵 Suplementos, cabello y tés → cada <b style="color:var(--text)">mes</b><br>
+                ✨ Skincare → cada <b style="color:var(--text)">3 meses</b>
+            </p>
+        </div>
+        <div id="shopping-container"></div>
+        <div class="card">
+            <div class="card-title">💰 Estimado de Gasto</div>
+            <div id="shopping-estimates"></div>
+        </div>
+    </div>
+
+    <!-- PANEL: PESO -->
+    <div id="panel-peso" class="panel">
+        <div class="weight-card">
+            <div class="card-title" style="margin-bottom:0">⚖️ Progresión de Peso Corporal</div>
+            <div class="weight-stats">
+                <div class="stat"><div class="stat-value" id="bw-start">--</div><div class="stat-label">Inicial (kg)</div></div>
+                <div class="stat"><div class="stat-value" id="bw-current">--</div><div class="stat-label">Actual (kg)</div></div>
+                <div class="stat"><div class="stat-value" id="bw-diff">--</div><div class="stat-label">Cambio (kg)</div></div>
+            </div>
+            <div class="weight-log-form">
+                <input type="number" step="0.1" id="bw-input" placeholder="Peso de hoy en kg">
+                <button onclick="addBodyWeight()">💾 Guardar</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title">📉 Gráfica de Progresión</div>
+            <div id="bw-chart"></div>
+        </div>
+        <div class="card">
+            <div class="card-title">📋 Historial de Pesajes</div>
+            <div id="bw-history"></div>
+        </div>
+    </div>
+
+    <!-- PANEL: FINANZAS -->
+    <div id="panel-finanzas" class="panel">
+        <div class="month-selector">
+            <button onclick="changeMonth(-1)">◀</button>
+            <span id="current-month-label"></span>
+            <button onclick="changeMonth(1)">▶</button>
+        </div>
+
+        <div class="finance-summary" id="finance-summary"></div>
+
+        <div class="tabs">
+            <div class="tab active" onclick="showFinanceTab('overview')">📊 Resumen</div>
+            <div class="tab" onclick="showFinanceTab('income')">💰 Ingresos</div>
+            <div class="tab" onclick="showFinanceTab('expenses')">💸 Gastos</div>
+            <div class="tab" onclick="showFinanceTab('fixed')">📋 Fijos</div>
+            <div class="tab" onclick="showFinanceTab('goals')">🎯 Metas</div>
+            <div class="tab" onclick="showFinanceTab('debts')">📉 Deudas</div>
+        </div>
+
+        <div id="finance-tab-overview" class="finance-tab-content">
+            <div class="card">
+                <div class="card-title">📊 Distribución de Gastos</div>
+                <div id="expense-distribution"></div>
+            </div>
+            <div class="card">
+                <div class="card-title">📈 Evolución Mensual</div>
+                <div id="monthly-evolution"></div>
+            </div>
+            <div class="card">
+                <div class="card-title">💡 Consejo del Mes</div>
+                <div id="finance-tip" style="color:var(--text2);font-size:0.9rem;line-height:1.6;"></div>
+            </div>
+        </div>
+
+        <div id="finance-tab-income" class="finance-tab-content hidden">
+            <div class="card">
+                <div class="card-title">➕ Registrar Ingreso</div>
+                <input type="text" class="input-field" id="income-name" placeholder="Descripción (ej: Proyecto web)">
+                <div class="form-row">
+                    <input type="number" class="input-field" id="income-amount" placeholder="Monto" style="flex:1">
+                    <select class="input-field" id="income-category" style="flex:1"></select>
+                </div>
+                <input type="date" class="input-field" id="income-date">
+                <button class="btn-primary" onclick="addTransaction('income')">💾 Guardar Ingreso</button>
+            </div>
+            <div class="card">
+                <div class="card-title">📋 Historial de Ingresos</div>
+                <div id="income-list"></div>
+            </div>
+        </div>
+
+        <div id="finance-tab-expenses" class="finance-tab-content hidden">
+            <div class="card">
+                <div class="card-title">➖ Registrar Gasto</div>
+                <input type="text" class="input-field" id="expense-name" placeholder="Descripción (ej: Supermercado)">
+                <div class="form-row">
+                    <input type="number" class="input-field" id="expense-amount" placeholder="Monto" style="flex:1">
+                    <select class="input-field" id="expense-category" style="flex:1"></select>
+                </div>
+                <input type="date" class="input-field" id="expense-date">
+                <button class="btn-primary" onclick="addTransaction('expense')">💾 Guardar Gasto</button>
+            </div>
+            <div class="card">
+                <div class="card-title">📋 Historial de Gastos</div>
+                <div id="expense-list"></div>
+            </div>
+        </div>
+
+        <div id="finance-tab-fixed" class="finance-tab-content hidden">
+            <div class="card">
+                <div class="card-title">📋 Gastos Fijos Mensuales</div>
+                <div id="fixed-expenses-list"></div>
+            </div>
+            <div class="card">
+                <div class="card-title">➕ Agregar Gasto Fijo</div>
+                <input type="text" class="input-field" id="fixed-name" placeholder="Nombre (ej: Alquiler)">
+                <div class="form-row">
+                    <input type="number" class="input-field" id="fixed-amount" placeholder="Monto mensual" style="flex:1">
+                    <input type="number" class="input-field" id="fixed-day" placeholder="Día del mes" style="flex:1;max-width:100px">
+                </div>
+                <select class="input-field" id="fixed-category"></select>
+                <button class="btn-primary" onclick="addFixedExpense()">💾 Agregar</button>
+            </div>
+        </div>
+
+        <div id="finance-tab-goals" class="finance-tab-content hidden">
+            <div class="card">
+                <div class="card-title">🎯 Metas de Ahorro</div>
+                <div id="savings-goals-list"></div>
+            </div>
+            <div class="card">
+                <div class="card-title">➕ Nueva Meta</div>
+                <input type="text" class="input-field" id="goal-name" placeholder="Nombre de la meta">
+                <div class="form-row">
+                    <input type="number" class="input-field" id="goal-target" placeholder="Meta ($)" style="flex:1">
+                    <input type="number" class="input-field" id="goal-current" placeholder="Actual ($)" style="flex:1">
+                </div>
+                <input type="number" class="input-field" id="goal-monthly" placeholder="Ahorro mensual automático ($)">
+                <button class="btn-primary" onclick="addSavingsGoal()">💾 Crear Meta</button>
+            </div>
+        </div>
+
+        <div id="finance-tab-debts" class="finance-tab-content hidden">
+            <div class="card">
+                <div class="card-title">📉 Deudas Activas</div>
+                <div id="debts-list"></div>
+            </div>
+            <div class="card">
+                <div class="card-title">➕ Registrar Deuda</div>
+                <input type="text" class="input-field" id="debt-name" placeholder="Nombre (ej: Tarjeta de crédito)">
+                <div class="form-row">
+                    <input type="number" class="input-field" id="debt-total" placeholder="Total ($)" style="flex:1">
+                    <input type="number" class="input-field" id="debt-paid" placeholder="Pagado ($)" style="flex:1">
+                </div>
+                <div class="form-row">
+                    <input type="number" class="input-field" id="debt-min" placeholder="Pago mínimo mensual" style="flex:1">
+                    <input type="number" class="input-field" id="debt-rate" placeholder="Tasa % anual" style="flex:1">
+                </div>
+                <button class="btn-primary" onclick="addDebt()">💾 Registrar Deuda</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL: SUPLEMENTOS -->
+    <div id="panel-supps" class="panel">
+        <div class="card">
+            <div class="card-title">💊 Protocolo de Suplementación</div>
+            <div id="supps-container"></div>
+        </div>
+    </div>
+
+    <!-- PANEL: SKIN -->
+    <div id="panel-skin" class="panel">
+        <div class="card">
+            <div class="card-title">✨ Skincare Mañana</div>
+            <div id="skin-am"></div>
+        </div>
+        <div class="card">
+            <div class="card-title">🌙 Skincare Noche</div>
+            <div id="skin-pm"></div>
+        </div>
+        <div class="hair-card">
+            <h4>💇 Cuidado del Cabello Graso</h4>
+            <div id="hair-care"></div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <button class="bottom-btn active" onclick="showPanel('hoy')"><span>📋</span>Hoy</button>
+        <button class="bottom-btn" onclick="showPanel('rutina')"><span>📅</span>Rutina</button>
+        <button class="bottom-btn" onclick="showPanel('entreno')"><span>🏋️</span>Entreno</button>
+        <button class="bottom-btn" onclick="showPanel('comidas')"><span>🍽️</span>Comidas</button>
+        <button class="bottom-btn" onclick="showPanel('compras')"><span>🛒</span>Compras</button>
+        <button class="bottom-btn" onclick="showPanel('peso')"><span>⚖️</span>Peso</button>
+        <button class="bottom-btn" onclick="showPanel('finanzas')"><span>💵</span>Finanzas</button>
+        <button class="bottom-btn" onclick="showPanel('supps')"><span>💊</span>Supps</button>
+        <button class="bottom-btn" onclick="showPanel('skin')"><span>✨</span>Skin</button>
+    </div>
+
+<script>
+// ==================== CONFIGURACIÓN ====================
+let DATA = null;
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+let selectedDayIdx = 0;
+let selectedExercise = null;
+let timerInterval = null;
+let timerSeconds = 150;
+let financeTab = 'overview';
+
+// ==================== LOCAL STORAGE KEYS ====================
+const LS = {
+    water: 'fp_water',
+    checked: 'fp_checked',
+    exerciseChecked: 'fp_exerciseChecked',
+    exerciseLogs: 'fp_exerciseLogs',
+    bodyWeight: 'fp_bodyWeight',
+    shoppingChecked: 'fp_shoppingChecked',
+    shoppingLastBought: 'fp_shoppingLastBought',
+    lastOpenDate: 'fp_lastOpenDate',
+    transactions: 'fp_transactions',
+    savingsGoals: 'fp_savingsGoals',
+    debts: 'fp_debts',
+    fixedExpenses: 'fp_fixedExpenses'
+};
+
+// ==================== CARGAR DATA.JSON ====================
+async function loadData() {
+    try {
+        const res = await fetch('data.json');
+        DATA = await res.json();
+        initApp();
+    } catch (e) {
+        document.body.innerHTML = '<div style="padding:40px;text-align:center;color:#f59e0b"><h2>❌ Error cargando data.json</h2><p>Asegúrate de que el archivo data.json esté en la misma carpeta que index.html</p></div>';
+    }
+}
+
+function getTodayStr() {
+    const d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+
+function getMonthKey() {
+    return currentYear + '-' + String(currentMonth + 1).padStart(2, '0');
+}
+
+function formatCurrency(amount) {
+    const sym = DATA?.finance?.currency_symbol || '$';
+    return sym + amount.toFixed(2);
+}
+
+// ==================== INICIALIZACIÓN ====================
+function initApp() {
+    // Header
+    const p = DATA.profile;
+    document.getElementById('header-info').textContent = `${p.height_m}m | ${p.weight_kg}kg | ${p.goal}`;
+    document.getElementById('water-goal').textContent = p.water_goal_ml;
+
+    // Daily reset
+    checkDailyReset();
+
+    // Set selected day to today
+    const dayMap = [6, 0, 1, 2, 3, 4, 5];
+    selectedDayIdx = dayMap[new Date().getDay()];
+
+    // Init finance defaults
+    initFinanceDefaults();
+
+    // Set default dates
+    const today = getTodayStr();
+    document.getElementById('income-date').value = today;
+    document.getElementById('expense-date').value = today;
+
+    // Render all
+    renderChecklist();
+    renderTimeline();
+    renderDaySelector();
+    renderExercises();
+    renderProgressSelector();
+    renderProgressChart();
+    renderWeek();
+    renderMeals();
+    renderTeas();
+    renderShopping();
+    renderShoppingEstimates();
+    renderBodyWeight();
+    renderSupps();
+    renderSkin();
+    renderHair();
+    renderFinance();
+    updateWater();
+    updateStats();
+}
+
+function checkDailyReset() {
+    const today = getTodayStr();
+    const last = localStorage.getItem(LS.lastOpenDate);
+    if (last !== today) {
+        localStorage.setItem(LS.checked, '[]');
+        localStorage.setItem(LS.exerciseChecked, '{}');
+        localStorage.setItem(LS.water, '0');
+        localStorage.setItem(LS.lastOpenDate, today);
+    }
+}
+
+function initFinanceDefaults() {
+    // Initialize transactions if empty
+    if (!localStorage.getItem(LS.transactions)) {
+        localStorage.setItem(LS.transactions, JSON.stringify({}));
+    }
+    // Initialize savings goals from data.json if empty
+    if (!localStorage.getItem(LS.savingsGoals)) {
+        localStorage.setItem(LS.savingsGoals, JSON.stringify(DATA.finance.savings_goals));
+    }
+    // Initialize debts from data.json if empty
+    if (!localStorage.getItem(LS.debts)) {
+        localStorage.setItem(LS.debts, JSON.stringify(DATA.finance.debts));
+    }
+    // Initialize fixed expenses from data.json if empty
+    if (!localStorage.getItem(LS.fixedExpenses)) {
+        localStorage.setItem(LS.fixedExpenses, JSON.stringify(DATA.finance.fixed_expenses));
+    }
+}
+
+// ==================== GETTERS LOCAL STORAGE ====================
+function getLS(key, def) { try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(def)); } catch(e) { return def; } }
+function setLS(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+
+// ==================== RENDER: CHECKLIST ====================
+function renderChecklist() {
+    const checked = getLS(LS.checked, []);
+    const container = document.getElementById('checklist-container');
+    container.innerHTML = DATA.checklist.map(item => `
+        <div class="check-item ${checked.includes(item.id) ? 'done' : ''}" onclick="toggleCheck(${item.id})">
+            <div class="check-box"></div>
+            <div>
+                <div class="check-text">${item.text}</div>
+                <div style="font-size:0.8rem;color:var(--text2)">${item.time}</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function toggleCheck(id) {
+    let checked = getLS(LS.checked, []);
+    if (checked.includes(id)) checked = checked.filter(c => c !== id);
+    else checked.push(id);
+    setLS(LS.checked, checked);
+    renderChecklist();
+    updateStats();
+}
+
+function resetChecks() {
+    setLS(LS.checked, []);
+    setLS(LS.water, 0);
+    renderChecklist();
+    updateWater();
+    updateStats();
+}
+
+// ==================== RENDER: TIMELINE ====================
+function renderTimeline() {
+    document.getElementById('daily-timeline').innerHTML = DATA.timeline.map(t => `
+        <div class="t-item">
+            <div class="t-time">${t.time}</div>
+            <div class="t-act">${t.icon} ${t.activity}</div>
+            <div class="t-note">${t.note}</div>
+        </div>
+    `).join('');
+}
+
+// ==================== RENDER: TRAINING ====================
+function renderDaySelector() {
+    document.getElementById('day-selector').innerHTML = DATA.training.week.map((d, i) => `
+        <div class="day-chip ${i === selectedDayIdx ? 'active' : ''} ${i === selectedDayIdx ? 'today' : ''}" onclick="selectDay(${i})">${d.day.slice(0, 3)}</div>
+    `).join('');
+}
+
+function selectDay(i) {
+    selectedDayIdx = i;
+    renderDaySelector();
+    renderExercises();
+}
+
+function renderExercises() {
+    const d = DATA.training.week[selectedDayIdx];
+    document.getElementById('today-training-title').textContent = `${d.day}${selectedDayIdx === selectedDayIdx ? '' : ''} — ${d.type}`;
+    const exerciseChecked = getLS(LS.exerciseChecked, {});
+    const exerciseLogs = getLS(LS.exerciseLogs, {});
+
+    document.getElementById('exercise-list').innerHTML = d.exercises.map((ex, i) => {
+        const key = selectedDayIdx + '-' + i;
+        const done = !!exerciseChecked[key];
+        const desc = ex.desc || DATA.training.exercise_library[ex.name] || '';
+        const logs = exerciseLogs[ex.name] || [];
+        const last = logs[logs.length - 1];
+        let logRow = '';
+        if (ex.trackable) {
+            logRow = `
+                <div class="exercise-log">
+                    <input type="number" step="2.5" id="w-${key}" placeholder="${last ? last.weight + 'kg (último)' : 'peso en kg'}">
+                    <button onclick="logWeight('${ex.name.replace(/'/g, "\'")}','${key}')">💾</button>
+                </div>
+                ${last ? `<div class="exercise-last">Último registro: ${last.weight}kg — ${last.date}</div>` : ''}
+            `;
+        }
+        return `
+            <div class="exercise-card ${done ? 'done' : ''}">
+                <div class="exercise-top" onclick="toggleExercise('${key}')">
+                    <div class="exercise-check"></div>
+                    <div style="flex:1">
+                        <div class="exercise-name">${ex.name}</div>
+                        <div class="exercise-sets">${ex.sets} x ${ex.reps}</div>
+                    </div>
+                </div>
+                ${desc ? `<div class="exercise-desc">${desc}</div>` : ''}
+                ${logRow}
+            </div>
+        `;
+    }).join('');
+}
+
+function toggleExercise(key) {
+    let exerciseChecked = getLS(LS.exerciseChecked, {});
+    exerciseChecked[key] = !exerciseChecked[key];
+    setLS(LS.exerciseChecked, exerciseChecked);
+    renderExercises();
+}
+
+function logWeight(name, key) {
+    const input = document.getElementById('w-' + key);
+    const val = parseFloat(input.value);
+    if (!val || val <= 0) { alert('Ingresa un peso válido'); return; }
+    let exerciseLogs = getLS(LS.exerciseLogs, {});
+    if (!exerciseLogs[name]) exerciseLogs[name] = [];
+    exerciseLogs[name].push({ date: getTodayStr(), weight: val });
+    setLS(LS.exerciseLogs, exerciseLogs);
+    renderExercises();
+    renderProgressChart();
+}
+
+function getTrackableNames() {
+    const set = new Set();
+    DATA.training.week.forEach(d => d.exercises.forEach(e => { if (e.trackable) set.add(e.name); }));
+    return [...set];
+}
+
+function renderProgressSelector() {
+    const names = getTrackableNames();
+    if (!selectedExercise || !names.includes(selectedExercise)) selectedExercise = names[0];
+    document.getElementById('exercise-select').innerHTML = names.map(n =>
+        `<option value="${n}" ${n === selectedExercise ? 'selected' : ''}>${n}</option>`
+    ).join('');
+}
+
+function onExerciseSelectChange() {
+    selectedExercise = document.getElementById('exercise-select').value;
+    renderProgressChart();
+}
+
+function buildLineChart(logs) {
+    const w = 300, h = 120, pad = 12;
+    const weights = logs.map(l => l.weight);
+    const min = Math.min(...weights), max = Math.max(...weights);
+    const range = (max - min) || 1;
+    const n = logs.length;
+    const pts = logs.map((l, i) => {
+        const x = pad + (n > 1 ? (i / (n - 1)) * (w - 2 * pad) : (w / 2));
+        const y = h - pad - ((l.weight - min) / range) * (h - 2 * pad);
+        return x.toFixed(1) + ',' + y.toFixed(1);
+    }).join(' ');
+    const dots = logs.map((l, i) => {
+        const x = pad + (n > 1 ? (i / (n - 1)) * (w - 2 * pad) : (w / 2));
+        const y = h - pad - ((l.weight - min) / range) * (h - 2 * pad);
+        return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.5" style="fill:var(--accent)"/>`;
+    }).join('');
+    return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:120px;display:block">
+        <polyline points="${pts}" style="fill:none;stroke:var(--accent);stroke-width:2.5"/>${dots}
+    </svg>`;
+}
+
+function renderProgressChart() {
+    const container = document.getElementById('progress-tracker');
+    if (!selectedExercise) { container.innerHTML = '<p class="empty-hint">Aún no hay ejercicios registrables.</p>'; return; }
+    const logs = getLS(LS.exerciseLogs, {})[selectedExercise] || [];
+    if (logs.length === 0) {
+        container.innerHTML = `<p class="empty-hint">Aún no hay registros de <b>${selectedExercise}</b>.</p>`;
+        return;
+    }
+    const chart = logs.length >= 2 ? buildLineChart(logs) : '<p class="empty-hint">Registra al menos 2 sesiones para ver la gráfica.</p>';
+    const rows = logs.slice(-8).reverse().map((l, idx, arr) => {
+        const prev = arr[idx + 1];
+        let delta = '';
+        if (prev) {
+            const diff = +(l.weight - prev.weight).toFixed(2);
+            const cls = diff > 0 ? 'delta-up' : diff < 0 ? 'delta-down' : 'delta-same';
+            const sym = diff > 0 ? '▲' : diff < 0 ? '▼' : '=';
+            delta = `<span class="${cls}">${sym} ${Math.abs(diff)}kg</span>`;
+        }
+        return `<div class="history-row"><span>${l.date}</span><span>${l.weight}kg ${delta}</span></div>`;
+    }).join('');
+    container.innerHTML = `<div class="chart-wrap">${chart}</div><div style="margin-top:8px">${rows}</div>`;
+}
+
+function renderWeek() {
+    document.getElementById('week-grid').innerHTML = DATA.training.week.map(d => `
+        <div class="day-card ${d.rest ? 'rest' : ''}">
+            <div class="day-name">${d.day}</div>
+            <div class="day-type">${d.type}</div>
+            <div class="day-exercises">${d.exercises.map(e => `${e.name} ${e.sets}x${e.reps}`).join('<br>')}</div>
+        </div>
+    `).join('');
+}
+
+// ==================== RENDER: MEALS ====================
+function renderMeals() {
+    const n = DATA.nutrition;
+    document.getElementById('fasting-label').textContent = n.fasting_window;
+
+    // Macro summary
+    const totalP = n.meals.reduce((s, m) => s + m.protein_g, 0);
+    const totalC = n.meals.reduce((s, m) => s + m.carbs_g, 0);
+    const totalF = n.meals.reduce((s, m) => s + m.fat_g, 0);
+    const totalCal = n.meals.reduce((s, m) => s + m.calories, 0);
+
+    document.getElementById('macro-summary').innerHTML = `
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;font-size:0.8rem">
+            <div style="background:var(--bg);padding:8px;border-radius:8px"><div style="font-weight:700;color:var(--accent)">${totalCal}</div><div style="color:var(--text2)">kcal</div></div>
+            <div style="background:var(--bg);padding:8px;border-radius:8px"><div style="font-weight:700;color:var(--success)">${totalP}g</div><div style="color:var(--text2)">Proteína</div></div>
+            <div style="background:var(--bg);padding:8px;border-radius:8px"><div style="font-weight:700;color:var(--info)">${totalC}g</div><div style="color:var(--text2)">Carbs</div></div>
+            <div style="background:var(--bg);padding:8px;border-radius:8px"><div style="font-weight:700;color:var(--accent-light)">${totalF}g</div><div style="color:var(--text2)">Grasas</div></div>
+        </div>
+        <div style="margin-top:8px;font-size:0.78rem;color:var(--text2);text-align:center">
+            Meta: ${n.target_calories} kcal | ${n.target_protein_g}g P | ${n.target_carbs_g}g C | ${n.target_fat_g}g G
+        </div>
+    `;
+
+    document.getElementById('meals-container').innerHTML = n.meals.map(m => `
+        <div class="meal-card">
+            <div class="meal-header">
+                <span class="meal-name">${m.name}</span>
+                <span class="meal-cal">~${m.calories} kcal</span>
+            </div>
+            <div class="meal-items">${m.items}</div>
+            <div class="meal-macros">
+                <span class="macro-p">P: ${m.protein_g}g</span>
+                <span class="macro-c">C: ${m.carbs_g}g</span>
+                <span class="macro-f">G: ${m.fat_g}g</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderTeas() {
+    document.getElementById('teas-container').innerHTML = DATA.nutrition.teas.map(t => `
+        <div class="meal-card" style="background:linear-gradient(135deg,#1e3a5f,#0f172a)">
+            <div class="meal-header"><span class="meal-name" style="color:#93c5fd">${t.name}</span></div>
+            <div class="meal-items">${t.benefit}</div>
+            <div style="margin-top:6px;font-size:0.8rem;color:#22c55e">⏰ ${t.best_time}</div>
+        </div>
+    `).join('');
+}
+
+// ==================== RENDER: SHOPPING ====================
+function daysBetween(d1, d2) { return Math.floor((d2 - d1) / (1000 * 60 * 60 * 24)); }
+
+function renderShopping() {
+    const shoppingChecked = getLS(LS.shoppingChecked, {});
+    const shoppingLastBought = getLS(LS.shoppingLastBought, {});
+
+    document.getElementById('shopping-container').innerHTML = DATA.shopping.map((cat, ci) => {
+        const lastBought = shoppingLastBought[ci];
+        let dueLabel, dueClass;
+        if (!lastBought) {
+            dueLabel = '🛒 Pendiente de primera compra';
+            dueClass = 'due-late';
+        } else {
+            const daysSince = daysBetween(new Date(lastBought), new Date());
+            const daysLeft = cat.days - daysSince;
+            if (daysLeft <= 0) { dueLabel = '🔴 ¡Toca comprar ya!'; dueClass = 'due-late'; }
+            else if (daysLeft <= 3) { dueLabel = `🟡 Próxima compra en ${daysLeft} día(s)`; dueClass = 'due-soon'; }
+            else { dueLabel = `🟢 Próxima compra en ${daysLeft} días`; dueClass = 'due-ok'; }
+        }
+        const items = cat.items.map((it, ii) => {
+            const key = ci + '-' + ii;
+            const done = !!shoppingChecked[key];
+            return `
+                <div class="check-item ${done ? 'done' : ''}" onclick="toggleShopping('${key}')">
+                    <div class="check-box"></div>
+                    <div><div class="check-text">${it.name}</div><div style="font-size:0.78rem;color:var(--text2)">${it.qty}</div></div>
+                </div>`;
+        }).join('');
+        return `
+            <div class="card">
+                <div class="shop-cat-header">
+                    <span class="shop-cat-title">${cat.category}</span>
+                    <span class="freq-badge">${cat.frequency}</span>
+                </div>
+                <div class="due-badge ${dueClass}">${dueLabel}</div>
+                <div>${items}</div>
+                <button class="shop-reset-btn" onclick="resetShoppingCategory(${ci})">✅ Ya compré esto (reiniciar categoría)</button>
+            </div>
+        `;
+    }).join('');
+}
+
+function toggleShopping(key) {
+    let shoppingChecked = getLS(LS.shoppingChecked, {});
+    shoppingChecked[key] = !shoppingChecked[key];
+    setLS(LS.shoppingChecked, shoppingChecked);
+    renderShopping();
+}
+
+function resetShoppingCategory(ci) {
+    let shoppingLastBought = getLS(LS.shoppingLastBought, {});
+    let shoppingChecked = getLS(LS.shoppingChecked, {});
+    shoppingLastBought[ci] = getTodayStr();
+    DATA.shopping[ci].items.forEach((it, ii) => { delete shoppingChecked[ci + '-' + ii]; });
+    setLS(LS.shoppingLastBought, shoppingLastBought);
+    setLS(LS.shoppingChecked, shoppingChecked);
+    renderShopping();
+}
+
+function renderShoppingEstimates() {
+    document.getElementById('shopping-estimates').innerHTML = `
+        <div class="supp-row"><div class="supp-info"><div class="supp-name">Alimentos frescos</div><div class="supp-timing">Semanal</div></div><div class="supp-dose">$75-105</div></div>
+        <div class="supp-row"><div class="supp-info"><div class="supp-name">Suplementos</div><div class="supp-timing">Mensual</div></div><div class="supp-dose">$80-120</div></div>
+        <div class="supp-row"><div class="supp-info"><div class="supp-name">Skincare</div><div class="supp-timing">Trimestral</div></div><div class="supp-dose">$60-100</div></div>
+    `;
+}
+
+// ==================== RENDER: BODY WEIGHT ====================
+function renderBodyWeight() {
+    const logs = getLS(LS.bodyWeight, []);
+    const current = logs.length ? logs[logs.length - 1].weight : DATA.profile.weight_kg;
+    const start = logs.length ? logs[0].weight : DATA.profile.weight_kg;
+    const diff = +(current - start).toFixed(1);
+
+    document.getElementById('bw-start').textContent = start;
+    document.getElementById('bw-current').textContent = current;
+    document.getElementById('bw-diff').textContent = (diff > 0 ? '+' : '') + diff;
+
+    document.getElementById('bw-chart').innerHTML = logs.length >= 2
+        ? buildLineChart(logs)
+        : '<p class="empty-hint">Registra al menos 2 pesajes para ver tu gráfica.</p>';
+
+    document.getElementById('bw-history').innerHTML = logs.length
+        ? logs.slice(-15).reverse().map(l => `<div class="history-row"><span>${l.date}</span><span>${l.weight}kg</span></div>`).join('')
+        : '<p class="empty-hint">Aún no hay pesajes registrados.</p>';
+
+    document.getElementById('header-info').textContent = `${DATA.profile.height_m}m | ${current}kg | ${DATA.profile.goal}`;
+}
+
+function addBodyWeight() {
+    const input = document.getElementById('bw-input');
+    const val = parseFloat(input.value);
+    if (!val || val <= 0) { alert('Ingresa un peso válido'); return; }
+    let logs = getLS(LS.bodyWeight, []);
+    const today = getTodayStr();
+    const existingIdx = logs.findIndex(l => l.date === today);
+    if (existingIdx >= 0) logs[existingIdx].weight = val;
+    else logs.push({ date: today, weight: val });
+    setLS(LS.bodyWeight, logs);
+    input.value = '';
+    renderBodyWeight();
+}
+
+// ==================== RENDER: SUPPS & SKIN ====================
+function renderSupps() {
+    document.getElementById('supps-container').innerHTML = DATA.supplements.map(s => `
+        <div class="supp-row">
+            <div class="supp-info">
+                <div class="supp-name">${s.name}</div>
+                <div class="supp-timing">${s.timing}</div>
+            </div>
+            <div class="supp-dose">${s.dose}</div>
+        </div>
+    `).join('');
+}
+
+function renderSkin() {
+    document.getElementById('skin-am').innerHTML = DATA.skincare.am.map(s => `
+        <div class="skincare-step">
+            <div class="step-num">${s.step}</div>
+            <div><div class="step-title">${s.title}</div><div class="step-desc">${s.desc}</div></div>
+        </div>
+    `).join('');
+    document.getElementById('skin-pm').innerHTML = DATA.skincare.pm.map(s => `
+        <div class="skincare-step">
+            <div class="step-num">${s.step}</div>
+            <div><div class="step-title">${s.title}</div><div class="step-desc">${s.desc}</div></div>
+        </div>
+    `).join('');
+}
+
+function renderHair() {
+    const h = DATA.skincare.hair;
+    document.getElementById('hair-care').innerHTML = `
+        <p>🧴 Shampoo sin sulfatos ${h.shampoo_freq}</p>
+        <p>💧 Acondicionador ${h.conditioner}</p>
+        <p>🌡️ Agua ${h.water_temp}</p>
+        <p>💨 Secador en ${h.dryer}</p>
+        <p>🧪 ${h.weekly_treatment}</p>
+        <p>🚫 Evita: ${h.avoid.join(', ')}</p>
+    `;
+}
+
+// ==================== FINANZAS COMPLETAS ====================
+function changeMonth(delta) {
+    currentMonth += delta;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    renderFinance();
+}
+
+function showFinanceTab(tab) {
+    financeTab = tab;
+    document.querySelectorAll('.finance-tab-content').forEach(el => el.classList.add('hidden'));
+    document.getElementById('finance-tab-' + tab).classList.remove('hidden');
+    document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    renderFinanceTabContent();
+}
+
+function getTransactions() {
+    return getLS(LS.transactions, {});
+}
+
+function getMonthTransactions() {
+    const all = getTransactions();
+    const key = getMonthKey();
+    return all[key] || { income: [], expenses: [] };
+}
+
+function saveMonthTransactions(data) {
+    const all = getTransactions();
+    all[getMonthKey()] = data;
+    setLS(LS.transactions, all);
+}
+
+function renderFinance() {
+    const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    document.getElementById('current-month-label').textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+    const data = getMonthTransactions();
+    const totalIncome = data.income.reduce((s, t) => s + t.amount, 0);
+    const totalExpenses = data.expenses.reduce((s, t) => s + t.amount, 0);
+    const fixedExpenses = getLS(LS.fixedExpenses, []);
+    const totalFixed = fixedExpenses.reduce((s, f) => s + (f.amount || 0), 0);
+    const savingsGoals = getLS(LS.savingsGoals, []);
+    const totalSaved = savingsGoals.reduce((s, g) => s + (g.current || 0), 0);
+    const debts = getLS(LS.debts, []);
+    const totalDebt = debts.reduce((s, d) => s + ((d.total || 0) - (d.paid || 0)), 0);
+
+    const balance = totalIncome - totalExpenses - totalFixed;
+
+    document.getElementById('finance-summary').innerHTML = `
+        <div class="finance-card income">
+            <div class="finance-value pos">${formatCurrency(totalIncome)}</div>
+            <div class="finance-label">Ingresos</div>
+        </div>
+        <div class="finance-card expense">
+            <div class="finance-value neg">${formatCurrency(totalExpenses + totalFixed)}</div>
+            <div class="finance-label">Gastos</div>
+        </div>
+        <div class="finance-card balance">
+            <div class="finance-value ${balance >= 0 ? 'pos' : 'neg'}">${formatCurrency(balance)}</div>
+            <div class="finance-label">Balance</div>
+        </div>
+        <div class="finance-card savings">
+            <div class="finance-value warn">${formatCurrency(totalSaved)}</div>
+            <div class="finance-label">Ahorrado</div>
+        </div>
+    `;
+
+    renderFinanceTabContent();
+}
+
+function renderFinanceTabContent() {
+    if (financeTab === 'overview') renderFinanceOverview();
+    else if (financeTab === 'income') renderIncomeTab();
+    else if (financeTab === 'expenses') renderExpensesTab();
+    else if (financeTab === 'fixed') renderFixedTab();
+    else if (financeTab === 'goals') renderGoalsTab();
+    else if (financeTab === 'debts') renderDebtsTab();
+}
+
+function renderFinanceOverview() {
+    const data = getMonthTransactions();
+    const expenses = data.expenses;
+    const cats = DATA.finance.expense_categories;
+
+    // Distribution
+    let distHTML = '';
+    const catTotals = {};
+    expenses.forEach(e => { catTotals[e.category] = (catTotals[e.category] || 0) + e.amount; });
+    const totalExp = expenses.reduce((s, e) => s + e.amount, 0);
+
+    cats.forEach(cat => {
+        const amount = catTotals[cat.id] || 0;
+        const pct = totalExp > 0 ? (amount / totalExp * 100).toFixed(1) : 0;
+        const budget = cat.budget_monthly || 0;
+        const budgetPct = budget > 0 ? Math.min((amount / budget * 100), 100) : 0;
+        distHTML += `
+            <div class="finance-item">
+                <div class="finance-item-name"><span style="font-size:1.2rem">${cat.icon}</span> ${cat.name}</div>
+                <div>
+                    <div class="finance-item-amount neg">${formatCurrency(amount)} / ${formatCurrency(budget)}</div>
+                    <div class="finance-bar-bg"><div class="finance-bar-fill" style="width:${budgetPct}%;background:${cat.color}"></div></div>
+                </div>
+            </div>
+        `;
+    });
+    document.getElementById('expense-distribution').innerHTML = distHTML || '<p class="empty-hint">Aún no hay gastos registrados este mes.</p>';
+
+    // Monthly evolution (last 6 months)
+    const allTrans = getTransactions();
+    const months = [];
+    for (let i = 5; i >= 0; i--) {
+        const d = new Date(currentYear, currentMonth - i, 1);
+        const key = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+        const mData = allTrans[key] || { income: [], expenses: [] };
+        const inc = mData.income.reduce((s, t) => s + t.amount, 0);
+        const exp = mData.expenses.reduce((s, t) => s + t.amount, 0);
+        months.push({ key, inc, exp, label: d.toLocaleDateString('es', { month: 'short' }) });
+    }
+
+    const maxVal = Math.max(...months.map(m => Math.max(m.inc, m.exp)), 1);
+    const w = 300, h = 100, pad = 20;
+    const barW = (w - 2 * pad) / months.length * 0.35;
+    const spacing = (w - 2 * pad) / months.length;
+
+    let bars = '';
+    months.forEach((m, i) => {
+        const x = pad + i * spacing;
+        const hInc = (m.inc / maxVal) * (h - pad);
+        const hExp = (m.exp / maxVal) * (h - pad);
+        bars += `<rect x="${x}" y="${h - hInc}" width="${barW}" height="${hInc}" fill="var(--success)" rx="3"/>`;
+        bars += `<rect x="${x + barW + 2}" y="${h - hExp}" width="${barW}" height="${hExp}" fill="var(--danger)" rx="3"/>`;
+        bars += `<text x="${x + barW}" y="${h + 12}" text-anchor="middle" fill="var(--text2)" font-size="8">${m.label}</text>`;
+    });
+
+    document.getElementById('monthly-evolution').innerHTML = `<svg viewBox="0 0 ${w} ${h + 20}" style="width:100%;height:120px">${bars}</svg>
+        <div style="display:flex;gap:16px;justify-content:center;margin-top:8px;font-size:0.8rem">
+            <span style="color:var(--success)">■ Ingresos</span>
+            <span style="color:var(--danger)">■ Gastos</span>
+        </div>`;
+
+    // Tip
+    const balance = months[months.length - 1].inc - months[months.length - 1].exp;
+    const tip = balance < 0 
+        ? "⚠️ Este mes gastas más de lo que ingresas. Revisa gastos variables y considera reducir entretenimiento u otros no esenciales."
+        : balance < 100
+        ? "💡 Estás al límite. Intenta aumentar ingresos freelance o reducir gastos variables para crear margen de ahorro."
+        : "✅ ¡Buen balance! Considera destinar el excedente a tu fondo de emergencia o metas de ahorro.";
+    document.getElementById('finance-tip').textContent = tip;
+}
+
+function renderIncomeTab() {
+    // Populate category select
+    const select = document.getElementById('income-category');
+    select.innerHTML = DATA.finance.income_categories.map(c => `<option value="${c.id}">${c.icon} ${c.name}</option>`).join('');
+
+    const data = getMonthTransactions();
+    document.getElementById('income-list').innerHTML = data.income.length
+        ? data.income.slice().reverse().map((t, i) => `
+            <div class="transaction-row">
+                <div class="transaction-info">
+                    <div class="transaction-name">${t.name}</div>
+                    <div class="transaction-date">${t.date} · ${getCatName('income', t.category)}</div>
+                </div>
+                <div class="transaction-amount income">+${formatCurrency(t.amount)}</div>
+                <button class="transaction-delete" onclick="deleteTransaction('income',${data.income.length - 1 - i})">🗑</button>
+            </div>
+        `).join('')
+        : '<p class="empty-hint">Aún no hay ingresos registrados este mes.</p>';
+}
+
+function renderExpensesTab() {
+    const select = document.getElementById('expense-category');
+    select.innerHTML = DATA.finance.expense_categories.map(c => `<option value="${c.id}">${c.icon} ${c.name}</option>`).join('');
+
+    const data = getMonthTransactions();
+    document.getElementById('expense-list').innerHTML = data.expenses.length
+        ? data.expenses.slice().reverse().map((t, i) => `
+            <div class="transaction-row">
+                <div class="transaction-info">
+                    <div class="transaction-name">${t.name}</div>
+                    <div class="transaction-date">${t.date} · ${getCatName('expense', t.category)}</div>
+                </div>
+                <div class="transaction-amount expense">-${formatCurrency(t.amount)}</div>
+                <button class="transaction-delete" onclick="deleteTransaction('expense',${data.expenses.length - 1 - i})">🗑</button>
+            </div>
+        `).join('')
+        : '<p class="empty-hint">Aún no hay gastos registrados este mes.</p>';
+}
+
+function renderFixedTab() {
+    const fixed = getLS(LS.fixedExpenses, []);
+    const catSelect = document.getElementById('fixed-category');
+    catSelect.innerHTML = DATA.finance.expense_categories.map(c => `<option value="${c.id}">${c.icon} ${c.name}</option>`).join('');
+
+    document.getElementById('fixed-expenses-list').innerHTML = fixed.length
+        ? fixed.map((f, i) => `
+            <div class="finance-item">
+                <div class="finance-item-name">
+                    <span>${f.name}</span>
+                    <span style="font-size:0.75rem;color:var(--text2)">Día ${f.day_of_month}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px">
+                    <span class="finance-item-amount neg">${formatCurrency(f.amount || 0)}</span>
+                    <button class="transaction-delete" onclick="deleteFixedExpense(${i})">🗑</button>
+                </div>
+            </div>
+        `).join('')
+        : '<p class="empty-hint">No hay gastos fijos configurados. Agrégalos desde data.json o con el formulario de abajo.</p>';
+}
+
+function renderGoalsTab() {
+    const goals = getLS(LS.savingsGoals, []);
+    document.getElementById('savings-goals-list').innerHTML = goals.map((g, i) => {
+        const pct = g.target > 0 ? Math.min((g.current / g.target) * 100, 100) : 0;
+        return `
+            <div class="goal-card">
+                <div class="goal-header">
+                    <span class="goal-name">${g.name}</span>
+                    <span class="goal-amount">${formatCurrency(g.current)} / ${formatCurrency(g.target)}</span>
+                </div>
+                <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:${pct}%;background:linear-gradient(90deg,var(--accent),var(--accent-light))"></div></div>
+                <div class="goal-percent">${pct.toFixed(1)}% · Ahorro mensual: ${formatCurrency(g.monthly_auto || 0)}</div>
+                <div style="display:flex;gap:8px;margin-top:8px">
+                    <input type="number" class="input-field" id="goal-add-${i}" placeholder="Agregar $" style="flex:1;margin-bottom:0">
+                    <button class="btn-secondary" onclick="addToGoal(${i})">➕</button>
+                    <button class="btn-danger" onclick="deleteGoal(${i})">🗑</button>
+                </div>
+            </div>
+        `;
+    }).join('') || '<p class="empty-hint">No hay metas de ahorro. Crea una desde el formulario de abajo.</p>';
+}
+
+function renderDebtsTab() {
+    const debts = getLS(LS.debts, []);
+    document.getElementById('debts-list').innerHTML = debts.map((d, i) => {
+        const remaining = (d.total || 0) - (d.paid || 0);
+        const pct = d.total > 0 ? ((d.paid / d.total) * 100) : 0;
+        return `
+            <div class="debt-card">
+                <div class="debt-header">
+                    <span class="debt-name">${d.name}</span>
+                    <span class="debt-amount">${formatCurrency(remaining)} restante</span>
+                </div>
+                <div class="debt-bar-bg"><div class="debt-bar-fill" style="width:${pct}%;background:linear-gradient(90deg,var(--danger),var(--accent))"></div></div>
+                <div class="debt-info">
+                    <span>Total: ${formatCurrency(d.total || 0)}</span>
+                    <span>Pagado: ${formatCurrency(d.paid || 0)}</span>
+                    <span>Mín: ${formatCurrency(d.monthly_min || 0)}/mes</span>
+                </div>
+                <div style="display:flex;gap:8px;margin-top:8px">
+                    <input type="number" class="input-field" id="debt-pay-${i}" placeholder="Pago $" style="flex:1;margin-bottom:0">
+                    <button class="btn-secondary" onclick="payDebt(${i})">💰 Pagar</button>
+                    <button class="btn-danger" onclick="deleteDebt(${i})">🗑</button>
+                </div>
+            </div>
+        `;
+    }).join('') || '<p class="empty-hint">No hay deudas registradas.</p>';
+}
+
+function getCatName(type, id) {
+    const cats = type === 'income' ? DATA.finance.income_categories : DATA.finance.expense_categories;
+    const cat = cats.find(c => c.id === id);
+    return cat ? cat.name : id;
+}
+
+// ==================== FINANCE ACTIONS ====================
+function addTransaction(type) {
+    const nameEl = document.getElementById(type + '-name');
+    const amountEl = document.getElementById(type + '-amount');
+    const catEl = document.getElementById(type + '-category');
+    const dateEl = document.getElementById(type + '-date');
+
+    const name = nameEl.value.trim();
+    const amount = parseFloat(amountEl.value);
+    const category = catEl.value;
+    const date = dateEl.value;
+
+    if (!name || !amount || amount <= 0 || !date) {
+        alert('Completa todos los campos');
+        return;
+    }
+
+    const data = getMonthTransactions();
+    data[type === 'income' ? 'income' : 'expenses'].push({ name, amount, category, date });
+    saveMonthTransactions(data);
+
+    nameEl.value = '';
+    amountEl.value = '';
+    renderFinance();
+}
+
+function deleteTransaction(type, index) {
+    const data = getMonthTransactions();
+    const arr = data[type === 'income' ? 'income' : 'expenses'];
+    arr.splice(index, 1);
+    saveMonthTransactions(data);
+    renderFinance();
+}
+
+function addFixedExpense() {
+    const name = document.getElementById('fixed-name').value.trim();
+    const amount = parseFloat(document.getElementById('fixed-amount').value);
+    const day = parseInt(document.getElementById('fixed-day').value);
+    const category = document.getElementById('fixed-category').value;
+
+    if (!name || !amount || amount <= 0 || !day || day < 1 || day > 31) {
+        alert('Completa todos los campos correctamente');
+        return;
+    }
+
+    let fixed = getLS(LS.fixedExpenses, []);
+    fixed.push({ name, amount, day_of_month: day, category });
+    setLS(LS.fixedExpenses, fixed);
+
+    document.getElementById('fixed-name').value = '';
+    document.getElementById('fixed-amount').value = '';
+    document.getElementById('fixed-day').value = '';
+    renderFinance();
+}
+
+function deleteFixedExpense(index) {
+    let fixed = getLS(LS.fixedExpenses, []);
+    fixed.splice(index, 1);
+    setLS(LS.fixedExpenses, fixed);
+    renderFinance();
+}
+
+function addSavingsGoal() {
+    const name = document.getElementById('goal-name').value.trim();
+    const target = parseFloat(document.getElementById('goal-target').value);
+    const current = parseFloat(document.getElementById('goal-current').value) || 0;
+    const monthly = parseFloat(document.getElementById('goal-monthly').value) || 0;
+
+    if (!name || !target || target <= 0) {
+        alert('Nombre y meta objetivo son obligatorios');
+        return;
+    }
+
+    let goals = getLS(LS.savingsGoals, []);
+    goals.push({ name, target, current, monthly_auto: monthly });
+    setLS(LS.savingsGoals, goals);
+
+    document.getElementById('goal-name').value = '';
+    document.getElementById('goal-target').value = '';
+    document.getElementById('goal-current').value = '';
+    document.getElementById('goal-monthly').value = '';
+    renderFinance();
+}
+
+function addToGoal(index) {
+    const amount = parseFloat(document.getElementById('goal-add-' + index).value);
+    if (!amount || amount <= 0) { alert('Monto inválido'); return; }
+    let goals = getLS(LS.savingsGoals, []);
+    goals[index].current = (goals[index].current || 0) + amount;
+    setLS(LS.savingsGoals, goals);
+    renderFinance();
+}
+
+function deleteGoal(index) {
+    let goals = getLS(LS.savingsGoals, []);
+    goals.splice(index, 1);
+    setLS(LS.savingsGoals, goals);
+    renderFinance();
+}
+
+function addDebt() {
+    const name = document.getElementById('debt-name').value.trim();
+    const total = parseFloat(document.getElementById('debt-total').value);
+    const paid = parseFloat(document.getElementById('debt-paid').value) || 0;
+    const min = parseFloat(document.getElementById('debt-min').value) || 0;
+    const rate = parseFloat(document.getElementById('debt-rate').value) || 0;
+
+    if (!name || !total || total <= 0) {
+        alert('Nombre y total son obligatorios');
+        return;
+    }
+
+    let debts = getLS(LS.debts, []);
+    debts.push({ name, total, paid, monthly_min: min, interest_rate: rate });
+    setLS(LS.debts, debts);
+
+    document.getElementById('debt-name').value = '';
+    document.getElementById('debt-total').value = '';
+    document.getElementById('debt-paid').value = '';
+    document.getElementById('debt-min').value = '';
+    document.getElementById('debt-rate').value = '';
+    renderFinance();
+}
+
+function payDebt(index) {
+    const amount = parseFloat(document.getElementById('debt-pay-' + index).value);
+    if (!amount || amount <= 0) { alert('Monto inválido'); return; }
+    let debts = getLS(LS.debts, []);
+    debts[index].paid = (debts[index].paid || 0) + amount;
+    if (debts[index].paid > debts[index].total) debts[index].paid = debts[index].total;
+    setLS(LS.debts, debts);
+    renderFinance();
+}
+
+function deleteDebt(index) {
+    let debts = getLS(LS.debts, []);
+    debts.splice(index, 1);
+    setLS(LS.debts, debts);
+    renderFinance();
+}
+
+// ==================== WATER & TIMER ====================
+function addWater(amount) {
+    let water = parseInt(localStorage.getItem(LS.water) || '0');
+    water += amount;
+    if (water > 5000) water = 5000;
+    localStorage.setItem(LS.water, water);
+    updateWater();
+}
+
+function updateWater() {
+    const water = parseInt(localStorage.getItem(LS.water) || '0');
+    const goal = DATA ? DATA.profile.water_goal_ml : 3500;
+    document.getElementById('water-current').textContent = water;
+    document.getElementById('stat-water').textContent = water;
+    const pct = Math.min((water / goal) * 100, 100);
+    document.getElementById('water-bar').style.width = pct + '%';
+}
+
+function updateStats() {
+    const checked = getLS(LS.checked, []);
+    document.getElementById('stat-check').textContent = checked.length + '/' + (DATA ? DATA.checklist.length : 16);
+    const cals = checked.includes(5) ? 550 : 0;
+    const cals2 = checked.includes(8) ? 600 : 0;
+    const cals3 = checked.includes(12) ? 550 : 0;
+    const cals4 = checked.includes(13) ? 320 : 0;
+    document.getElementById('stat-cals').textContent = cals + cals2 + cals3 + cals4;
+}
+
+function startTimer() {
+    if (timerInterval) return;
+    timerInterval = setInterval(() => {
+        timerSeconds--;
+        if (timerSeconds <= 0) {
+            stopTimer();
+            navigator.vibrate?.([200, 100, 200]);
+            alert('⏱️ ¡Descanso completado!');
+        }
+        updateTimerDisplay();
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+}
+
+function setTimer(seconds) {
+    stopTimer();
+    timerSeconds = seconds;
+    updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+    const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+    const s = (timerSeconds % 60).toString().padStart(2, '0');
+    document.getElementById('timer').textContent = m + ':' + s;
+}
+
+// ==================== NAVIGATION ====================
+function showPanel(id) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.bottom-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+}
+
+// ==================== INIT ====================
+loadData();
+
+// Service Worker para offline
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('data:text/javascript;base64,' + btoa(`
+        self.addEventListener('install', e => self.skipWaiting());
+        self.addEventListener('activate', e => e.waitUntil(clients.claim()));
+        self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
+    `)).catch(() => {});
+}
+</script>
+</body>
+</html>
