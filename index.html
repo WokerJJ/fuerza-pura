@@ -1219,7 +1219,12 @@ function getCategory(type, id) {
     return list.find(c => c.id === id) || { name: id, icon: '📦', color: '#78716c' };
 }
 
-function getMonthTransactions() { return getLS(LS.transactions, {})[getMonthKey()] || []; }
+function getMonthTransactions() {
+    const all = getLS(LS.transactions, {});
+    const mk = getMonthKey();
+    if (!Array.isArray(all[mk])) return [];
+    return all[mk];
+}
 
 function changeMonth(delta) {
     currentMonth += delta;
@@ -1337,13 +1342,15 @@ function addTransaction(type) {
     if (!name || !amount || amount <= 0) { alert('Completa descripcion y monto validos'); return; }
     const date = dateEl.value || getTodayStr();
     const mk = date.slice(0, 7);
+
     let all = getLS(LS.transactions, {});
-    if (!all[mk]) all[mk] = [];
+    if (typeof all !== 'object' || all === null || Array.isArray(all)) all = {}; // corrupción de nivel raíz
+    if (!Array.isArray(all[mk])) all[mk] = []; // corrupción de nivel mes
+
     const tx = { id: Date.now().toString(36), type, name, amount, category: catEl.value, date };
     all[mk].push(tx);
     setLS(LS.transactions, all);
 
-    // Si es un gasto de Suplementos, lo agrega automáticamente al panel Supps
     if (type === 'expense' && catEl.value === 'supplements') addSupplementFromExpense(name);
 
     nameEl.value = ''; amountEl.value = '';
