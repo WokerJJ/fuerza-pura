@@ -132,7 +132,8 @@
         .due-badge { font-size: 0.78rem; margin-bottom: 10px; font-weight: 600; }
         .due-ok { color: var(--success); } .due-soon { color: var(--accent); } .due-late { color: var(--danger); }
         .shop-reset-btn { background: none; border: 1px solid var(--card-hover); color: var(--text2); padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer; margin-top: 8px; width: 100%; font-weight: 600; }
-
+        .shop-price-input { width: 90px; background: var(--card); border: 1px solid var(--card-hover); border-radius: 8px; padding: 8px; color: var(--text); font-size: 0.85rem; text-align: right; }
+        
         .weight-card { background: linear-gradient(135deg, #1e3a5f, #0f172a); border-radius: 16px; padding: 18px; margin-bottom: 12px; border: 1px solid var(--card-hover); }
         .weight-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0; }
         .weight-log-form { display: flex; gap: 8px; }
@@ -208,7 +209,6 @@
         .note-box { background: linear-gradient(135deg, #451a03, #7c2d12); border: 1px solid var(--accent); border-radius: 12px; padding: 14px; margin: 12px 0; }
         .note-box p { color: #fed7aa; font-size: 0.9rem; }
     </style>
-<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -508,6 +508,7 @@ let timerSeconds = 150;
 let financeTab = 'overview';
 
 const LS = {
+    shoppingPrices: 'fp_shoppingPrices', shoppingData: 'fp_shoppingData',
     water: 'fp_water', checked: 'fp_checked', exerciseChecked: 'fp_exerciseChecked',
     exerciseLogs: 'fp_exerciseLogs', bodyWeight: 'fp_bodyWeight',
     shoppingChecked: 'fp_shoppingChecked', shoppingLastBought: 'fp_shoppingLastBought',
@@ -526,1142 +527,16 @@ function formatCurrency(amount) {
     return formatCOP(amount);
 }
 
-// ==================== DATA EMBEBIDA ====================
-const EMBEDDED_DATA = {
-  "profile": {
-    "name": "Fuerza Pura",
-    "name_clean": "Fuerza Pura",
-    "icon": "💪",
-    "height_m": 1.75,
-    "weight_kg": 75,
-    "goal": "Definición + Fuerza",
-    "water_goal_ml": 3500
-  },
-  "checklist": [
-    {
-      "id": 1,
-      "text": "Tomar vaso de agua al despertar",
-      "time": "06:00",
-      "done": false
-    },
-    {
-      "id": 2,
-      "text": "Lavarse los dientes + skincare AM",
-      "time": "06:15",
-      "done": false
-    },
-    {
-      "id": 3,
-      "text": "Preparar desayuno",
-      "time": "06:30",
-      "done": false
-    },
-    {
-      "id": 4,
-      "text": "Tomar suplementos matutinos",
-      "time": "07:00",
-      "done": false
-    },
-    {
-      "id": 5,
-      "text": "Desayuno (comida 1)",
-      "time": "07:30",
-      "done": false
-    },
-    {
-      "id": 6,
-      "text": "Trabajo / Productividad",
-      "time": "08:00 - 12:00",
-      "done": false
-    },
-    {
-      "id": 7,
-      "text": "Almuerzo (comida 2)",
-      "time": "12:30",
-      "done": false
-    },
-    {
-      "id": 8,
-      "text": "Descanso digestivo",
-      "time": "13:00",
-      "done": false
-    },
-    {
-      "id": 9,
-      "text": "Entrenamiento de fuerza",
-      "time": "15:00",
-      "done": false
-    },
-    {
-      "id": 10,
-      "text": "Post-workout + proteína",
-      "time": "16:30",
-      "done": false
-    },
-    {
-      "id": 11,
-      "text": "Cena (comida 3)",
-      "time": "19:00",
-      "done": false
-    },
-    {
-      "id": 12,
-      "text": "Skincare PM",
-      "time": "21:00",
-      "done": false
-    },
-    {
-      "id": 13,
-      "text": "Relajación / Lectura",
-      "time": "21:30",
-      "done": false
-    },
-    {
-      "id": 14,
-      "text": "Dormir 7-8 horas",
-      "time": "22:30",
-      "done": false
-    }
-  ],
-  "timeline": [
-    {
-      "time": "06:00",
-      "activity": "Despertar + Agua",
-      "note": "500ml agua tibia con limón",
-      "icon": "💧"
-    },
-    {
-      "time": "06:15",
-      "activity": "Higiene + Skincare AM",
-      "note": "Limpieza, vitamina C, protector solar",
-      "icon": "✨"
-    },
-    {
-      "time": "07:00",
-      "activity": "Suplementos",
-      "note": "Multivitamínico, omega-3, creatina",
-      "icon": "💊"
-    },
-    {
-      "time": "07:30",
-      "activity": "Desayuno",
-      "note": "Avena + huevos + fruta",
-      "icon": "🍳"
-    },
-    {
-      "time": "08:00",
-      "activity": "Trabajo",
-      "note": "Bloque de productividad profunda",
-      "icon": "💻"
-    },
-    {
-      "time": "10:30",
-      "activity": "Snack",
-      "note": "Frutos secos o yogur griego",
-      "icon": "🥜"
-    },
-    {
-      "time": "12:30",
-      "activity": "Almuerzo",
-      "note": "Proteína + carbohidratos + vegetales",
-      "icon": "🍽️"
-    },
-    {
-      "time": "15:00",
-      "activity": "Entrenamiento",
-      "note": "Rutina de fuerza del día",
-      "icon": "🏋️"
-    },
-    {
-      "time": "16:30",
-      "activity": "Post-workout",
-      "note": "Batido de proteína + carbs",
-      "icon": "🥤"
-    },
-    {
-      "time": "19:00",
-      "activity": "Cena",
-      "note": "Proteína magra + vegetales",
-      "icon": "🥗"
-    },
-    {
-      "time": "21:00",
-      "activity": "Skincare PM",
-      "note": "Doble limpieza, retinol, hidratante",
-      "icon": "🌙"
-    },
-    {
-      "time": "22:30",
-      "activity": "Dormir",
-      "note": "7-8 horas de sueño reparador",
-      "icon": "😴"
-    }
-  ],
-  "training": {
-    "exercise_library": {
-      "Sentadilla": "Pies a la anchura de los hombros, barra sobre trapecios, descender controladamente hasta que los muslos estén paralelos al suelo.",
-      "Peso Muerto": "Barra cerca de las espinillas, espalda recta, empujar con los talones al levantar.",
-      "Press Banca": "Barra sobre el pecho, codos a 45°, bajar controladamente hasta tocar el pecho.",
-      "Press Militar": "Barra desde el pecho hasta extensión completa de brazos, core activado.",
-      "Dominadas": "Agarre prono, subir hasta que la barbilla supere la barra, controlar el descenso.",
-      "Fondos": "En paralelas, bajar hasta 90° de flexión de codo, empujar hasta extensión.",
-      "Curl de Bíceps": "Codos fijos al costado, subir el peso sin balancear el cuerpo.",
-      "Extensión de Tríceps": "Codo fijo, extender el antebrazo hasta la extensión completa.",
-      "Prensa de Piernas": "Pies en la plataforma a la anchura de los hombros, no bloquear rodillas.",
-      "Hip Thrust": "Espalda sobre banco, barra sobre caderas, empujar hacia arriba apretando glúteos.",
-      "Peso Muerto Rumano": "Piernas semi-rígidas, barra cerca del cuerpo, sentir el estiramiento en isquiotibiales.",
-      "Zancadas": "Paso largo hacia adelante, rodilla trasera casi toca el suelo, empujar con el talón delantero.",
-      "Elevación de Gemelos": "En máquina o con mancuernas, subir sobre las puntas de los pies.",
-      "Plancha": "Antebrazos en el suelo, cuerpo en línea recta, core activado 30-60 seg.",
-      "Face Pull": "Cuerda a la altura de la cara, tirar hacia la frente, codos altos.",
-      "Remo con Barra": "Espalda recta, tirar la barra hacia el abdomen inferior, apretar omóplatos.",
-      "Remo Unilateral": "Mancuerna, apoyar mano y rodilla en banco, tirar hacia la cadera.",
-      "Pull-over": "Mancuerna con ambas manos, brazos extendidos sobre el pecho, descender detrás de la cabeza.",
-      "Curl Martillo": "Mancuernas en agarre neutro, alternar brazos.",
-      "Patada de Tríceps": "Mancuerna, codo fijo a 90°, extender hacia atrás.",
-      "Crunch": "Manos detrás de la cabeza, elevar hombros del suelo sin tirar del cuello.",
-      "Elevación de Piernas": "Acostado boca arriba, elevar piernas rectas hasta 90°.",
-      "Press de Piernas": "Máquina, pies en la plataforma, empujar sin bloquear rodillas.",
-      "Abducción de Cadera": "Máquina, abrir piernas contra resistencia apretando glúteos.",
-      "Adducción de Cadera": "Máquina, juntar piernas contra resistencia.",
-      "Press de Hombros con Mancuernas": "Sentado, mancuernas a la altura de los hombros, empujar hacia arriba.",
-      "Elevación Lateral": "Mancuernas, elevar brazos hasta la altura de los hombros, codos ligeramente flexionados.",
-      "Elevación Frontal": "Mancuernas, elevar brazos al frente hasta la altura de los hombros.",
-      "Encogimiento de Hombros": "Barra o mancuernas, elevar hombros hacia las orejas.",
-      "Pulldown": "Agarre ancho, tirar la barra hacia la parte superior del pecho.",
-      "Remo en Máquina": "Sentado, agarre neutro, tirar hacia el abdomen apretando omóplatos.",
-      "Curl en Máquina": "Bíceps en la almohadilla, subir el brazo sin mover el codo."
-    },
-    "week": [
-      {
-        "day": "Lunes",
-        "type": "Pecho + Tríceps",
-        "rest": false,
-        "exercises": [
-          {
-            "name": "Press Banca",
-            "sets": 4,
-            "reps": "8-10",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Fondos",
-            "sets": 3,
-            "reps": "10-12",
-            "trackable": false,
-            "desc": ""
-          },
-          {
-            "name": "Pull-over",
-            "sets": 3,
-            "reps": "12-15",
-            "trackable": false,
-            "desc": ""
-          },
-          {
-            "name": "Curl de Bíceps",
-            "sets": 3,
-            "reps": "10-12",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Extensión de Tríceps",
-            "sets": 3,
-            "reps": "12-15",
-            "trackable": true,
-            "desc": ""
-          }
-        ]
-      },
-      {
-        "day": "Martes",
-        "type": "Espalda + Bíceps",
-        "rest": false,
-        "exercises": [
-          {
-            "name": "Dominadas",
-            "sets": 4,
-            "reps": "6-10",
-            "trackable": false,
-            "desc": ""
-          },
-          {
-            "name": "Remo con Barra",
-            "sets": 4,
-            "reps": "8-10",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Remo Unilateral",
-            "sets": 3,
-            "reps": "10-12",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Pulldown",
-            "sets": 3,
-            "reps": "10-12",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Curl Martillo",
-            "sets": 3,
-            "reps": "12-15",
-            "trackable": true,
-            "desc": ""
-          }
-        ]
-      },
-      {
-        "day": "Miércoles",
-        "type": "Piernas + Glúteos",
-        "rest": false,
-        "exercises": [
-          {
-            "name": "Sentadilla",
-            "sets": 4,
-            "reps": "6-8",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Prensa de Piernas",
-            "sets": 4,
-            "reps": "10-12",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Hip Thrust",
-            "sets": 4,
-            "reps": "10-12",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Peso Muerto Rumano",
-            "sets": 3,
-            "reps": "10-12",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Zancadas",
-            "sets": 3,
-            "reps": "12-15",
-            "trackable": false,
-            "desc": ""
-          },
-          {
-            "name": "Elevación de Gemelos",
-            "sets": 4,
-            "reps": "15-20",
-            "trackable": false,
-            "desc": ""
-          }
-        ]
-      },
-      {
-        "day": "Jueves",
-        "type": "Descanso Activo",
-        "rest": true,
-        "exercises": [
-          {
-            "name": "Caminata ligera",
-            "sets": 1,
-            "reps": "30-45 min",
-            "trackable": false,
-            "desc": "Ritmo moderado, zona de quema de grasa"
-          },
-          {
-            "name": "Estiramientos",
-            "sets": 1,
-            "reps": "15-20 min",
-            "trackable": false,
-            "desc": "Enfoque en piernas y espalda"
-          },
-          {
-            "name": "Plancha",
-            "sets": 3,
-            "reps": "45-60 seg",
-            "trackable": false,
-            "desc": "Core activado, respiración controlada"
-          }
-        ]
-      },
-      {
-        "day": "Viernes",
-        "type": "Hombros + Core",
-        "rest": false,
-        "exercises": [
-          {
-            "name": "Press Militar",
-            "sets": 4,
-            "reps": "8-10",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Press de Hombros con Mancuernas",
-            "sets": 3,
-            "reps": "10-12",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Elevación Lateral",
-            "sets": 4,
-            "reps": "12-15",
-            "trackable": false,
-            "desc": ""
-          },
-          {
-            "name": "Elevación Frontal",
-            "sets": 3,
-            "reps": "12-15",
-            "trackable": false,
-            "desc": ""
-          },
-          {
-            "name": "Encogimiento de Hombros",
-            "sets": 3,
-            "reps": "12-15",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Face Pull",
-            "sets": 3,
-            "reps": "15-20",
-            "trackable": false,
-            "desc": ""
-          },
-          {
-            "name": "Crunch",
-            "sets": 4,
-            "reps": "15-20",
-            "trackable": false,
-            "desc": ""
-          },
-          {
-            "name": "Elevación de Piernas",
-            "sets": 3,
-            "reps": "12-15",
-            "trackable": false,
-            "desc": ""
-          }
-        ]
-      },
-      {
-        "day": "Sábado",
-        "type": "Full Body Intenso",
-        "rest": false,
-        "exercises": [
-          {
-            "name": "Peso Muerto",
-            "sets": 4,
-            "reps": "5-6",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Sentadilla",
-            "sets": 4,
-            "reps": "6-8",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Press Banca",
-            "sets": 4,
-            "reps": "8-10",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Dominadas",
-            "sets": 3,
-            "reps": "6-10",
-            "trackable": false,
-            "desc": ""
-          },
-          {
-            "name": "Remo con Barra",
-            "sets": 3,
-            "reps": "8-10",
-            "trackable": true,
-            "desc": ""
-          },
-          {
-            "name": "Press Militar",
-            "sets": 3,
-            "reps": "8-10",
-            "trackable": true,
-            "desc": ""
-          }
-        ]
-      },
-      {
-        "day": "Domingo",
-        "type": "Descanso Completo",
-        "rest": true,
-        "exercises": [
-          {
-            "name": "Descanso total",
-            "sets": 1,
-            "reps": "Todo el día",
-            "trackable": false,
-            "desc": "Recuperación muscular, hidratación, sueño"
-          },
-          {
-            "name": "Foam rolling",
-            "sets": 1,
-            "reps": "10-15 min",
-            "trackable": false,
-            "desc": "Liberación miofascial en grupos musculares trabajados"
-          },
-          {
-            "name": "Meditación",
-            "sets": 1,
-            "reps": "10-20 min",
-            "trackable": false,
-            "desc": "Reducción de cortisol, recuperación mental"
-          }
-        ]
-      }
-    ]
-  },
-  "nutrition": {
-    "fasting_window": "(16:8)",
-    "target_calories": 2500,
-    "target_protein_g": 180,
-    "target_carbs_g": 250,
-    "target_fat_g": 80,
-    "meals": [
-      {
-        "name": "Desayuno (07:30)",
-        "calories": 650,
-        "items": "Avena (80g) con leche descremada, 3 huevos enteros, 1 plátano, café negro",
-        "protein_g": 35,
-        "carbs_g": 70,
-        "fat_g": 22
-      },
-      {
-        "name": "Almuerzo (12:30)",
-        "calories": 750,
-        "items": "200g pechuga de pollo a la plancha, 150g arroz integral, 200g brócoli al vapor, 1 cda aceite de oliva",
-        "protein_g": 50,
-        "carbs_g": 75,
-        "fat_g": 18
-      },
-      {
-        "name": "Pre-entreno (14:30)",
-        "calories": 200,
-        "items": "1 plátano, 30g de avena, café con creatina",
-        "protein_g": 3,
-        "carbs_g": 40,
-        "fat_g": 2
-      },
-      {
-        "name": "Post-entreno (16:30)",
-        "calories": 400,
-        "items": "Batido de proteína whey (40g) con 250ml leche descremada, 1 cda miel",
-        "protein_g": 45,
-        "carbs_g": 30,
-        "fat_g": 5
-      },
-      {
-        "name": "Cena (19:00)",
-        "calories": 500,
-        "items": "200g salmón a la plancha, 150g ensalada mixta (aguacate, espinaca, tomate), 1 cda aceite de oliva",
-        "protein_g": 42,
-        "carbs_g": 10,
-        "fat_g": 30
-      },
-      {
-        "name": "Snack nocturno (opcional)",
-        "calories": 150,
-        "items": "200g yogur griego natural, 10g almendras",
-        "protein_g": 15,
-        "carbs_g": 8,
-        "fat_g": 8
-      }
-    ],
-    "teas": [
-      {
-        "name": "Té Verde",
-        "benefit": "Antioxidante, acelera metabolismo, mejora concentración",
-        "best_time": "Mañana, antes del entrenamiento"
-      },
-      {
-        "name": "Té de Jengibre",
-        "benefit": "Antiinflamatorio, mejora digestión, reduce náuseas",
-        "best_time": "Después de las comidas"
-      },
-      {
-        "name": "Té de Manzanilla",
-        "benefit": "Relajante, mejora calidad del sueño, reduce ansiedad",
-        "best_time": "Antes de dormir"
-      },
-      {
-        "name": "Té de Hibisco",
-        "benefit": "Reduce presión arterial, antioxidante, diurético natural",
-        "best_time": "Tarde, entre comidas"
-      }
-    ]
-  },
-  "shopping": [
-    {
-      "category": "🥩 Proteínas",
-      "frequency": "Semanal",
-      "days": 7,
-      "items": [
-        {
-          "name": "Pechuga de pollo",
-          "qty": "1.5 kg"
-        },
-        {
-          "name": "Salmón fresco",
-          "qty": "800g"
-        },
-        {
-          "name": "Huevos (docena)",
-          "qty": "3 docenas"
-        },
-        {
-          "name": "Proteína whey",
-          "qty": "1 kg"
-        }
-      ]
-    },
-    {
-      "category": "🍚 Carbohidratos",
-      "frequency": "Semanal",
-      "days": 7,
-      "items": [
-        {
-          "name": "Avena en hojuelas",
-          "qty": "1 kg"
-        },
-        {
-          "name": "Arroz integral",
-          "qty": "1 kg"
-        },
-        {
-          "name": "Plátanos",
-          "qty": "1.5 kg"
-        },
-        {
-          "name": "Patatas",
-          "qty": "1 kg"
-        }
-      ]
-    },
-    {
-      "category": "🥑 Grasas Saludables",
-      "frequency": "Semanal",
-      "days": 7,
-      "items": [
-        {
-          "name": "Aguacates",
-          "qty": "4-5 unidades"
-        },
-        {
-          "name": "Aceite de oliva extra virgen",
-          "qty": "500 ml"
-        },
-        {
-          "name": "Almendras",
-          "qty": "500g"
-        },
-        {
-          "name": "Mantequilla de maní natural",
-          "qty": "400g"
-        }
-      ]
-    },
-    {
-      "category": "🥬 Vegetales",
-      "frequency": "Semanal",
-      "days": 7,
-      "items": [
-        {
-          "name": "Brócoli",
-          "qty": "1 kg"
-        },
-        {
-          "name": "Espinaca fresca",
-          "qty": "500g"
-        },
-        {
-          "name": "Tomates",
-          "qty": "1 kg"
-        },
-        {
-          "name": "Zanahorias",
-          "qty": "500g"
-        }
-      ]
-    },
-    {
-      "category": "💊 Suplementos",
-      "frequency": "Mensual",
-      "days": 30,
-      "items": [
-        {
-          "name": "Multivitamínico",
-          "qty": "30 tabletas"
-        },
-        {
-          "name": "Omega-3 (EPA/DHA)",
-          "qty": "60 cápsulas"
-        },
-        {
-          "name": "Creatina monohidratada",
-          "qty": "300g"
-        },
-        {
-          "name": "Vitamina D3",
-          "qty": "30 tabletas"
-        },
-        {
-          "name": "Magnesio",
-          "qty": "60 tabletas"
-        }
-      ]
-    },
-    {
-      "category": "✨ Skincare",
-      "frequency": "Trimestral",
-      "days": 90,
-      "items": [
-        {
-          "name": "Limpiador facial suave",
-          "qty": "150 ml"
-        },
-        {
-          "name": "Vitamina C sérum",
-          "qty": "30 ml"
-        },
-        {
-          "name": "Protector solar SPF 50",
-          "qty": "50 ml"
-        },
-        {
-          "name": "Retinol 0.5%",
-          "qty": "30 ml"
-        },
-        {
-          "name": "Hidratante facial",
-          "qty": "50 ml"
-        },
-        {
-          "name": "Desmaquillante bifásico",
-          "qty": "100 ml"
-        }
-      ]
-    },
-    {
-      "category": "💇 Cuidado Capilar",
-      "frequency": "Mensual",
-      "days": 30,
-      "items": [
-        {
-          "name": "Shampoo sin sulfatos",
-          "qty": "400 ml"
-        },
-        {
-          "name": "Acondicionador hidratante",
-          "qty": "400 ml"
-        },
-        {
-          "name": "Mascarilla capilar",
-          "qty": "200 ml"
-        },
-        {
-          "name": "Serum anti-caída",
-          "qty": "60 ml"
-        }
-      ]
-    },
-    {
-      "category": "🍵 Tés y Bebidas",
-      "frequency": "Mensual",
-      "days": 30,
-      "items": [
-        {
-          "name": "Té verde orgánico",
-          "qty": "50 bolsitas"
-        },
-        {
-          "name": "Té de jengibre",
-          "qty": "25 bolsitas"
-        },
-        {
-          "name": "Té de manzanilla",
-          "qty": "25 bolsitas"
-        },
-        {
-          "name": "Café en grano",
-          "qty": "500g"
-        }
-      ]
-    },
-    {
-      "category": "🧹 Limpieza",
-      "frequency": "Quincenal",
-      "days": 14,
-      "items": [
-        {
-          "name": "Detergente líquido",
-          "qty": "2 L"
-        },
-        {
-          "name": "Suavizante",
-          "qty": "1 L"
-        },
-        {
-          "name": "Limpiador multiusos",
-          "qty": "1 L"
-        },
-        {
-          "name": "Papel higiénico",
-          "qty": "12 rollos"
-        }
-      ]
-    },
-    {
-      "category": "🐕 Mascotas",
-      "frequency": "Quincenal",
-      "days": 14,
-      "items": [
-        {
-          "name": "Alimento para perro",
-          "qty": "5 kg"
-        },
-        {
-          "name": "Snacks para perro",
-          "qty": "500g"
-        },
-        {
-          "name": "Arena para gato",
-          "qty": "5 kg"
-        }
-      ]
-    }
-  ],
-  "supplements": [
-    {
-      "name": "Multivitamínico",
-      "timing": "Con el desayuno",
-      "dose": "1 tableta"
-    },
-    {
-      "name": "Omega-3 (EPA/DHA)",
-      "timing": "Con el desayuno",
-      "dose": "2 cápsulas (1000mg)"
-    },
-    {
-      "name": "Creatina Monohidratada",
-      "timing": "Pre o post entreno",
-      "dose": "5g (1 cucharada)"
-    },
-    {
-      "name": "Vitamina D3",
-      "timing": "Con el desayuno",
-      "dose": "2000 UI"
-    },
-    {
-      "name": "Magnesio",
-      "timing": "Antes de dormir",
-      "dose": "400mg"
-    },
-    {
-      "name": "Proteína Whey",
-      "timing": "Post-entreno o entre comidas",
-      "dose": "30-40g"
-    },
-    {
-      "name": "Cafeína",
-      "timing": "Pre-entreno (30 min antes)",
-      "dose": "200mg"
-    },
-    {
-      "name": "Zinc",
-      "timing": "Con el desayuno",
-      "dose": "15mg"
-    }
-  ],
-  "skincare": {
-    "am": [
-      {
-        "step": 1,
-        "title": "Limpieza suave",
-        "desc": "Gel limpiador con pH equilibrado, masaje circular 60 segundos"
-      },
-      {
-        "step": 2,
-        "title": "Tónico hidratante",
-        "desc": "Aplicar con algodón o palmas de las manos, dejar absorber"
-      },
-      {
-        "step": 3,
-        "title": "Vitamina C sérum",
-        "desc": "3-5 gotas, aplicar en rostro y cuello, esperar 2-3 min"
-      },
-      {
-        "step": 4,
-        "title": "Contorno de ojos",
-        "desc": "Toquecitos con anular, sin estirar la piel"
-      },
-      {
-        "step": 5,
-        "title": "Hidratante ligero",
-        "desc": "Aplicar cantidad generosa, masaje ascendente"
-      },
-      {
-        "step": 6,
-        "title": "Protector solar SPF 50",
-        "desc": "2 dedos de producto para todo el rostro, reaplicar cada 2-3h"
-      }
-    ],
-    "pm": [
-      {
-        "step": 1,
-        "title": "Desmaquillante / Aceite limpiador",
-        "desc": "Doble limpieza: primero aceite, luego gel limpiador"
-      },
-      {
-        "step": 2,
-        "title": "Exfoliante químico (2-3x semana)",
-        "desc": "Ácido glicólico o salicílico, dejar actuar 5-10 min"
-      },
-      {
-        "step": 3,
-        "title": "Tónico hidratante",
-        "desc": "Preparar la piel para los activos"
-      },
-      {
-        "step": 4,
-        "title": "Retinol 0.5% (3x semana)",
-        "desc": "Aplicar en piel seca, evitar contorno de ojos, empezar 2x semana"
-      },
-      {
-        "step": 5,
-        "title": "Niacinamida 5%",
-        "desc": "Control de poros y sebo, aplicar después del retinol"
-      },
-      {
-        "step": 6,
-        "title": "Contorno de ojos",
-        "desc": "Crema específica para ojos, masaje suave"
-      },
-      {
-        "step": 7,
-        "title": "Hidratante reparador",
-        "desc": "Crema más nutritiva que la de día, masaje facial"
-      },
-      {
-        "step": 8,
-        "title": "Bálsamo labial",
-        "desc": "Aplicar generosamente antes de dormir"
-      }
-    ],
-    "hair": {
-      "shampoo_freq": "cada 2-3 días",
-      "conditioner": "en medios y puntas, cada lavado",
-      "water_temp": "tibia, evitar agua muy caliente",
-      "dryer": "temperatura media, a 15cm del cabello",
-      "weekly_treatment": "Mascarilla capilar 1x por semana (sábado)",
-      "avoid": [
-        "sulfatos",
-        "siliconas",
-        "alcohol en exceso",
-        "lavado diario",
-        "agua caliente"
-      ]
-    }
-  },
-  "finance": {
-    "income_categories": [
-      {
-        "id": "salary",
-        "name": "Salario",
-        "icon": "💼"
-      },
-      {
-        "id": "freelance",
-        "name": "Freelance",
-        "icon": "💻"
-      },
-      {
-        "id": "investments",
-        "name": "Inversiones",
-        "icon": "📈"
-      },
-      {
-        "id": "gifts",
-        "name": "Regalos",
-        "icon": "🎁"
-      },
-      {
-        "id": "other_income",
-        "name": "Otros",
-        "icon": "💵"
-      }
-    ],
-    "expense_categories": [
-      {
-        "id": "food",
-        "name": "Alimentación",
-        "icon": "🍽️",
-        "color": "#22c55e"
-      },
-      {
-        "id": "transport",
-        "name": "Transporte",
-        "icon": "🚗",
-        "color": "#3b82f6"
-      },
-      {
-        "id": "housing",
-        "name": "Vivienda",
-        "icon": "🏠",
-        "color": "#f59e0b"
-      },
-      {
-        "id": "health",
-        "name": "Salud",
-        "icon": "🏥",
-        "color": "#ef4444"
-      },
-      {
-        "id": "gym",
-        "name": "Gimnasio",
-        "icon": "🏋️",
-        "color": "#a855f7"
-      },
-      {
-        "id": "supplements",
-        "name": "Suplementos",
-        "icon": "💊",
-        "color": "#06b6d4"
-      },
-      {
-        "id": "skincare",
-        "name": "Skincare",
-        "icon": "✨",
-        "color": "#ec4899"
-      },
-      {
-        "id": "entertainment",
-        "name": "Entretenimiento",
-        "icon": "🎬",
-        "color": "#f97316"
-      },
-      {
-        "id": "shopping",
-        "name": "Compras",
-        "icon": "🛍️",
-        "color": "#8b5cf6"
-      },
-      {
-        "id": "education",
-        "name": "Educación",
-        "icon": "📚",
-        "color": "#14b8a6"
-      },
-      {
-        "id": "other_expense",
-        "name": "Otros",
-        "icon": "📦",
-        "color": "#78716c"
-      }
-    ],
-    "fixed_expenses": [
-      {
-        "name": "Arriendo apartamento",
-        "amount": 1200000,
-        "day_of_month": 1,
-        "category": "housing"
-      },
-      {
-        "name": "Servicios públicos",
-        "amount": 250000,
-        "day_of_month": 5,
-        "category": "housing"
-      },
-      {
-        "name": "Internet",
-        "amount": 120000,
-        "day_of_month": 10,
-        "category": "housing"
-      },
-      {
-        "name": "Gimnasio",
-        "amount": 180000,
-        "day_of_month": 15,
-        "category": "gym"
-      },
-      {
-        "name": "Seguro médico",
-        "amount": 200000,
-        "day_of_month": 20,
-        "category": "health"
-      },
-      {
-        "name": "Spotify + Netflix",
-        "amount": 50000,
-        "day_of_month": 25,
-        "category": "entertainment"
-      }
-    ],
-    "savings_goals": [
-      {
-        "name": "Fondo de emergencia",
-        "target": 10000000,
-        "current": 3500000,
-        "monthly_auto": 500000
-      },
-      {
-        "name": "Viaje a Europa",
-        "target": 15000000,
-        "current": 2000000,
-        "monthly_auto": 300000
-      },
-      {
-        "name": "Nueva laptop",
-        "target": 5000000,
-        "current": 1500000,
-        "monthly_auto": 200000
-      }
-    ],
-    "debts": [
-      {
-        "name": "Tarjeta de crédito Bancolombia",
-        "total": 3500000,
-        "paid": 1200000,
-        "monthly_min": 350000,
-        "interest_rate": 25.5
-      },
-      {
-        "name": "Crédito de vehículo",
-        "total": 25000000,
-        "paid": 8000000,
-        "monthly_min": 850000,
-        "interest_rate": 12.8
-      }
-    ]
-  }
-};
+// ==================== DATA EMBEBIDA (funciona con doble clic, sin servidor) ====================
 
-function loadData() {
-    DATA = EMBEDDED_DATA;
+async function loadData() {
+    try {
+        const res = await fetch('data.json?v=' + Date.now());
+        if (!res.ok) throw new Error('data.json no encontrado');
+        DATA = await res.json();
+    } catch (e) {
+        console.warn('No se pudo cargar data.json (¿abriste el archivo con doble clic?), usando datos embebidos.', e);
+    }
     initApp();
 }
 
@@ -1689,6 +564,7 @@ function initApp() {
     selectedDayIdx = dayMap[new Date().getDay()];
 
     initFinanceDefaults();
+    initShoppingDefaults();
     populateCategorySelects();
     const today = getTodayStr();
     document.getElementById('income-date').value = today;
@@ -1714,6 +590,11 @@ function initFinanceDefaults() {
     if (!localStorage.getItem(LS.debts)) setLS(LS.debts, DATA.finance.debts);
     if (!localStorage.getItem(LS.fixedExpenses)) setLS(LS.fixedExpenses, DATA.finance.fixed_expenses);
 }
+
+function initShoppingDefaults() {
+    if (!localStorage.getItem(LS.shoppingData)) setLS(LS.shoppingData, DATA.shopping);
+}
+function getShoppingData() { return getLS(LS.shoppingData, DATA.shopping); }
 
 function renderAll() {
     renderChecklist();
@@ -1972,30 +853,44 @@ function renderTeas() {
 // ==================== SHOPPING ====================
 function daysBetween(d1, d2) { return Math.floor((d2 - d1) / (1000 * 60 * 60 * 24)); }
 
+function updateShoppingPrice(key, value) {
+    let prices = getLS(LS.shoppingPrices, {});
+    prices[key] = parseFloat(value) || 0;
+    setLS(LS.shoppingPrices, prices);
+    renderShopping();
+}
+
 function renderShopping() {
+    const shopping = getShoppingData();
     const shoppingChecked = getLS(LS.shoppingChecked, {});
     const shoppingLastBought = getLS(LS.shoppingLastBought, {});
+    const shoppingPrices = getLS(LS.shoppingPrices, {});
 
-    document.getElementById('shopping-container').innerHTML = DATA.shopping.map((cat, ci) => {
+    let html = '<button class="btn-primary" onclick="addShoppingCategory()" style="margin-bottom:12px">➕ Nueva categoría</button>';
+
+    html += shopping.map((cat, ci) => {
         const lastBought = shoppingLastBought[ci];
         let dueLabel, dueClass;
-        if (!lastBought) {
-            dueLabel = '🛒 Pendiente de primera compra';
-            dueClass = 'due-late';
-        } else {
-            const daysSince = daysBetween(new Date(lastBought), new Date());
-            const daysLeft = cat.days - daysSince;
+        if (!lastBought) { dueLabel = '🛒 Pendiente de primera compra'; dueClass = 'due-late'; }
+        else {
+            const daysLeft = cat.days - daysBetween(new Date(lastBought), new Date());
             if (daysLeft <= 0) { dueLabel = '🔴 ¡Toca comprar ya!'; dueClass = 'due-late'; }
             else if (daysLeft <= 3) { dueLabel = `🟡 Proxima compra en ${daysLeft} dia(s)`; dueClass = 'due-soon'; }
             else { dueLabel = `🟢 Proxima compra en ${daysLeft} dias`; dueClass = 'due-ok'; }
         }
+        let catTotal = 0;
         const items = cat.items.map((it, ii) => {
             const key = ci + '-' + ii;
             const done = !!shoppingChecked[key];
+            const price = shoppingPrices[key] ?? it.price ?? 0;
+            if (done) catTotal += price;
             return `
-                <div class="check-item ${done ? 'done' : ''}" onclick="toggleShopping('${key}')">
-                    <div class="check-box"></div>
-                    <div><div class="check-text">${it.name}</div><div style="font-size:0.78rem;color:var(--text2)">${it.qty}</div></div>
+                <div class="check-item ${done ? 'done' : ''}">
+                    <div class="check-box" onclick="toggleShopping('${key}')"></div>
+                    <div style="flex:1" onclick="toggleShopping('${key}')"><div class="check-text">${it.name}</div><div style="font-size:0.78rem;color:var(--text2)">${it.qty}</div></div>
+                    <input type="number" class="shop-price-input" value="${price || ''}" placeholder="$" onclick="event.stopPropagation()" onchange="updateShoppingPrice('${key}', this.value)">
+                    <button class="transaction-delete" onclick="event.stopPropagation();editShoppingItem(${ci},${ii})">✏️</button>
+                    <button class="transaction-delete" onclick="event.stopPropagation();deleteShoppingItem(${ci},${ii})">🗑️</button>
                 </div>`;
         }).join('');
         return `
@@ -2006,10 +901,16 @@ function renderShopping() {
                 </div>
                 <div class="due-badge ${dueClass}">${dueLabel}</div>
                 <div>${items}</div>
-                <button class="shop-reset-btn" onclick="resetShoppingCategory(${ci})">✅ Ya compre esto (reiniciar categoria)</button>
+                <div style="display:flex;gap:8px;margin-top:10px">
+                    <button class="shop-reset-btn" style="flex:1" onclick="addShoppingItem(${ci})">➕ Producto</button>
+                    <button class="shop-reset-btn" style="flex:1;color:var(--danger)" onclick="deleteShoppingCategory(${ci})">🗑️ Categoría</button>
+                </div>
+                <div style="margin-top:8px;font-size:0.85rem;color:var(--text2)">Total marcado: <b style="color:var(--accent)">${formatCOP(catTotal)}</b></div>
+                <button class="shop-reset-btn" onclick="sendShoppingToFinance(${ci})">💸 Enviar a Finanzas y reiniciar</button>
             </div>
         `;
     }).join('');
+    document.getElementById('shopping-container').innerHTML = html;
 }
 
 function toggleShopping(key) {
@@ -2020,12 +921,91 @@ function toggleShopping(key) {
 }
 
 function resetShoppingCategory(ci) {
+    const shopping = getShoppingData();
     let shoppingLastBought = getLS(LS.shoppingLastBought, {});
     let shoppingChecked = getLS(LS.shoppingChecked, {});
     shoppingLastBought[ci] = getTodayStr();
-    DATA.shopping[ci].items.forEach((it, ii) => { delete shoppingChecked[ci + '-' + ii]; });
+    shopping[ci].items.forEach((it, ii) => { delete shoppingChecked[ci + '-' + ii]; });
     setLS(LS.shoppingLastBought, shoppingLastBought);
     setLS(LS.shoppingChecked, shoppingChecked);
+    renderShopping();
+}
+
+function sendShoppingToFinance(ci) {
+    const shopping = getShoppingData();
+    const shoppingChecked = getLS(LS.shoppingChecked, {});
+    const shoppingPrices = getLS(LS.shoppingPrices, {});
+    const cat = shopping[ci];
+    let total = 0, count = 0;
+    cat.items.forEach((it, ii) => {
+        const key = ci + '-' + ii;
+        if (shoppingChecked[key]) { total += (shoppingPrices[key] ?? it.price ?? 0); count++; }
+    });
+    if (count === 0) { alert('Marca al menos un producto antes de enviar.'); return; }
+    if (total <= 0) { alert('Los productos marcados no tienen precio.'); return; }
+    const date = getTodayStr(), mk = date.slice(0, 7);
+    let all = getLS(LS.transactions, {});
+    if (!all[mk]) all[mk] = [];
+    all[mk].push({ id: Date.now().toString(36), type: 'expense', name: cat.category + ' (compra)', amount: total, category: cat.expense_category || 'other_exp', date });
+    setLS(LS.transactions, all);
+    resetShoppingCategory(ci);
+    alert('✅ ' + formatCOP(total) + ' enviado a Finanzas.');
+}
+
+// ==================== EDITAR LISTA DE COMPRAS ====================
+function updateShoppingPrice(key, value) {
+    let prices = getLS(LS.shoppingPrices, {});
+    prices[key] = parseFloat(value) || 0;
+    setLS(LS.shoppingPrices, prices);
+    renderShopping();
+}
+
+function editShoppingItem(ci, ii) {
+    let shopping = getShoppingData();
+    const it = shopping[ci].items[ii];
+    const name = prompt('Nombre del producto:', it.name);
+    if (name === null) return;
+    const qty = prompt('Cantidad:', it.qty);
+    if (qty === null) return;
+    shopping[ci].items[ii] = { ...it, name: name.trim(), qty: qty.trim() };
+    setLS(LS.shoppingData, shopping);
+    renderShopping();
+}
+
+function deleteShoppingItem(ci, ii) {
+    let shopping = getShoppingData();
+    if (!confirm('¿Eliminar "' + shopping[ci].items[ii].name + '"?')) return;
+    shopping[ci].items.splice(ii, 1);
+    setLS(LS.shoppingData, shopping);
+    renderShopping();
+}
+
+function addShoppingItem(ci) {
+    let shopping = getShoppingData();
+    const name = prompt('Nombre del nuevo producto:');
+    if (!name || !name.trim()) return;
+    const qty = prompt('Cantidad (ej: 1 kg):', '1');
+    shopping[ci].items.push({ name: name.trim(), qty: (qty || '').trim(), price: 0 });
+    setLS(LS.shoppingData, shopping);
+    renderShopping();
+}
+
+function addShoppingCategory() {
+    let shopping = getShoppingData();
+    const category = prompt('Nombre de la categoría (con emoji, ej: 🍞 Panadería):');
+    if (!category || !category.trim()) return;
+    const freq = prompt('Frecuencia (Semanal, Quincenal, Mensual, Trimestral):', 'Semanal');
+    const daysMap = { 'Semanal': 7, 'Quincenal': 14, 'Mensual': 30, 'Trimestral': 90 };
+    shopping.push({ category: category.trim(), frequency: freq || 'Semanal', days: daysMap[freq] || 7, expense_category: 'other_exp', items: [] });
+    setLS(LS.shoppingData, shopping);
+    renderShopping();
+}
+
+function deleteShoppingCategory(ci) {
+    let shopping = getShoppingData();
+    if (!confirm('¿Eliminar toda la categoría "' + shopping[ci].category + '"?')) return;
+    shopping.splice(ci, 1);
+    setLS(LS.shoppingData, shopping);
     renderShopping();
 }
 
@@ -2061,12 +1041,8 @@ function renderBodyWeight() {
 
 function addBodyWeight() {
     const input = document.getElementById('bw-input');
-    let raw = input.value.replace(',', '.').trim();
-    const val = parseFloat(raw);
-    if (isNaN(val) || val <= 0 || val > 300) { 
-        alert('Ingresa un peso válido entre 0.1 y 300 kg'); 
-        return; 
-    }
+    const val = parseFloat(input.value.replace(',', '.').trim());
+    if (isNaN(val) || val <= 0 || val > 300) { alert('Ingresa un peso valido entre 0.1 y 300 kg'); return; }
     let logs = getLS(LS.bodyWeight, []);
     const today = getTodayStr();
     const existingIdx = logs.findIndex(l => l.date === today);
@@ -2429,12 +1405,12 @@ function deleteDebt(i) {
     renderFinance();
 }
 
-// ==================== SERVICE WORKER (offline: cachea index.html y manifest) ====================
+// ==================== SERVICE WORKER (offline: cachea index.html, manifest y data.json) ====================
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('data:text/javascript;base64,' + btoa(`
         const CACHE = 'fp-v1';
         self.addEventListener('install', e => {
-            e.waitUntil(caches.open(CACHE).then(c => c.addAll(['./', './index.html', './manifest.json'])).catch(()=>{}));
+            e.waitUntil(caches.open(CACHE).then(c => c.addAll(['./', './index.html', './manifest.json', './data.json'])).catch(()=>{}));
             self.skipWaiting();
         });
         self.addEventListener('activate', e => e.waitUntil(clients.claim()));
@@ -2452,6 +1428,7 @@ if ('serviceWorker' in navigator) {
 
 // ==================== INIT ====================
 loadData();
+
 </script>
 </body>
 </html>
