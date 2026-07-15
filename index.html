@@ -347,14 +347,13 @@
 
         <div class="finance-summary" id="finance-summary"></div>
 
-        <div class="tabs">
-            <div class="tab active" onclick="showFinanceTab('overview')">📊 Resumen</div>
-            <div class="tab" onclick="showFinanceTab('income')">💰 Ingresos</div>
-            <div class="tab" onclick="showFinanceTab('expenses')">💸 Gastos</div>
-            <div class="tab" onclick="showFinanceTab('fixed')">📋 Fijos</div>
-            <div class="tab" onclick="showFinanceTab('goals')">🎯 Metas</div>
-            <div class="tab" onclick="showFinanceTab('debts')">📉 Deudas</div>
-        </div>
+        <!-- pestañas de Finanzas -->
+        <div class="tab active" onclick="showFinanceTab('overview', event)">📊 Resumen</div>
+        <div class="tab" onclick="showFinanceTab('income', event)">💰 Ingresos</div>
+        <div class="tab" onclick="showFinanceTab('expenses', event)">💸 Gastos</div>
+        <div class="tab" onclick="showFinanceTab('fixed', event)">📋 Fijos</div>
+        <div class="tab" onclick="showFinanceTab('goals', event)">🎯 Metas</div>
+        <div class="tab" onclick="showFinanceTab('debts', event)">📉 Deudas</div>
 
         <div id="finance-tab-overview" class="finance-tab-content">
             <div class="card">
@@ -485,15 +484,15 @@
     </div>
 
     <div class="bottom-nav">
-        <button class="bottom-btn active" onclick="showPanel('hoy')"><span>📋</span>Hoy</button>
-        <button class="bottom-btn" onclick="showPanel('rutina')"><span>📅</span>Rutina</button>
-        <button class="bottom-btn" onclick="showPanel('entreno')"><span>🏋️</span>Entreno</button>
-        <button class="bottom-btn" onclick="showPanel('comidas')"><span>🍽️</span>Comidas</button>
-        <button class="bottom-btn" onclick="showPanel('compras')"><span>🛒</span>Compras</button>
-        <button class="bottom-btn" onclick="showPanel('peso')"><span>⚖️</span>Peso</button>
-        <button class="bottom-btn" onclick="showPanel('finanzas')"><span>💵</span>Finanzas</button>
-        <button class="bottom-btn" onclick="showPanel('supps')"><span>💊</span>Supps</button>
-        <button class="bottom-btn" onclick="showPanel('skin')"><span>✨</span>Skin</button>
+        <button class="bottom-btn active" onclick="showPanel('hoy', event)"><span>📋</span>Hoy</button>
+        <button class="bottom-btn" onclick="showPanel('rutina', event)"><span>📅</span>Rutina</button>
+        <button class="bottom-btn" onclick="showPanel('entreno', event)"><span>🏋️</span>Entreno</button>
+        <button class="bottom-btn" onclick="showPanel('comidas', event)"><span>🍽️</span>Comidas</button>
+        <button class="bottom-btn" onclick="showPanel('compras', event)"><span>🛒</span>Compras</button>
+        <button class="bottom-btn" onclick="showPanel('peso', event)"><span>⚖️</span>Peso</button>
+        <button class="bottom-btn" onclick="showPanel('finanzas', event)"><span>💵</span>Finanzas</button>
+        <button class="bottom-btn" onclick="showPanel('supps', event)"><span>💊</span>Supps</button>
+        <button class="bottom-btn" onclick="showPanel('skin', event)"><span>✨</span>Skin</button>
     </div>
 
 <script>
@@ -513,7 +512,8 @@ const LS = {
     exerciseLogs: 'fp_exerciseLogs', bodyWeight: 'fp_bodyWeight',
     shoppingChecked: 'fp_shoppingChecked', shoppingLastBought: 'fp_shoppingLastBought',
     lastOpenDate: 'fp_lastOpenDate', transactions: 'fp_transactions',
-    savingsGoals: 'fp_savingsGoals', debts: 'fp_debts', fixedExpenses: 'fp_fixedExpenses'
+    savingsGoals: 'fp_savingsGoals', debts: 'fp_debts', fixedExpenses: 'fp_fixedExpenses',
+    supplementsData: 'fp_supplementsData'
 };
 
 // ==================== FORMATO COP ====================
@@ -547,6 +547,64 @@ function getTodayStr() {
 
 function getMonthKey() {
     return currentYear + '-' + String(currentMonth + 1).padStart(2, '0');
+}
+
+function getSupplementsData() {
+    if (!localStorage.getItem(LS.supplementsData)) setLS(LS.supplementsData, DATA.supplements);
+    return getLS(LS.supplementsData, DATA.supplements);
+}
+
+function addSupplementFromExpense(name) {
+    let supps = getSupplementsData();
+    if (supps.some(s => s.name.toLowerCase() === name.toLowerCase())) return; // ya existe
+    supps.push({ name, dose: 'Editar dosis', timing: 'Editar horario' });
+    setLS(LS.supplementsData, supps);
+}
+
+function renderSupps() {
+    const supps = getSupplementsData();
+    document.getElementById('supps-container').innerHTML = supps.map((s, i) => `
+        <div class="supp-row">
+            <div class="supp-info">
+                <div class="supp-name">${s.name}</div>
+                <div class="supp-timing">${s.timing}</div>
+            </div>
+            <div class="supp-dose">${s.dose}</div>
+            <button class="transaction-delete" onclick="editSupplement(${i})">✏️</button>
+            <button class="transaction-delete" onclick="deleteSupplement(${i})">🗑️</button>
+        </div>
+    `).join('') + `<button class="btn-primary" onclick="addSupplement()" style="margin-top:10px">➕ Agregar suplemento</button>`;
+}
+
+function editSupplement(i) {
+    let supps = getSupplementsData();
+    const s = supps[i];
+    const dose = prompt('Cantidad/dosis:', s.dose);
+    if (dose === null) return;
+    const timing = prompt('Horario de ingesta:', s.timing);
+    if (timing === null) return;
+    supps[i] = { ...s, dose: dose.trim(), timing: timing.trim() };
+    setLS(LS.supplementsData, supps);
+    renderSupps();
+}
+
+function addSupplement() {
+    const name = prompt('Nombre del suplemento:');
+    if (!name || !name.trim()) return;
+    const dose = prompt('Cantidad/dosis:', '');
+    const timing = prompt('Horario de ingesta:', '');
+    let supps = getSupplementsData();
+    supps.push({ name: name.trim(), dose: dose || '', timing: timing || '' });
+    setLS(LS.supplementsData, supps);
+    renderSupps();
+}
+
+function deleteSupplement(i) {
+    let supps = getSupplementsData();
+    if (!confirm('¿Eliminar "' + supps[i].name + '"?')) return;
+    supps.splice(i, 1);
+    setLS(LS.supplementsData, supps);
+    renderSupps();
 }
 
 function getLS(key, def) { try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(def)); } catch(e) { return def; } }
@@ -1098,11 +1156,11 @@ function renderHair() {
 }
 
 // ==================== NAVEGACIÓN ====================
-function showPanel(id) {
+function showPanel(id, evt) {
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.bottom-nav .bottom-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('panel-' + id).classList.add('active');
-    event.currentTarget.classList.add('active');
+    (evt?.currentTarget || document.querySelector(`.bottom-btn[onclick*="'${id}'"]`))?.classList.add('active');
 }
 
 // ==================== AGUA Y STATS ====================
@@ -1170,10 +1228,10 @@ function changeMonth(delta) {
     renderFinance();
 }
 
-function showFinanceTab(tab) {
+function showFinanceTab(tab, evt) {
     financeTab = tab;
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    event.currentTarget.classList.add('active');
+    (evt?.currentTarget || document.querySelector(`.tab[onclick*="'${tab}'"]`))?.classList.add('active');
     document.querySelectorAll('.finance-tab-content').forEach(c => c.classList.add('hidden'));
     document.getElementById('finance-tab-' + tab).classList.remove('hidden');
     renderFinanceTabContent();
@@ -1273,6 +1331,7 @@ function addTransaction(type) {
     const amountEl = document.getElementById(type + '-amount');
     const catEl = document.getElementById(type + '-category');
     const dateEl = document.getElementById(type + '-date');
+    if (!nameEl || !amountEl || !catEl || !dateEl) { console.error('Faltan inputs de', type); return; }
     const name = nameEl.value.trim();
     const amount = parseFloat(amountEl.value);
     if (!name || !amount || amount <= 0) { alert('Completa descripcion y monto validos'); return; }
@@ -1280,9 +1339,16 @@ function addTransaction(type) {
     const mk = date.slice(0, 7);
     let all = getLS(LS.transactions, {});
     if (!all[mk]) all[mk] = [];
-    all[mk].push({ id: Date.now().toString(36), type, name, amount, category: catEl.value, date });
+    const tx = { id: Date.now().toString(36), type, name, amount, category: catEl.value, date };
+    all[mk].push(tx);
     setLS(LS.transactions, all);
+
+    // Si es un gasto de Suplementos, lo agrega automáticamente al panel Supps
+    if (type === 'expense' && catEl.value === 'supplements') addSupplementFromExpense(name);
+
     nameEl.value = ''; amountEl.value = '';
+    currentMonth = parseInt(mk.split('-')[1]) - 1;
+    currentYear = parseInt(mk.split('-')[0]);
     renderFinance();
 }
 
@@ -1311,18 +1377,21 @@ function renderFixedList() {
 }
 
 function addFixedExpense() {
-    const name = document.getElementById('fixed-name').value.trim();
-    const amount = parseFloat(document.getElementById('fixed-amount').value);
-    const day = parseInt(document.getElementById('fixed-day').value) || 1;
-    const category = document.getElementById('fixed-category').value;
+    const nameEl = document.getElementById('fixed-name');
+    const amountEl = document.getElementById('fixed-amount');
+    const dayEl = document.getElementById('fixed-day');
+    const catEl = document.getElementById('fixed-category');
+    if (!nameEl || !amountEl || !catEl) { console.error('Faltan inputs de fixed'); return; }
+    const name = nameEl.value.trim();
+    const amount = parseFloat(amountEl.value);
+    const day = parseInt(dayEl.value) || 1;
     if (!name || !amount || amount <= 0) { alert('Completa nombre y monto validos'); return; }
     let fixed = getLS(LS.fixedExpenses, DATA.finance.fixed_expenses);
-    fixed.push({ name, amount, day_of_month: day, category });
+    fixed.push({ name, amount, day_of_month: day, category: catEl.value });
     setLS(LS.fixedExpenses, fixed);
-    document.getElementById('fixed-name').value = '';
-    document.getElementById('fixed-amount').value = '';
-    document.getElementById('fixed-day').value = '';
+    nameEl.value = ''; amountEl.value = ''; dayEl.value = '';
     renderFinance();
+    renderFixedList();
 }
 
 function deleteFixedExpense(i) {
