@@ -127,7 +127,13 @@
         .empty-hint { color: var(--text2); font-size: 0.85rem; padding: 10px 2px; }
 
         .shop-cat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-        .shop-cat-title { font-weight: 700; color: var(--accent-light); font-size: 1rem; }
+        .Sshop-cat-title { font-weight: 700; color: var(--accent-light); font-size: 1rem; }
+        .shop-item-btn { background:none; border:none; color:var(--text2); font-size:0.8rem; cursor:pointer; padding:2px 4px; flex-shrink:0; }
+        .shop-item-btn.danger { color:var(--danger); }
+        .shop-price-input { width: 64px; background: var(--card); border: 1px solid var(--card-hover); border-radius: 6px; padding: 6px 4px; color: var(--text); font-size: 0.78rem; text-align: right; }
+        .transaction-row { flex-wrap: wrap; gap: 6px; }
+        .transaction-actions { display:flex; align-items:center; gap:6px; flex-shrink:0; margin-left:auto; }
+        .shop-reset-btn { padding: 6px 10px; font-size: 0.75rem; }
         .freq-badge { background: var(--card-hover); color: var(--text2); padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; }
         .due-badge { font-size: 0.78rem; margin-bottom: 10px; font-weight: 600; }
         .due-ok { color: var(--success); } .due-soon { color: var(--accent); } .due-late { color: var(--danger); }
@@ -513,7 +519,7 @@ const LS = {
     shoppingChecked: 'fp_shoppingChecked', shoppingLastBought: 'fp_shoppingLastBought',
     lastOpenDate: 'fp_lastOpenDate', transactions: 'fp_transactions',
     savingsGoals: 'fp_savingsGoals', debts: 'fp_debts', fixedExpenses: 'fp_fixedExpenses',
-    supplementsData: 'fp_supplementsData'
+    supplementsData: 'fp_supplementsData', dailyMetrics: 'fp_dailyMetrics',
 };
 
 // ==================== FORMATO COP ====================
@@ -605,6 +611,29 @@ function deleteSupplement(i) {
     supps.splice(i, 1);
     setLS(LS.supplementsData, supps);
     renderSupps();
+}
+
+function checkDailyReset() {
+    const today = getTodayStr();
+    const last = localStorage.getItem(LS.lastOpenDate);
+    if (last !== today) {
+        if (last) saveDailyMetrics(last);
+        setLS(LS.checked, []);
+        setLS(LS.exerciseChecked, {});
+        localStorage.setItem(LS.water, '0');
+        localStorage.setItem(LS.lastOpenDate, today);
+    }
+}
+
+function saveDailyMetrics(dateStr) {
+    const checked = getLS(LS.checked, []);
+    const water = parseInt(localStorage.getItem(LS.water) || '0');
+    const m = DATA.nutrition.meals;
+    const cals = (checked.includes(5) ? m[0].calories : 0) + (checked.includes(8) ? m[1].calories : 0) +
+                 (checked.includes(12) ? m[3].calories : 0) + (checked.includes(13) ? m[4].calories : 0);
+    let history = getLS(LS.dailyMetrics, {});
+    history[dateStr] = { water, checks: checked.length, totalChecks: DATA.checklist.length, kcal: cals };
+    setLS(LS.dailyMetrics, history);
 }
 
 function getLS(key, def) { try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(def)); } catch(e) { return def; } }
@@ -943,12 +972,12 @@ function renderShopping() {
             const price = shoppingPrices[key] ?? it.price ?? 0;
             if (done) catTotal += price;
             return `
-                <div class="check-item ${done ? 'done' : ''}">
-                    <div class="check-box" onclick="toggleShopping('${key}')"></div>
-                    <div style="flex:1" onclick="toggleShopping('${key}')"><div class="check-text">${it.name}</div><div style="font-size:0.78rem;color:var(--text2)">${it.qty}</div></div>
+                <div class="check-item ${done ? 'done' : ''}" style="padding:10px;gap:8px">
+                    <div class="check-box" onclick="toggleShopping('${key}')" style="width:20px;height:20px"></div>
+                    <div style="flex:1;min-width:0" onclick="toggleShopping('${key}')"><div class="check-text" style="font-size:0.88rem">${it.name}</div><div style="font-size:0.72rem;color:var(--text2)">${it.qty}</div></div>
                     <input type="number" class="shop-price-input" value="${price || ''}" placeholder="$" onclick="event.stopPropagation()" onchange="updateShoppingPrice('${key}', this.value)">
-                    <button class="transaction-delete" onclick="event.stopPropagation();editShoppingItem(${ci},${ii})">✏️</button>
-                    <button class="transaction-delete" onclick="event.stopPropagation();deleteShoppingItem(${ci},${ii})">🗑️</button>
+                    <button class="shop-item-btn" onclick="event.stopPropagation();editShoppingItem(${ci},${ii})">✏️</button>
+                    <button class="shop-item-btn danger" onclick="event.stopPropagation();deleteShoppingItem(${ci},${ii})">🗑️</button>
                 </div>`;
         }).join('');
         return `
@@ -1325,8 +1354,10 @@ function renderTransactionList(type) {
                     <div class="transaction-name">${cat.icon} ${t.name}</div>
                     <div class="transaction-date">${t.date} · ${cat.name}</div>
                 </div>
-                <div class="transaction-amount ${type}">${type === 'income' ? '+' : '-'}${formatCOP(t.amount)}</div>
-                <button class="transaction-delete" onclick="deleteTransaction('${t.id}')">🗑️</button>
+                <div class="transaction-actions">
+                    <div class="transaction-amount ${type}">${type === 'income' ? '+' : '-'}${formatCOP(t.amount)}</div>
+                    <button class="transaction-delete" onclick="deleteTransaction('${t.id}')">🗑️</button>
+                </div>
             </div>`;
     }).join('') : '<p class="empty-hint">Sin movimientos este mes.</p>';
 }
@@ -1377,8 +1408,10 @@ function renderFixedList() {
                     <div class="transaction-name">${cat.icon} ${f.name}</div>
                     <div class="transaction-date">Dia ${f.day_of_month} de cada mes · ${cat.name}</div>
                 </div>
-                <div class="transaction-amount expense">${formatCOP(f.amount)}</div>
-                <button class="transaction-delete" onclick="deleteFixedExpense(${i})">🗑️</button>
+                <div class="transaction-actions">
+                    <div class="transaction-amount expense">${formatCOP(f.amount)}</div>
+                    <button class="transaction-delete" onclick="deleteFixedExpense(${i})">🗑️</button>
+                </div>
             </div>`;
     }).join('') : '<p class="empty-hint">Sin gastos fijos configurados.</p>';
 }
@@ -1414,12 +1447,27 @@ function renderGoalsList() {
         const pct = Math.min(100, (g.current / g.target) * 100).toFixed(0);
         return `
             <div class="goal-card">
-                <div class="goal-header"><span class="goal-name">🎯 ${g.name}</span><button class="transaction-delete" onclick="deleteGoal(${i})">🗑️</button></div>
+                <div class="goal-header">
+                    <span class="goal-name">🎯 ${g.name}</span>
+                    <div class="transaction-actions">
+                        <button class="shop-item-btn" onclick="addMoneyToGoal(${i})">➕💰</button>
+                        <button class="transaction-delete" onclick="deleteGoal(${i})">🗑️</button>
+                    </div>
+                </div>
                 <div class="goal-amount">${formatCOP(g.current)} / ${formatCOP(g.target)}</div>
                 <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:${pct}%;background:var(--accent)"></div></div>
                 <div class="goal-percent">${pct}% · +${formatCOP(g.monthly_auto)}/mes</div>
             </div>`;
     }).join('') : '<p class="empty-hint">Sin metas de ahorro.</p>';
+}
+
+function addMoneyToGoal(i) {
+    let goals = getLS(LS.savingsGoals, DATA.finance.savings_goals);
+    const amount = parseFloat(prompt('¿Cuánto quieres agregar a "' + goals[i].name + '"? (COP)'));
+    if (!amount || amount <= 0) return;
+    goals[i].current += amount;
+    setLS(LS.savingsGoals, goals);
+    renderFinance();
 }
 
 function addSavingsGoal() {
